@@ -1,5 +1,4 @@
-import { NativeModules } from 'react-native';
+import { requireNativeComponent } from 'react-native';
 
-const { Blurhash } = NativeModules;
-
-export default Blurhash;
+// requireNativeComponent automatically resolves 'RNTMap' to 'RNTMapManager'
+module.exports = requireNativeComponent('Blurhash');

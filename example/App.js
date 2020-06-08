@@ -8,30 +8,24 @@
  * https://github.com/facebook/react-native
  */
 
-import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import React, {Component} from 'react';
+import {Platform, StyleSheet, Text, View} from 'react-native';
 import Blurhash from 'react-native-blurhash';
 
 export default class App extends Component<{}> {
   state = {
     status: 'starting',
-    message: '--'
+    message: '--',
   };
-  componentDidMount() {
-    Blurhash.sampleMethod('Testing', 123, (message) => {
-      this.setState({
-        status: 'native callback received',
-        message
-      });
-    });
-  }
+  componentDidMount() {}
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>☆Blurhash example☆</Text>
-        <Text style={styles.instructions}>STATUS: {this.state.status}</Text>
-        <Text style={styles.welcome}>☆NATIVE CALLBACK MESSAGE☆</Text>
-        <Text style={styles.instructions}>{this.state.message}</Text>
+        <Blurhash
+          width={400}
+          height={200}
+          blurhash="LEHV6nWB2yk8pyo0adR*.7kCMdnj"
+        />
       </View>
     );
   }
