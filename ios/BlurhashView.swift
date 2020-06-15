@@ -9,52 +9,73 @@
 import Foundation
 import UIKit
 
+class BlurhashCache {
+	var blurhash: NSString
+	var width: NSNumber
+	var height: NSNumber
+	var punch: NSNumber
+	var image: UIImage
+	
+	init(blurhash: NSString, width: NSNumber, height: NSNumber, punch: NSNumber, image: UIImage) {
+		self.blurhash = blurhash
+		self.width = width
+		self.height = height
+		self.punch = punch
+		self.image = image
+	}
+	
+	func isDifferent(blurhash: NSString, width: NSNumber, height: NSNumber, punch: NSNumber) -> Bool {
+		return self.blurhash != blurhash || self.width != width || self.height != height || self.punch != punch
+	}
+}
 
 class BlurhashView: UIView {
 	// TODO: Re-render on props change?
-	@objc var blurhash: NSString = "LEHV6nWB2yk8pyo0adR*.7kCMdnj" {
-		didSet {
-			self.renderBlurhashView()
-		}
-	}
-	@objc var width: NSNumber = 400 {
-		didSet {
-			self.renderBlurhashView()
-		}
-	}
-	@objc var height: NSNumber = 300 {
-		didSet {
-			self.renderBlurhashView()
-		}
-	}
-	@objc var punch: NSNumber = 1 {
-		didSet {
-			self.renderBlurhashView()
-		}
-	}
-	
-	var imageContainer: UIImageView
+	@objc var blurhash: NSString?
+	@objc var width: NSNumber?
+	@objc var height: NSNumber?
+	@objc var punch: NSNumber = 1
+	var lastState: BlurhashCache?
 	
 	override init(frame: CGRect) {
-		self.imageContainer = UIImageView(frame: frame)
 		super.init(frame: frame)
-		self.addSubview(imageContainer)
-		print("Initial Rendering { \(self.width):\(self.height) } view for \(self.blurhash) (\(self.punch))")
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
 	  fatalError("init(coder:) has not been implemented")
 	}
 	
-	func renderBlurhashView() {
-		print("Re-Rendering { \(self.width):\(self.height) } view for \(self.blurhash) (\(self.punch))")
-		DispatchQueue.main.async {
-			let size = CGSize(width: self.width.intValue, height: self.height.intValue)
-			let image = UIImage(blurHash: self.blurhash as String, size: size, punch: self.punch.floatValue)
-			// image.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-			self.imageContainer.image = image
-			self.imageContainer.setNeedsDisplay()
-			self.addSubview(UIImageView(image: image))
+	func decodeImage() -> UIImage? {
+		guard let blurhash = self.blurhash, let width = self.width, let height = self.height else {
+			return nil
 		}
+		if (self.lastState?.isDifferent(blurhash: blurhash, width: width, height: height, punch: punch) == false) {
+			print("Using cached image from last state!")
+			return self.lastState?.image
+		}
+		print("Re-rendering image!")
+		let size = CGSize(width: width.intValue, height: height.intValue)
+		let nullableImage = UIImage(blurHash: blurhash as String, size: size, punch: self.punch.floatValue)
+		guard let image = nullableImage else {
+			return nil
+		}
+		self.lastState = BlurhashCache(blurhash: blurhash, width: width, height: height, punch: self.punch, image: image)
+		return image
+	}
+	
+	func renderBlurhashView() {
+		guard let image = self.decodeImage() else {
+			return
+		}
+		DispatchQueue.main.async {
+			// image.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+			self.subviews.forEach({ $0.removeFromSuperview() })
+			self.addSubview(UIImageView(image: image))
+			print("Set UIImageView's Image source!")
+		}
+	}
+	
+	override func didSetProps(_ changedProps: [String]!) {
+		self.renderBlurhashView()
 	}
 }

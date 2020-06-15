@@ -27,7 +27,7 @@ export default class App extends Component<{}> {
         <Blurhash
           width={300}
           height={200}
-          blurhash={BLURHASH_TWO}
+          blurhash={BLURHASH_ONE}
           punch={1}
           style={styles.blurhash}
         />
