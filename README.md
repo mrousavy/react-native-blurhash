@@ -1,7 +1,8 @@
 # Blurhash
 
-```npm
+```sh
 npm i react-native-blurhash
+cd ios; pod install; cd ..
 ```
 
 **BlurHash** is a compact representation of a placeholder for an image. This is a Native UI Module for React Native to wrap the Blurhash implementations and make them usable in React Native.
@@ -21,50 +22,60 @@ This is how I use it in my project:
 
 ## About
 
-The decoders are written in [Swift](ios/BlurhashDecode.swift) and [Kotlin](android/src/main/java/com/blurhash/BlurhashDecode.java), and are copied from the official [woltapp/blurhash](https://github.com/woltapp/blurhash) repository. I use caching techniques, to only re-render the (quite expensive) Blurhash image creation when one of the following required props has changed:
+The decoders are written in [Swift](ios/BlurhashDecode.swift) and [Kotlin](android/src/main/java/com/blurhash/BlurhashDecode.java), and are copied from the official [woltapp/blurhash](https://github.com/woltapp/blurhash) repository. I use caching techniques, to only re-render the (quite expensive) Blurhash image creation when one of the blurhash specific props (`blurhash`, `width`, `height` or `punch`) has changed.
 
 <table>
-<tr>
-  <th>Name</th>
-  <th>Type</th>
-  <th>Explanation</th>
-  <th>Required</th>
-  <th>Default Value</th>
-</td>
-<tr>
-  <td><code>blurhash</code></td>
-  <td>string</td>
-  <td>The blurhash string to use</td>
-  <td>✅</td>
-  <td><code>undefined</code></td>
-</tr>
-<tr>
-  <td><code>width</code></td>
-  <td>number</td>
-  <td>The width to decode to. You can still up-/down-scale it in React</td>
-  <td>✅</td>
-  <td><code>undefined</code></td>
-</tr>
-<tr>
-  <td><code>height</code></td>
-  <td>number</td>
-  <td>The height to decode to. You can still up-/down-scale it in React</td>
-  <td>✅</td>
-  <td><code>undefined</code></td>
-</tr>
-<tr>
-  <td><code>punch</code></td>
-  <td>number</td>
-  <td>The punch to use for decoding.</td>
-  <td>❌</td>
-  <td><code>1</code></td>
-</tr>
+  <tr>
+    <th>Name</th>
+    <th>Type</th>
+    <th>Explanation</th>
+    <th>Required</th>
+    <th>Default Value</th>
+  </td>
+  <tr>
+    <td><code>blurhash</code></td>
+    <td>string</td>
+    <td>The blurhash string to use</td>
+    <td>✅</td>
+    <td><code>undefined</code></td>
+  </tr>
+  <tr>
+    <td><code>width</code></td>
+    <td>number</td>
+    <td>The width to decode to. You can still up-/down-scale it in React</td>
+    <td>✅</td>
+    <td><code>undefined</code></td>
+  </tr>
+  <tr>
+    <td><code>height</code></td>
+    <td>number</td>
+    <td>The height to decode to. You can still up-/down-scale it in React</td>
+    <td>✅</td>
+    <td><code>undefined</code></td>
+  </tr>
+  <tr>
+    <td><code>punch</code></td>
+    <td>number</td>
+    <td>The punch to use for decoding.</td>
+    <td>❌</td>
+    <td><code>1</code></td>
+  </tr>
 </table>
 
 > Read the [algorithm description](https://github.com/woltapp/blurhash/blob/master/Algorithm.md) for more details
 
-<img src="img/demo.ios.png" alt="iOS Demo Screenshot" width=300>
-<img src="img/demo.android.png" alt="Android Demo Screenshot" width=300>
+
+<table>
+  <tr>
+    <th>iOS Screenshot</th>
+    <th>Android Screenshot</th>
+  </td>
+  <tr>
+    <td><img src="img/demo.ios.png" alt="iOS Demo Screenshot"></td>
+    <td><img src="img/demo.ios.png" alt="Android Demo Screenshot"></td>
+  </tr>
+</table>
+
 
 
 ## Resources
