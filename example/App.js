@@ -12,9 +12,6 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, TextInput} from 'react-native';
 import Blurhash from 'react-native-blurhash';
 
-const BLURHASH_ONE = 'LEHV6nWB2yk8pyo0adR*.7kCMdnj';
-const BLURHASH_TWO = 'LGFFaXYk^6#M@-5c,1J5@[or[Q6.';
-
 export default class App extends Component {
   state = {
     blurhash: 'LGFFaXYk^6#M@-5c,1J5@[or[Q6.',
