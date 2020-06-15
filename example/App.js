@@ -28,10 +28,11 @@ export default class App extends Component {
     return (
       <View style={styles.container}>
         <Blurhash
-          width={400}
-          height={300}
+          width={300}
+          height={200}
           blurhash={this.state.blurhash}
           punch={1}
+          style={styles.blurhashImage}
         />
         <TextInput
           value={this.state.blurhash}
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   blurhashImage: {
-    // Custom styling for width height etc here
+    // Custom styling for width, height, scaling etc here
   },
   blurhashTextInput: {
     marginTop: 20,

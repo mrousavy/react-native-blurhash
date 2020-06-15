@@ -34,31 +34,38 @@ The decoders are written in [Swift](ios/BlurhashDecode.swift) and [Kotlin](andro
   </td>
   <tr>
     <td><code>blurhash</code></td>
-    <td>string</td>
-    <td>The blurhash string to use.</td>
+    <td><code>string</code></td>
+    <td>The blurhash string to use. Example: <code>LGFFaXYk^6#M@-5c,1J5@[or[Q6.</code></td>
     <td>✅</td>
     <td><code>undefined</code></td>
   </tr>
   <tr>
     <td><code>width</code></td>
-    <td>number</td>
+    <td><code>number</code></td>
     <td>The width (resolution) to decode to. This is not the same as the React Component's Style width!</td>
     <td>✅</td>
     <td><code>undefined</code></td>
   </tr>
   <tr>
     <td><code>height</code></td>
-    <td>number</td>
+    <td><code>number</code></td>
     <td>The height (resolution) to decode to. This is not the same as the React Component's Style height!</td>
     <td>✅</td>
     <td><code>undefined</code></td>
   </tr>
   <tr>
     <td><code>punch</code></td>
-    <td>number</td>
+    <td><code>number</code></td>
     <td>The punch to use for decoding.</td>
     <td>❌</td>
     <td><code>1.0</code></td>
+  </tr>
+  <tr>
+    <td>All <code>View</code> props</td>
+    <td><code>{}</code></td>
+    <td>All properties from the React Native <code>View</code>. Use <code>style.width</code> and <code>style.height</code> for render-widths.</td>
+    <td>❌</td>
+    <td></td>
   </tr>
 </table>
 
@@ -76,7 +83,11 @@ The decoders are written in [Swift](ios/BlurhashDecode.swift) and [Kotlin](andro
   </tr>
 </table>
 
+## Performance
 
+The performance of the decoders is really fast, which means you should be able to use them in collections quite easily. Make sure to expect a small delay though, since it is still a complex decoding algorithm. By increasing the `width` and `height` props, the performance decreases. If you don't care much about the render resolution, use lower `width` and `height` values, and increase `style.width` and `style.height` values (or upscale it any other way like `flex`, `scale`, ...)
+
+> For some reason is the performance on Android much better than on iOS, I'm trying to figure out what's wrong here. See: [Issue #1: iOS Performance](https://github.com/mrousavy/react-native-blurhash/issues/1)
 
 ## Resources
 * [this medium article. jesus christ amen thanks for that](https://teabreak.e-spres-oh.com/swift-in-react-native-the-ultimate-guide-part-2-ui-components-907767123d9e)
