@@ -7,6 +7,8 @@ npm i react-native-blurhash
 cd ios; pod install; cd ..
 ```
 
+<a href='https://ko-fi.com/F1F8CLXG' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://az743702.vo.msecnd.net/cdn/kofi2.png?v=0' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
+
 **BlurHash** is a compact representation of a placeholder for an image. This is a native UI module for React Native to wrap the Blurhash iOS and Android implementations and make them usable in React Native. See [woltapp/blurhash](https://github.com/woltapp/blurhash)
 
 <img src="https://github.com/mrousavy/react-native-blurhash/raw/master/img/explanation.png" alt="Turn grey image boxes into colorful blurred images">
@@ -124,3 +126,6 @@ At the moment, the Android decoder is faster than the iOS decoder, I'm not quite
 ## Resources
 * [this medium article. jesus christ amen thanks for that](https://teabreak.e-spres-oh.com/swift-in-react-native-the-ultimate-guide-part-2-ui-components-907767123d9e)
 * [Native Modules documentation, especially the Swift part](https://reactnative.dev/docs/native-modules-ios.html#exporting-swift)
+
+
+<a href='https://ko-fi.com/F1F8CLXG' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://az743702.vo.msecnd.net/cdn/kofi2.png?v=0' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
