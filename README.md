@@ -9,7 +9,7 @@ cd ios; pod install; cd ..
 
 **BlurHash** is a compact representation of a placeholder for an image. This is a native UI module for React Native to wrap the Blurhash iOS and Android implementations and make them usable in React Native. See [woltapp/blurhash](https://github.com/woltapp/blurhash)
 
-<img src="img/explanation.png" alt="Turn grey image boxes into colorful blurred images">
+<img src="https://github.com/mrousavy/react-native-blurhash/raw/master/img/explanation.png" alt="Turn grey image boxes into colorful blurred images">
 
 ## Example Workflow
 
@@ -81,8 +81,8 @@ The decoders are written in [Swift](ios/BlurhashDecode.swift) and [Kotlin](andro
     <th>Android Screenshot</th>
   </td>
   <tr>
-    <td><img src="img/demo.ios.png" alt="iOS Demo Screenshot"></td>
-    <td><img src="img/demo.android.png" alt="Android Demo Screenshot"></td>
+    <td><img src="https://github.com/mrousavy/react-native-blurhash/raw/master/img/demo.ios.png" alt="iOS Demo Screenshot"></td>
+    <td><img src="https://github.com/mrousavy/react-native-blurhash/raw/master/img/demo.android.png" alt="Android Demo Screenshot"></td>
   </tr>
 </table>
 
