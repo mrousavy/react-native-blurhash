@@ -10,7 +10,7 @@
 
 import React, {Component} from 'react';
 import {StyleSheet, View, TextInput} from 'react-native';
-import Blurhash from 'react-native-blurhash';
+import {Blurhash} from 'react-native-blurhash';
 
 export default class App extends Component {
   state = {

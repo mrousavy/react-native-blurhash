@@ -22,7 +22,7 @@ This is how I use it in my project:
 3. After I generated the blurhash string, I set this as a property on my `post` document in Firestore.
 4. Now everytime a user loads a feed of posts from my Firestore database, I use a `<Blurhash>` component (with the post's `blurhash` property) over my `<Image>` component, and fade it out once the `<Image>` component's [`onLoadEnd`](https://reactnative.dev/docs/image#onloadend) function has been called.
 
-## About
+## Usage
 
 The decoders are written in [Swift](ios/BlurhashDecode.swift) and [Kotlin](android/src/main/java/com/blurhash/BlurhashDecode.java), and are copied from the official [woltapp/blurhash](https://github.com/woltapp/blurhash) repository. I use caching techniques, to only re-render the (quite expensive) Blurhash image creation when one of the blurhash specific props (`blurhash`, `decodeWidth`, `decodeHeight` or `decodePunch`) has changed.
 
@@ -72,6 +72,21 @@ The decoders are written in [Swift](ios/BlurhashDecode.swift) and [Kotlin](andro
 </table>
 
 > Read the [algorithm description](https://github.com/woltapp/blurhash/blob/master/Algorithm.md) for more details
+
+Example Usage:
+
+```tsx
+import { Blurhash } from 'react-native-blurhash';
+
+export default function App() {
+  return (
+    <Blurhash
+      blurhash="LGFFaXYk^6#M@-5c,1J5@[or[Q6."
+      style={{flex: 1}}
+    />
+  );
+}
+```
 
 ### Example App
 

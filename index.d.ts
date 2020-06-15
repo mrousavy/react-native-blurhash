@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
-import { requireNativeComponent, ViewProps } from 'react-native';
+import React from 'react';
+import { ViewProps } from 'react-native';
 
-
-export interface BlurhashProps extends ViewProps {
+export declare interface BlurhashProps extends ViewProps {
   /**
    * The blurhash string to use. Example: `LGFFaXYk^6#M@-5c,1J5@[or[Q6`.
    */
@@ -24,19 +23,6 @@ export interface BlurhashProps extends ViewProps {
   decodePunch?: number;
 }
 
-class Blurhash extends Component<BlurhashProps> {
-  constructor(props: BlurhashProps) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <NativeBlurhashView {...this.props} />
-    );
-  }
+export declare class Blurhash extends React.Component<BlurhashProps> {
+  public render(): React.ReactNode;
 }
-
-// requireNativeComponent automatically resolves 'BlurhashView' to 'BlurhashViewManager'
-const NativeBlurhashView = requireNativeComponent<BlurhashProps>('BlurhashView');
-
-export default Blurhash;
