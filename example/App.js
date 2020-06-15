@@ -9,21 +9,15 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, TextInput} from 'react-native';
+import {StyleSheet, View, TextInput} from 'react-native';
 import Blurhash from 'react-native-blurhash';
 
 export default class App extends Component {
   state = {
     blurhash: 'LGFFaXYk^6#M@-5c,1J5@[or[Q6.',
-    styleWidth: 400,
   };
-  componentDidMount() {
-    setTimeout(() => {
-      this.setState({
-        styleWidth: 200,
-      });
-    }, 2000);
-  }
+  componentDidMount() {}
+
   render() {
     return (
       <View style={styles.container}>

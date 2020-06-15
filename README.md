@@ -73,6 +73,7 @@ The decoders are written in [Swift](ios/BlurhashDecode.swift) and [Kotlin](andro
 
 > Read the [algorithm description](https://github.com/woltapp/blurhash/blob/master/Algorithm.md) for more details
 
+### Example App
 
 <table>
   <tr>
@@ -84,6 +85,17 @@ The decoders are written in [Swift](ios/BlurhashDecode.swift) and [Kotlin](andro
     <td><img src="img/demo.android.png" alt="Android Demo Screenshot"></td>
   </tr>
 </table>
+
+To run the example App, execute the following commands:
+
+```sh
+cd react-native-blurhash/example/
+yarn
+cd ios; pod install; cd ..
+npm run ios
+npm run android
+```
+
 
 ## Performance
 
