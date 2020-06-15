@@ -21,8 +21,8 @@ export default class App extends Component {
     return (
       <View style={styles.container}>
         <Blurhash
-          width={300}
-          height={200}
+          width={400}
+          height={300}
           blurhash={this.state.blurhash}
           punch={1}
           style={styles.blurhashImage}
@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
   },
   blurhashImage: {
     // Custom styling for width height etc here
+    backgroundColor: 'red',
   },
   blurhashTextInput: {
     marginTop: 20,

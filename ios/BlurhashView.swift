@@ -30,7 +30,6 @@ class BlurhashCache {
 }
 
 class BlurhashView: UIView {
-	// TODO: Re-render on props change?
 	@objc var blurhash: NSString?
 	@objc var width: NSNumber?
 	@objc var height: NSNumber?

@@ -6,7 +6,7 @@ export interface BlurhashProps extends ViewProps {
   blurhash: string;
   width: number;
   height: number;
-  punch: number;
+  punch?: number;
 }
 
 // requireNativeComponent automatically resolves 'BlurhashView' to 'BlurhashViewManager'
