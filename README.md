@@ -35,21 +35,21 @@ The decoders are written in [Swift](ios/BlurhashDecode.swift) and [Kotlin](andro
   <tr>
     <td><code>blurhash</code></td>
     <td>string</td>
-    <td>The blurhash string to use</td>
+    <td>The blurhash string to use.</td>
     <td>✅</td>
     <td><code>undefined</code></td>
   </tr>
   <tr>
     <td><code>width</code></td>
     <td>number</td>
-    <td>The width to decode to. You can still up-/down-scale it in React</td>
+    <td>The width (resolution) to decode to. This is not the same as the React Component's Style width!</td>
     <td>✅</td>
     <td><code>undefined</code></td>
   </tr>
   <tr>
     <td><code>height</code></td>
     <td>number</td>
-    <td>The height to decode to. You can still up-/down-scale it in React</td>
+    <td>The height (resolution) to decode to. This is not the same as the React Component's Style height!</td>
     <td>✅</td>
     <td><code>undefined</code></td>
   </tr>
@@ -58,7 +58,7 @@ The decoders are written in [Swift](ios/BlurhashDecode.swift) and [Kotlin](andro
     <td>number</td>
     <td>The punch to use for decoding.</td>
     <td>❌</td>
-    <td><code>1</code></td>
+    <td><code>1.0</code></td>
   </tr>
 </table>
 

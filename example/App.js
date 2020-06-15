@@ -15,8 +15,15 @@ import Blurhash from 'react-native-blurhash';
 export default class App extends Component {
   state = {
     blurhash: 'LGFFaXYk^6#M@-5c,1J5@[or[Q6.',
+    styleWidth: 400,
   };
-  componentDidMount() {}
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({
+        styleWidth: 200,
+      });
+    }, 2000);
+  }
   render() {
     return (
       <View style={styles.container}>
@@ -25,7 +32,6 @@ export default class App extends Component {
           height={300}
           blurhash={this.state.blurhash}
           punch={1}
-          style={styles.blurhashImage}
         />
         <TextInput
           value={this.state.blurhash}
@@ -51,7 +57,6 @@ const styles = StyleSheet.create({
   },
   blurhashImage: {
     // Custom styling for width height etc here
-    backgroundColor: 'red',
   },
   blurhashTextInput: {
     marginTop: 20,
