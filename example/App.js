@@ -22,8 +22,8 @@ export default class App extends Component {
     return (
       <View style={styles.container}>
         <Blurhash
-          width={300}
-          height={200}
+          width={32}
+          height={28}
           blurhash={this.state.blurhash}
           punch={1}
           style={styles.blurhashImage}
