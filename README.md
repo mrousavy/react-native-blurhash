@@ -89,7 +89,7 @@ The decoders are written in [Swift](ios/BlurhashDecode.swift) and [Kotlin](andro
 
 The performance of the decoders is really fast, which means you should be able to use them in collections quite easily. Make sure to expect a small delay though, since it is still a complex decoding algorithm. By increasing the `width` and `height` props, the performance decreases. If you don't care much about the render resolution, use lower `width` and `height` values, and increase `style.width` and `style.height` values (or upscale it any other way like `flex`, `scale`, ...)
 
-> For some reason is the performance on Android much better than on iOS, I'm trying to figure out what's wrong here. See: [Issue #1: iOS Performance](https://github.com/mrousavy/react-native-blurhash/issues/1)
+> For some reason is the performance on Android much better than on iOS, I'm trying to figure out what's wrong here. See: [Issue #2: iOS Performance](https://github.com/mrousavy/react-native-blurhash/issues/2)
 
 ## Resources
 * [this medium article. jesus christ amen thanks for that](https://teabreak.e-spres-oh.com/swift-in-react-native-the-ultimate-guide-part-2-ui-components-907767123d9e)
