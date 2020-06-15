@@ -20,9 +20,11 @@ def safeExtGet(prop, fallback) {
 }
 
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 apply plugin: 'maven'
 
 buildscript {
+    ext.kotlin_version = '1.3.72'
     // The Android Gradle plugin is only required when opening the android folder stand-alone.
     // This avoids unnecessary downloads and potential conflicts when the library is included as a
     // module dependency in an application project.
@@ -35,6 +37,12 @@ buildscript {
         dependencies {
             classpath 'com.android.tools.build:gradle:3.4.1'
         }
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
@@ -72,7 +80,8 @@ repositories {
 
 dependencies {
     //noinspection GradleDynamicVersion
-    implementation 'com.facebook.react:react-native:+'  // From node_modules
+    implementation 'com.facebook.react:react-native:+'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"  // From node_modules
 }
 
 def configureReactNativePom(def pom) {
@@ -82,7 +91,7 @@ def configureReactNativePom(def pom) {
         name packageJson.title
         artifactId packageJson.name
         version = packageJson.version
-        group = "com.reactlibrary"
+        group = "com.com.mrousavy.blurhash"
         description packageJson.description
         url packageJson.repository.baseUrl
 
