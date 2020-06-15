@@ -22,8 +22,8 @@ export default class App extends Component {
     return (
       <View style={styles.container}>
         <Blurhash
-          decodeWidth={150}
-          decodeHeight={100}
+          decodeWidth={32}
+          decodeHeight={32}
           blurhash={this.state.blurhash}
           decodePunch={1}
           style={styles.blurhashImage}
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   blurhashImage: {
-    width: 400,
+    width: 300,
     height: 300,
     // Custom styling for width, height, scaling etc here
   },

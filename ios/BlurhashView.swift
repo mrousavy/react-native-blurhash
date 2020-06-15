@@ -77,8 +77,8 @@ class BlurhashView: UIView {
 		// image.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 		self.subviews.forEach({ $0.removeFromSuperview() })
 		// TODO: Dynamic width/height
-		let imageContainer = UIImageView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
-		imageContainer.image = image
+		let imageContainer = UIImageView(image: image)
+		imageContainer.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 		self.addSubview(imageContainer)
 		print("\(LOG_ID): Set UIImageView's Image source!")
 	}
