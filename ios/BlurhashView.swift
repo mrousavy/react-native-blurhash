@@ -37,9 +37,13 @@ class BlurhashView: UIView {
 	@objc var decodeHeight: NSNumber?
 	@objc var decodePunch: NSNumber = 1
 	var lastState: BlurhashCache?
+	let imageContainer: UIImageView
 	
 	override init(frame: CGRect) {
+		self.imageContainer = UIImageView()
+		self.imageContainer.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 		super.init(frame: frame)
+		self.addSubview(self.imageContainer)
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
@@ -73,13 +77,7 @@ class BlurhashView: UIView {
 			return
 		}
 
-		// Run View Setter on main thread again
-		// image.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-		self.subviews.forEach({ $0.removeFromSuperview() })
-		// TODO: Dynamic width/height
-		let imageContainer = UIImageView(image: image)
-		imageContainer.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-		self.addSubview(imageContainer)
+		self.imageContainer.image = image
 		print("\(LOG_ID): Set UIImageView's Image source!")
 	}
 	
