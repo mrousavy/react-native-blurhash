@@ -71,8 +71,8 @@ The decoders are written in [Swift](ios/BlurhashDecode.swift) and [Kotlin](andro
     <th>Android Screenshot</th>
   </td>
   <tr>
-    <td><img src="img/demo.ios.png" alt="iOS Demo Screenshot"></td>
-    <td><img src="img/demo.ios.png" alt="Android Demo Screenshot"></td>
+    <td><img src="img/demo.ios.png" height=700 alt="iOS Demo Screenshot"></td>
+    <td><img src="img/demo.android.png" height=700 alt="Android Demo Screenshot"></td>
   </tr>
 </table>
 
