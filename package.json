@@ -2,7 +2,7 @@
   "name": "react-native-blurhash",
   "title": "React Native Blurhash",
   "version": "1.0.0",
-  "description": "TODO",
+  "description": "BlurHash is a compact representation of a placeholder for an image. This is a Native UI Module for React Native to wrap the Blurhash implementations and make them usable in React Native.",
   "main": "index.js",
   "files": [
     "README.md",
@@ -16,15 +16,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/github_account/react-native-blurhash.git",
-    "baseUrl": "https://github.com/github_account/react-native-blurhash"
+    "url": "git+https://github.com/mrousavy/react-native-blurhash.git",
+    "baseUrl": "https://github.com/mrousavy/react-native-blurhash"
   },
   "keywords": [
     "react-native"
   ],
   "author": {
-    "name": "Your Name",
-    "email": "yourname@email.com"
+    "name": "Marc Rousavy",
+    "email": "marcrousavy@hotmail.com"
   },
   "license": "MIT",
   "licenseFilename": "LICENSE",
