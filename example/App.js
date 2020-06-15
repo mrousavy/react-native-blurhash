@@ -12,6 +12,9 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import Blurhash from 'react-native-blurhash';
 
+const BLURHASH_ONE = 'LEHV6nWB2yk8pyo0adR*.7kCMdnj';
+const BLURHASH_TWO = 'LGFFaXYk^6#M@-5c,1J5@[or[Q6.';
+
 export default class App extends Component<{}> {
   state = {
     status: 'starting',
@@ -24,7 +27,7 @@ export default class App extends Component<{}> {
         <Blurhash
           width={300}
           height={200}
-          blurhash="LEHV6nWB2yk8pyo0adR*.7kCMdnj"
+          blurhash={BLURHASH_TWO}
           punch={1}
           style={styles.blurhash}
         />
@@ -41,10 +44,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   blurhash: {
-    width: 400,
-    height: 300,
-    top: 20,
-    left: 20,
+    // Custom styling for width height etc here
   },
   welcome: {
     fontSize: 20,
