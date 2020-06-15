@@ -12,13 +12,13 @@ import UIKit
 let LOG_ID = "BlurhashView"
 
 class BlurhashCache {
-	var blurhash: NSString
-	var decodeWidth: NSNumber
-	var decodeHeight: NSNumber
-	var decodePunch: NSNumber
+	var blurhash: String
+	var decodeWidth: Int
+	var decodeHeight: Int
+	var decodePunch: Float
 	var image: UIImage
 	
-	init(blurhash: NSString, decodeWidth: NSNumber, decodeHeight: NSNumber, decodePunch: NSNumber, image: UIImage) {
+	init(blurhash: String, decodeWidth: Int, decodeHeight: Int, decodePunch: Float, image: UIImage) {
 		self.blurhash = blurhash
 		self.decodeWidth = decodeWidth
 		self.decodeHeight = decodeHeight
@@ -26,15 +26,23 @@ class BlurhashCache {
 		self.image = image
 	}
 	
+	init(blurhash: NSString, decodeWidth: NSNumber, decodeHeight: NSNumber, decodePunch: NSNumber, image: UIImage) {
+		self.blurhash = blurhash as String
+		self.decodeWidth = decodeWidth.intValue
+		self.decodeHeight = decodeHeight.intValue
+		self.decodePunch = decodePunch.floatValue
+		self.image = image
+	}
+	
 	func isDifferent(blurhash: NSString, decodeWidth: NSNumber, decodeHeight: NSNumber, decodePunch: NSNumber) -> Bool {
-		return self.blurhash != blurhash || self.decodeWidth != decodeWidth || self.decodeHeight != decodeHeight || self.decodePunch != decodePunch
+		return self.blurhash != blurhash as String || self.decodeWidth != decodeWidth.intValue || self.decodeHeight != decodeHeight.intValue || self.decodePunch != decodePunch.floatValue
 	}
 }
 
 class BlurhashView: UIView {
 	@objc var blurhash: NSString?
-	@objc var decodeWidth: NSNumber?
-	@objc var decodeHeight: NSNumber?
+	@objc var decodeWidth: NSNumber = 32
+	@objc var decodeHeight: NSNumber = 32
 	@objc var decodePunch: NSNumber = 1
 	var lastState: BlurhashCache?
 	let imageContainer: UIImageView
@@ -51,7 +59,7 @@ class BlurhashView: UIView {
 	}
 	
 	func decodeImage() -> UIImage? {
-		guard let blurhash = self.blurhash, let decodeWidth = self.decodeWidth, let decodeHeight = self.decodeHeight else {
+		guard let blurhash = self.blurhash else {
 			return nil
 		}
 		if (self.lastState?.isDifferent(blurhash: blurhash, decodeWidth: decodeWidth, decodeHeight: decodeHeight, decodePunch: self.decodePunch) == false) {

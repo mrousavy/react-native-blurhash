@@ -9,12 +9,14 @@ export interface BlurhashProps extends ViewProps {
   blurhash: string;
   /**
    * The width (resolution) to decode to. This is not the same as the React Component's Style width! Higher values decrease performance, `32` is plenty!
+   * @default 32
    */
-  decodeWidth: number;
+  decodeWidth?: number;
   /**
    * The height (resolution) to decode to. This is not the same as the React Component's Style height! Higher values decrease performance, `32` is plenty!
+   * @default 32
    */
-  decodeHeight: number;
+  decodeHeight?: number;
   /**
    * Adjusts the contrast of the output image. Tweak it if you want a different look for your placeholders.
    * @default 1.0

@@ -45,15 +45,15 @@ The decoders are written in [Swift](ios/BlurhashDecode.swift) and [Kotlin](andro
     <td><code>decodeWidth</code></td>
     <td><code>number</code></td>
     <td>The width (resolution) to decode to. This is not the same as the React Component's Style width! Higher values decrease performance, <code>32</code> is plenty!</td>
-    <td>✅</td>
-    <td><code>undefined</code></td>
+    <td>❌</td>
+    <td><code>32</code></td>
   </tr>
   <tr>
     <td><code>decodeHeight</code></td>
     <td><code>number</code></td>
     <td>The height (resolution) to decode to. This is not the same as the React Component's Style height! Higher values decrease performance, <code>32</code> is plenty!</td>
-    <td>✅</td>
-    <td><code>undefined</code></td>
+    <td>❌</td>
+    <td><code>32</code></td>
   </tr>
   <tr>
     <td><code>decodePunch</code></td>
@@ -64,10 +64,10 @@ The decoders are written in [Swift](ios/BlurhashDecode.swift) and [Kotlin](andro
   </tr>
   <tr>
     <td>All <code>View</code> props</td>
-    <td><code>{}</code></td>
+    <td><code>ViewProps</code></td>
     <td>All properties from the React Native <code>View</code>. Use <code>style.width</code> and <code>style.height</code> for render-widths.</td>
     <td>❌</td>
-    <td></td>
+    <td><code>{}</code></td>
   </tr>
 </table>
 

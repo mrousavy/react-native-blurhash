@@ -32,12 +32,13 @@ internal class BlurhashCache(private val _blurhash: String?, private val _decode
 
 class BlurhashImageView(context: Context?, draweeControllerBuilder: AbstractDraweeControllerBuilder<*, *, *, *>?, globalImageLoadListener: GlobalImageLoadListener?, callerContext: Any?) : ReactImageView(context, draweeControllerBuilder, globalImageLoadListener, callerContext) {
     private var _blurhash: String? = null
-    private var _decodeWidth = 0
-    private var _decodeHeight = 0
+    private var _decodeWidth = 32
+    private var _decodeHeight = 32
     private var _decodePunch = 1.0f
     private var _cachedBlurhash: BlurhashCache? = null
-    fun setBlurhash(_blurhash: String?) {
-        this._blurhash = _blurhash
+
+    fun setBlurhash(blurhash: String?) {
+        this._blurhash = blurhash
         updateBlurhashBitmap()
     }
 

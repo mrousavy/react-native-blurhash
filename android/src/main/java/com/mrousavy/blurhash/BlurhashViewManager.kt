@@ -11,12 +11,12 @@ class BlurhashViewManager : SimpleViewManager<BlurhashImageView>() {
         view.setBlurhash(blurhash)
     }
 
-    @ReactProp(name = "decodeWidth")
+    @ReactProp(name = "decodeWidth", defaultInt = 32)
     fun setDecodeWidth(view: BlurhashImageView, decodeWidth: Int) {
         view.setDecodeWidth(decodeWidth)
     }
 
-    @ReactProp(name = "decodeHeight")
+    @ReactProp(name = "decodeHeight", defaultInt = 32)
     fun setDecodeHeight(view: BlurhashImageView, decodeHeight: Int) {
         view.setDecodeHeight(decodeHeight)
     }
