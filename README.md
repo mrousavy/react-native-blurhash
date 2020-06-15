@@ -7,7 +7,7 @@ npm i react-native-blurhash
 cd ios; pod install; cd ..
 ```
 
-**BlurHash** is a compact representation of a placeholder for an image. This is a native UI module for React Native to wrap the Blurhash iOS and Android implementations and make them usable in React Native.
+**BlurHash** is a compact representation of a placeholder for an image. This is a native UI module for React Native to wrap the Blurhash iOS and Android implementations and make them usable in React Native. See [woltapp/blurhash](https://github.com/woltapp/blurhash)
 
 <img src="img/explanation.png" alt="Turn grey image boxes into colorful blurred images">
 
