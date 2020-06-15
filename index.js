@@ -1,4 +1,4 @@
 import { requireNativeComponent } from 'react-native';
 
-// requireNativeComponent automatically resolves 'RNTMap' to 'RNTMapManager'
-module.exports = requireNativeComponent('Blurhash');
+// requireNativeComponent automatically resolves 'BlurhashView' to 'BlurhashViewManager'
+module.exports = requireNativeComponent('BlurhashView');

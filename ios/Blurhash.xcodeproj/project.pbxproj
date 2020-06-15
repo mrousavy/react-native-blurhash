@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B8EAEFB1248E37CA000932A3 /* BlurhashBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = B8EAEFB0248E37CA000932A3 /* BlurhashBridge.m */; };
-		B8EAEFB4248E37D7000932A3 /* Blurhash.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EAEFB3248E37D7000932A3 /* Blurhash.swift */; };
+		B8EAEFB1248E37CA000932A3 /* BlurhashViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B8EAEFB0248E37CA000932A3 /* BlurhashViewManager.m */; };
+		B8EAEFB4248E37D7000932A3 /* BlurhashViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EAEFB3248E37D7000932A3 /* BlurhashViewManager.swift */; };
 		B8EAEFB7248E3CD6000932A3 /* BlurhashDecode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EAEFB6248E3CD6000932A3 /* BlurhashDecode.swift */; };
 		B8EAEFB9248E3CE5000932A3 /* BlurhashEncode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EAEFB8248E3CE5000932A3 /* BlurhashEncode.swift */; };
 		B8EAEFBB248E3EBB000932A3 /* UIImage+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EAEFBA248E3EBB000932A3 /* UIImage+Color.swift */; };
@@ -28,9 +28,9 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libBlurhash.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBlurhash.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		B8EAEFB0248E37CA000932A3 /* BlurhashBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlurhashBridge.m; sourceTree = "<group>"; };
+		B8EAEFB0248E37CA000932A3 /* BlurhashViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlurhashViewManager.m; sourceTree = "<group>"; };
 		B8EAEFB2248E37D7000932A3 /* BlurhashBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlurhashBridge.h; sourceTree = "<group>"; };
-		B8EAEFB3248E37D7000932A3 /* Blurhash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blurhash.swift; sourceTree = "<group>"; };
+		B8EAEFB3248E37D7000932A3 /* BlurhashViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurhashViewManager.swift; sourceTree = "<group>"; };
 		B8EAEFB6248E3CD6000932A3 /* BlurhashDecode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurhashDecode.swift; sourceTree = "<group>"; };
 		B8EAEFB8248E3CE5000932A3 /* BlurhashEncode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurhashEncode.swift; sourceTree = "<group>"; };
 		B8EAEFBA248E3EBB000932A3 /* UIImage+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Color.swift"; sourceTree = "<group>"; };
@@ -62,8 +62,8 @@
 				B8EAEFB8248E3CE5000932A3 /* BlurhashEncode.swift */,
 				B8EAEFB6248E3CD6000932A3 /* BlurhashDecode.swift */,
 				B8EAEFB5248E39F7000932A3 /* Frameworks */,
-				B8EAEFB3248E37D7000932A3 /* Blurhash.swift */,
-				B8EAEFB0248E37CA000932A3 /* BlurhashBridge.m */,
+				B8EAEFB3248E37D7000932A3 /* BlurhashViewManager.swift */,
+				B8EAEFB0248E37CA000932A3 /* BlurhashViewManager.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
 				B8EAEFB2248E37D7000932A3 /* BlurhashBridge.h */,
 			);
@@ -134,11 +134,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B8EAEFB4248E37D7000932A3 /* Blurhash.swift in Sources */,
+				B8EAEFB4248E37D7000932A3 /* BlurhashViewManager.swift in Sources */,
 				B8EAEFB7248E3CD6000932A3 /* BlurhashDecode.swift in Sources */,
 				B8EAEFBB248E3EBB000932A3 /* UIImage+Color.swift in Sources */,
 				B8EAEFB9248E3CE5000932A3 /* BlurhashEncode.swift in Sources */,
-				B8EAEFB1248E37CA000932A3 /* BlurhashBridge.m in Sources */,
+				B8EAEFB1248E37CA000932A3 /* BlurhashViewManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

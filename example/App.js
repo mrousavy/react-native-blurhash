@@ -25,6 +25,7 @@ export default class App extends Component<{}> {
           width={400}
           height={200}
           blurhash="LEHV6nWB2yk8pyo0adR*.7kCMdnj"
+          style={styles.blurhash}
         />
       </View>
     );
@@ -37,6 +38,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+  },
+  blurhash: {
+    width: 400,
+    height: 300,
+    top: 20,
+    left: 20,
   },
   welcome: {
     fontSize: 20,

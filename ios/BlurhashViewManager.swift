@@ -1,5 +1,5 @@
 //
-//  Blurhash.swift
+//  BlurhashViewManager.swift
 //  Blurhash
 //
 //  Created by Marc Rousavy on 08.06.20.
@@ -9,20 +9,14 @@
 import Foundation
 import UIKit
 
-@objc(Blurhash)
-class Blurhash: RCTViewManager {
+@objc(BlurhashViewManager)
+class BlurhashViewManager: RCTViewManager {
 	var blurhash: String? = nil
 	var width: Int = 300
 	var height: Int = 300
 	
 	override func view() -> UIView? {
-		guard let blurhash = self.blurhash else {
-			guard let image = UIImage(color: .black) else {
-				return nil
-			}
-			return UIImageView(image: image)
-		}
-		let image = UIImage(blurHash: blurhash, size: CGSize(width: self.width, height: self.height))
+		let image = UIImage(blurHash: "LEHV6nWB2yk8pyo0adR*.7kCMdnj", size: CGSize(width: 400, height: 300))
 		return UIImageView(image: image)
 	}
 	
@@ -39,5 +33,9 @@ class Blurhash: RCTViewManager {
 	@objc(width:)
 	func setWidth(width: Int) {
 		self.width = width
+	}
+	
+	override static func requiresMainQueueSetup() -> Bool {
+	  return true
 	}
 }
