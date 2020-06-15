@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { requireNativeComponent, ViewProps } from 'react-native';
 
 
@@ -24,6 +24,19 @@ export interface BlurhashProps extends ViewProps {
   decodePunch?: number;
 }
 
+class Blurhash extends Component<BlurhashProps> {
+  constructor(props: BlurhashProps) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <NativeBlurhashView {...this.props} />
+    );
+  }
+}
+
 // requireNativeComponent automatically resolves 'BlurhashView' to 'BlurhashViewManager'
-const Blurhash = requireNativeComponent<BlurhashProps>('BlurhashView');
+const NativeBlurhashView = requireNativeComponent<BlurhashProps>('BlurhashView');
+
 export default Blurhash;

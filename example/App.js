@@ -22,9 +22,9 @@ export default class App extends Component {
     return (
       <View style={styles.container}>
         <Blurhash
+          blurhash={this.state.blurhash}
           decodeWidth={16}
           decodeHeight={16}
-          blurhash={this.state.blurhash}
           decodePunch={1}
           style={styles.blurhashImage}
         />
