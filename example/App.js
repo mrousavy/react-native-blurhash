@@ -22,9 +22,10 @@ export default class App extends Component<{}> {
     return (
       <View style={styles.container}>
         <Blurhash
-          width={400}
+          width={300}
           height={200}
           blurhash="LEHV6nWB2yk8pyo0adR*.7kCMdnj"
+          punch={1}
           style={styles.blurhash}
         />
       </View>
