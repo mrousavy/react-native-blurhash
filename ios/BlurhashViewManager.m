@@ -4,8 +4,8 @@
 @interface RCT_EXTERN_MODULE(BlurhashViewManager, RCTViewManager)
 
 RCT_EXPORT_VIEW_PROPERTY(blurhash, NSString)
-RCT_EXPORT_VIEW_PROPERTY(width, NSNumber)
-RCT_EXPORT_VIEW_PROPERTY(height, NSNumber)
-RCT_EXPORT_VIEW_PROPERTY(punch, NSNumber)
+RCT_EXPORT_VIEW_PROPERTY(decodeWidth, NSNumber)
+RCT_EXPORT_VIEW_PROPERTY(decodeHeight, NSNumber)
+RCT_EXPORT_VIEW_PROPERTY(decodePunch, NSNumber)
 
 @end

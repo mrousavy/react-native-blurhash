@@ -24,7 +24,7 @@ This is how I use it in my project:
 
 ## About
 
-The decoders are written in [Swift](ios/BlurhashDecode.swift) and [Kotlin](android/src/main/java/com/blurhash/BlurhashDecode.java), and are copied from the official [woltapp/blurhash](https://github.com/woltapp/blurhash) repository. I use caching techniques, to only re-render the (quite expensive) Blurhash image creation when one of the blurhash specific props (`blurhash`, `width`, `height` or `punch`) has changed.
+The decoders are written in [Swift](ios/BlurhashDecode.swift) and [Kotlin](android/src/main/java/com/blurhash/BlurhashDecode.java), and are copied from the official [woltapp/blurhash](https://github.com/woltapp/blurhash) repository. I use caching techniques, to only re-render the (quite expensive) Blurhash image creation when one of the blurhash specific props (`blurhash`, `decodeWidth`, `decodeHeight` or `decodePunch`) has changed.
 
 <table>
   <tr>
@@ -99,7 +99,7 @@ npm run android
 
 ## Performance
 
-The performance of the decoders is really fast, which means you should be able to use them in collections quite easily. Make sure to expect a small delay though, since it is still a complex decoding algorithm. By increasing the `width` and `height` props, the performance decreases. If you don't care much about the render resolution, use lower `width` and `height` values (`32` pixels wide is plenty!), and increase `style.width` and `style.height` values (or upscale it any other way like `flex`, `scale`, ...)
+The performance of the decoders is really fast, which means you should be able to use them in collections quite easily. Make sure to expect a small delay though, since it is still a complex decoding algorithm. By increasing the `decodeWidth` and `decodeHeight` props, the performance decreases. If you don't care much about the render resolution, use lower `decodeWidth` and `decodeHeight` values (`32` pixels wide is plenty!), and increase `style.width` and `style.height` values (or upscale it any other way like `flex`, `scale`, ...)
 
 > For some reason is the performance on Android much better than on iOS, I'm trying to figure out what's wrong here. See: [Issue #2: iOS Performance](https://github.com/mrousavy/react-native-blurhash/issues/2)
 

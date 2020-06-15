@@ -13,22 +13,22 @@ public class BlurhashViewManager extends SimpleViewManager<BlurhashImageView> {
     public static final String REACT_CLASS = "BlurhashView";
     @ReactProp(name = "blurhash")
     public void setBlurhash(BlurhashImageView view, String blurhash) {
-        view.set_blurhash(blurhash);
+        view.setBlurhash(blurhash);
     }
 
-    @ReactProp(name = "width")
-    public void setWidth(BlurhashImageView view, int width) {
-        view.set_width(width);
+    @ReactProp(name = "decodeWidth")
+    public void setDecodeWidth(BlurhashImageView view, int decodeWidth) {
+        view.setDecodeWidth(decodeWidth);
     }
 
-    @ReactProp(name = "height")
-    public void setHeight(BlurhashImageView view, int height) {
-        view.set_height(height);
+    @ReactProp(name = "decodeHeight")
+    public void setDecodeHeight(BlurhashImageView view, int decodeHeight) {
+        view.setDecodeHeight(decodeHeight);
     }
 
-    @ReactProp(name = "punch", defaultFloat = 1.0f)
-    public void setPunch(BlurhashImageView view, float punch) {
-        view.set_punch(punch);
+    @ReactProp(name = "decodePunch", defaultFloat = 1.0f)
+    public void setDecodePunch(BlurhashImageView view, float decodePunch) {
+        view.setDecodePunch(decodePunch);
     }
 
     @NotNull

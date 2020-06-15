@@ -9,31 +9,33 @@
 import Foundation
 import UIKit
 
+let LOG_ID = "BlurhashView"
+
 class BlurhashCache {
 	var blurhash: NSString
-	var width: NSNumber
-	var height: NSNumber
-	var punch: NSNumber
+	var decodeWidth: NSNumber
+	var decodeHeight: NSNumber
+	var decodePunch: NSNumber
 	var image: UIImage
 	
-	init(blurhash: NSString, width: NSNumber, height: NSNumber, punch: NSNumber, image: UIImage) {
+	init(blurhash: NSString, decodeWidth: NSNumber, decodeHeight: NSNumber, decodePunch: NSNumber, image: UIImage) {
 		self.blurhash = blurhash
-		self.width = width
-		self.height = height
-		self.punch = punch
+		self.decodeWidth = decodeWidth
+		self.decodeHeight = decodeHeight
+		self.decodePunch = decodePunch
 		self.image = image
 	}
 	
-	func isDifferent(blurhash: NSString, width: NSNumber, height: NSNumber, punch: NSNumber) -> Bool {
-		return self.blurhash != blurhash || self.width != width || self.height != height || self.punch != punch
+	func isDifferent(blurhash: NSString, decodeWidth: NSNumber, decodeHeight: NSNumber, decodePunch: NSNumber) -> Bool {
+		return self.blurhash != blurhash || self.decodeWidth != decodeWidth || self.decodeHeight != decodeHeight || self.decodePunch != decodePunch
 	}
 }
 
 class BlurhashView: UIView {
 	@objc var blurhash: NSString?
-	@objc var width: NSNumber?
-	@objc var height: NSNumber?
-	@objc var punch: NSNumber = 1
+	@objc var decodeWidth: NSNumber?
+	@objc var decodeHeight: NSNumber?
+	@objc var decodePunch: NSNumber = 1
 	var lastState: BlurhashCache?
 	
 	override init(frame: CGRect) {
@@ -45,33 +47,40 @@ class BlurhashView: UIView {
 	}
 	
 	func decodeImage() -> UIImage? {
-		guard let blurhash = self.blurhash, let width = self.width, let height = self.height else {
+		guard let blurhash = self.blurhash, let decodeWidth = self.decodeWidth, let decodeHeight = self.decodeHeight else {
 			return nil
 		}
-		if (self.lastState?.isDifferent(blurhash: blurhash, width: width, height: height, punch: punch) == false) {
-			print("Using cached image from last state!")
+		if (self.lastState?.isDifferent(blurhash: blurhash, decodeWidth: decodeWidth, decodeHeight: decodeHeight, decodePunch: self.decodePunch) == false) {
+			print("\(LOG_ID): Using cached image from last state!")
 			return self.lastState?.image
 		}
-		print("Re-rendering image!")
-		let size = CGSize(width: width.intValue, height: height.intValue)
-		let nullableImage = UIImage(blurHash: blurhash as String, size: size, punch: self.punch.floatValue)
+		print("\(LOG_ID): Re-rendering image on \(Thread.isMainThread ? "main" : "separate") thread!")
+		let size = CGSize(width: decodeWidth.intValue, height: decodeHeight.intValue)
+		let start = DispatchTime.now()
+		let nullableImage = UIImage(blurHash: blurhash as String, size: size, punch: self.decodePunch.floatValue)
+		let end = DispatchTime.now()
+		print("\(LOG_ID): Image decoding took: \((end.uptimeNanoseconds - start.uptimeNanoseconds) / 1000000) milliseconds")
 		guard let image = nullableImage else {
 			return nil
 		}
-		self.lastState = BlurhashCache(blurhash: blurhash, width: width, height: height, punch: self.punch, image: image)
+		self.lastState = BlurhashCache(blurhash: blurhash, decodeWidth: decodeWidth, decodeHeight: decodeHeight, decodePunch: self.decodePunch, image: image)
 		return image
 	}
 	
 	func renderBlurhashView() {
+		// TODO: background thread decoding?
 		guard let image = self.decodeImage() else {
 			return
 		}
-		DispatchQueue.main.async {
-			// image.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-			self.subviews.forEach({ $0.removeFromSuperview() })
-			self.addSubview(UIImageView(image: image))
-			print("Set UIImageView's Image source!")
-		}
+
+		// Run View Setter on main thread again
+		// image.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+		self.subviews.forEach({ $0.removeFromSuperview() })
+		// TODO: Dynamic width/height
+		let imageContainer = UIImageView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+		imageContainer.image = image
+		self.addSubview(imageContainer)
+		print("\(LOG_ID): Set UIImageView's Image source!")
 	}
 	
 	override func didSetProps(_ changedProps: [String]!) {
