@@ -56,6 +56,7 @@ class BlurhashView: UIView {
 		self.imageContainer = UIImageView()
 		self.imageContainer.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 		self.imageContainer.clipsToBounds = true
+		self.imageContainer.contentMode = .scaleAspectFit
 		super.init(frame: frame)
 		self.addSubview(self.imageContainer)
 	}
