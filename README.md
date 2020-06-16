@@ -2,6 +2,8 @@
 
 > Make loading not so boring.
 
+Install via [npm](https://www.npmjs.com/package/react-native-blurhash):
+
 ```sh
 npm i react-native-blurhash
 cd ios; pod install; cd ..
