@@ -3,6 +3,8 @@ package com.mrousavy.blurhash
 import android.content.Context
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.ScaleDrawable
+import android.os.Build
 import android.util.Log
 import com.facebook.drawee.controller.AbstractDraweeControllerBuilder
 import com.facebook.react.views.image.GlobalImageLoadListener
@@ -57,18 +59,13 @@ class BlurhashImageView(context: Context?, draweeControllerBuilder: AbstractDraw
         updateBlurhashBitmap()
     }
 
-    fun setResizeMode(resizeMode: String) {
-        this.scaleType = parseResizeMode(resizeMode)
-    }
-
     private fun updateBlurhashBitmap() {
         val shouldUpdate = _cachedBlurhash == null || _cachedBlurhash!!.isDifferent(_blurhash, _decodeWidth, _decodeHeight, _decodePunch)
         if (shouldUpdate) {
             if (_decodeWidth > 0 && _decodeHeight > 0 && _decodePunch > 0) {
                 Log.d(REACT_CLASS, "Decoding Bitmap...")
                 val bitmap = decode(_blurhash, _decodeWidth, _decodeHeight, _decodePunch)
-                val drawable: Drawable = BitmapDrawable(resources, bitmap)
-                this.background = drawable
+                setImageBitmap(bitmap) // why is this deprecated? https://developer.android.com/reference/android/widget/ImageView#setImageBitmap(android.graphics.Bitmap)
                 _cachedBlurhash = BlurhashCache(_blurhash, _decodeWidth, _decodeHeight, _decodePunch)
             } else {
                 Log.w(REACT_CLASS, "Width, Height and Punch properties of Blurhash View must be greater than 0!")
@@ -80,15 +77,5 @@ class BlurhashImageView(context: Context?, draweeControllerBuilder: AbstractDraw
 
     companion object {
         const val REACT_CLASS = "BlurhashImageView"
-
-        fun parseResizeMode(resizeMode: String): ScaleType {
-            return when(resizeMode) {
-                "contain" -> ScaleType.FIT_CENTER
-                "cover" -> ScaleType.CENTER_CROP
-                "stretch" -> ScaleType.FIT_XY
-                "center" -> ScaleType.CENTER_INSIDE
-                else -> ScaleType.CENTER_CROP
-            }
-        }
     }
 }

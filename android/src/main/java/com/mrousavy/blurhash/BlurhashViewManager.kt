@@ -1,9 +1,16 @@
 package com.mrousavy.blurhash
 
+import android.os.Build
+import android.widget.ImageView
 import com.facebook.drawee.backends.pipeline.Fresco
+import com.facebook.react.uimanager.PixelUtil
 import com.facebook.react.uimanager.SimpleViewManager
 import com.facebook.react.uimanager.ThemedReactContext
+import com.facebook.react.uimanager.ViewProps
 import com.facebook.react.uimanager.annotations.ReactProp
+import com.facebook.react.uimanager.annotations.ReactPropGroup
+import com.facebook.yoga.YogaConstants
+
 
 class BlurhashViewManager : SimpleViewManager<BlurhashImageView>() {
     @ReactProp(name = "blurhash")
@@ -28,11 +35,20 @@ class BlurhashViewManager : SimpleViewManager<BlurhashImageView>() {
 
     @ReactProp(name = "resizeMode")
     fun setResizeMode(view: BlurhashImageView, resizeMode: String) {
-        view.setResizeMode(resizeMode)
+        view.setScaleType(parseResizeMode(resizeMode))
+    }
+
+    override fun onAfterUpdateTransaction(view: BlurhashImageView) {
+        super.onAfterUpdateTransaction(view)
+        view.maybeUpdateView()
     }
 
     public override fun createViewInstance(context: ThemedReactContext): BlurhashImageView {
-        return BlurhashImageView(context, Fresco.newDraweeControllerBuilder(), null, null)
+        val image = BlurhashImageView(context, Fresco.newDraweeControllerBuilder(), null, null)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            image.clipToOutline = true
+        }
+        return image
     }
 
     override fun getName(): String {
@@ -41,5 +57,15 @@ class BlurhashViewManager : SimpleViewManager<BlurhashImageView>() {
 
     companion object {
         const val REACT_CLASS = "BlurhashView"
+
+        fun parseResizeMode(resizeMode: String): ImageView.ScaleType {
+            return when(resizeMode) {
+                "contain" -> ImageView.ScaleType.FIT_CENTER
+                "cover" -> ImageView.ScaleType.CENTER_CROP
+                "stretch" -> ImageView.ScaleType.FIT_XY
+                "center" -> ImageView.ScaleType.CENTER_INSIDE
+                else -> ImageView.ScaleType.CENTER_CROP
+            }
+        }
     }
 }
