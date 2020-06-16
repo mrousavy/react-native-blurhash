@@ -27,6 +27,7 @@ export default class App extends Component {
           decodeHeight={16}
           decodePunch={1}
           style={styles.blurhashImage}
+          resizeMode="cover"
         />
         <TextInput
           value={this.state.blurhash}

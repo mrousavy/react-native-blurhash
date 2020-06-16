@@ -26,6 +26,11 @@ class BlurhashViewManager : SimpleViewManager<BlurhashImageView>() {
         view.setDecodePunch(decodePunch)
     }
 
+    @ReactProp(name = "resizeMode")
+    fun setResizeMode(view: BlurhashImageView, resizeMode: String) {
+        view.setResizeMode(resizeMode)
+    }
+
     public override fun createViewInstance(context: ThemedReactContext): BlurhashImageView {
         return BlurhashImageView(context, Fresco.newDraweeControllerBuilder(), null, null)
     }

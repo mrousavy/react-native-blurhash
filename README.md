@@ -26,7 +26,7 @@ This is how I use it in my project:
 
 ## Usage
 
-The decoders are written in [Swift](ios/BlurhashDecode.swift) and [Kotlin](android/src/main/java/com/blurhash/BlurhashDecode.java), and are copied from the official [woltapp/blurhash](https://github.com/woltapp/blurhash) repository. I use caching techniques, to only re-render the (quite expensive) Blurhash image creation when one of the blurhash specific props (`blurhash`, `decodeWidth`, `decodeHeight` or `decodePunch`) has changed.
+The decoders are written in [Swift](ios/BlurhashDecode.swift) and [Kotlin](android/src/main/java/com/mrousavy/blurhash/BlurhashDecode.kt), and are copied from the official [woltapp/blurhash](https://github.com/woltapp/blurhash) repository. I use caching techniques, to only re-render the (quite expensive) Blurhash image creation when one of the blurhash specific props (`blurhash`, `decodeWidth`, `decodeHeight` or `decodePunch`) has changed.
 
 <table>
   <tr>
@@ -63,6 +63,13 @@ The decoders are written in [Swift](ios/BlurhashDecode.swift) and [Kotlin](andro
     <td>Adjusts the contrast of the output image. Tweak it if you want a different look for your placeholders.</td>
     <td>❌</td>
     <td><code>1.0</code></td>
+  </tr>
+  <tr>
+    <td><code>resizeMode</code></td>
+    <td><code>'cover' | 'contain' | 'stretch' | 'center'</code></td>
+    <td>Sets the resize mode of the image. See: <a href="https://reactnative.dev/docs/image#resizemode">Image:resizeMode</a></td>
+    <td>❌</td>
+    <td><code>'contain'</code></td>
   </tr>
   <tr>
     <td>All <code>View</code> props</td>

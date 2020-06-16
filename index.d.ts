@@ -1,6 +1,7 @@
 import React from 'react';
 import { ViewProps } from 'react-native';
 
+
 export declare interface BlurhashProps extends ViewProps {
   /**
    * The blurhash string to use. Example: `LGFFaXYk^6#M@-5c,1J5@[or[Q6`.
@@ -21,6 +22,11 @@ export declare interface BlurhashProps extends ViewProps {
    * @default 1.0
    */
   decodePunch?: number;
+  /**
+   * Adjusts the resize mode of the image.
+   * @default 'contain'
+   */
+  resizeMode?: 'cover' | 'contain' | 'stretch' | 'center';
 }
 
 export declare class Blurhash extends React.Component<BlurhashProps> {

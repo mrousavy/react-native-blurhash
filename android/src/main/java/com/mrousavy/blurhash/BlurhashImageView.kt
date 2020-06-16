@@ -57,6 +57,10 @@ class BlurhashImageView(context: Context?, draweeControllerBuilder: AbstractDraw
         updateBlurhashBitmap()
     }
 
+    fun setResizeMode(resizeMode: String) {
+        this.scaleType = parseResizeMode(resizeMode)
+    }
+
     private fun updateBlurhashBitmap() {
         val shouldUpdate = _cachedBlurhash == null || _cachedBlurhash!!.isDifferent(_blurhash, _decodeWidth, _decodeHeight, _decodePunch)
         if (shouldUpdate) {
@@ -76,5 +80,15 @@ class BlurhashImageView(context: Context?, draweeControllerBuilder: AbstractDraw
 
     companion object {
         const val REACT_CLASS = "BlurhashImageView"
+
+        fun parseResizeMode(resizeMode: String): ScaleType {
+            return when(resizeMode) {
+                "contain" -> ScaleType.FIT_CENTER
+                "cover" -> ScaleType.CENTER_CROP
+                "stretch" -> ScaleType.FIT_XY
+                "center" -> ScaleType.CENTER_INSIDE
+                else -> ScaleType.CENTER_CROP
+            }
+        }
     }
 }
