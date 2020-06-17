@@ -1,6 +1,6 @@
 # Blurhash
 
-> Make loading not so boring.
+> Give your users the loading experience they want.
 
 Install via [npm](https://www.npmjs.com/package/react-native-blurhash):
 
@@ -11,20 +11,40 @@ cd ios; pod install; cd ..
 
 <a href='https://ko-fi.com/F1F8CLXG' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://az743702.vo.msecnd.net/cdn/kofi2.png?v=0' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
 
-**BlurHash** is a compact representation of a placeholder for an image. This is a native UI module for React Native to wrap the Blurhash iOS and Android implementations and make them usable in React Native. See [woltapp/blurhash](https://github.com/woltapp/blurhash)
+[![react-native-blurhash](https://badge.fury.io/js/react-native-blurhash.svg)](https://badge.fury.io/js/react-native-blurhash)
+[![GitHub stars](https://img.shields.io/github/stars/mrousavy/react-native-blurhash.svg?style=social&label=Star&maxAge=259000)](https://GitHub.com/mrousavy/react-native-blurhash/stargazers/)
+[![GitHub followers](https://img.shields.io/github/followers/mrousavy.svg?style=social&label=Follow&maxAge=259000)](https://github.com/mrousavy?tab=followers)
 
-<img src="https://github.com/mrousavy/react-native-blurhash/raw/master/img/explanation.png" alt="Turn grey image boxes into colorful blurred images">
+**BlurHash** is a compact representation of a placeholder for an image. Instead of displaying boring grey little boxes while your image loads, show a _blurred preview_ until the full image has been loaded.
+
+> The algorithm was created by [woltapp/blurhash](https://github.com/woltapp/blurhash), which also includes an [algorithm explanation](https://github.com/woltapp/blurhash/blob/master/Algorithm.md).
+
+<img src="https://github.com/mrousavy/react-native-blurhash/raw/master/img/explanation.png" alt="Turn grey image boxes into colorful blurred images" width="70%">
+
+
 
 ## Example Workflow
 
-In order to use the Blurhash component, you have to already have a Blurhash string. See the [blurha.sh](https://blurha.sh) page to create example strings.
 
-This is how I use it in my project:
 
-1. A user uploads images from the react native app to firebase
-2. In firebase, I have a storage trigger function that generates a blurhash string from the uploaded image using the [TypeScript implementation](https://github.com/woltapp/blurhash/blob/master/TypeScript/src/encode.ts)
-3. After I generated the blurhash string, I set this as a property on my `post` document in Firestore.
-4. Now everytime a user loads a feed of posts from my Firestore database, I use a `<Blurhash>` component (with the post's `blurhash` property) over my `<Image>` component, and fade it out once the `<Image>` component's [`onLoadEnd`](https://reactnative.dev/docs/image#onloadend) function has been called.
+<table>
+<tr>
+<td width="55%">
+<ol>
+  In order to use the Blurhash component, you have to already have a Blurhash string. See the <a href="https://blurha.sh">blurha.sh</a> page to create example strings.
+
+  This is how I use it in my project:
+
+  <li>A user uploads images from the react native app to firebase</li>
+  <li>In firebase, I have a storage trigger function that generates a blurhash string from the uploaded image using the encoder from the <a href="https://github.com/woltapp/blurhash/blob/master/C/encode.c">C implementation</a>. (You can also use the <a href="https://github.com/woltapp/blurhash/blob/master/TypeScript/src/encode.ts">TypeScript implementation</a> if you don't care so much about performance)</li>
+  <li>After I generated the blurhash string, I set this as a property on my <code>post</code> document in Firestore</li>
+  <li>Now everytime a user loads a feed of <code>posts</code> from my Firestore database, I use a <code>&lt;Blurhash&gt;</code> component (with the post's <code>blurhash</code> property) over my <code>&lt;Image&gt;</code> component, and fade it out once the <code>&lt;Image&gt;</code> component's <a href="https://reactnative.dev/docs/image#onloadend"><code>onLoadEnd</code></a> function has been called.</li>
+</td>
+<td width="25%">
+<img src="https://github.com/mrousavy/react-native-blurhash/raw/master/img/demo.gif">
+</td>
+</tr>
+</table>
 
 ## Usage
 
@@ -48,14 +68,18 @@ The decoders are written in [Swift](ios/BlurhashDecode.swift) and [Kotlin](andro
   <tr>
     <td><code>decodeWidth</code></td>
     <td><code>number</code></td>
-    <td>The width (resolution) to decode to. This is not the same as the React Component's Style width! Higher values decrease performance, <code>32</code> is plenty!</td>
+    <td>The width (resolution) to decode to. Higher values decrease performance, use <code>16</code> for large lists, otherwise you can increase it to <code>32</code>.
+    <br/>
+    <blockquote>See: <a href="#performance">performance</a></blockquote></td>
     <td>❌</td>
     <td><code>32</code></td>
   </tr>
   <tr>
     <td><code>decodeHeight</code></td>
     <td><code>number</code></td>
-    <td>The height (resolution) to decode to. This is not the same as the React Component's Style height! Higher values decrease performance, <code>32</code> is plenty!</td>
+    <td>The height (resolution) to decode to. Higher values decrease performance, use <code>16</code> for large lists, otherwise you can increase it to <code>32</code>.
+    <br/>
+    <blockquote>See: <a href="#performance">performance</a></blockquote></td>
     <td>❌</td>
     <td><code>32</code></td>
   </tr>
@@ -69,14 +93,16 @@ The decoders are written in [Swift](ios/BlurhashDecode.swift) and [Kotlin](andro
   <tr>
     <td><code>resizeMode</code></td>
     <td><code>'cover' | 'contain' | 'stretch' | 'center'</code></td>
-    <td>Sets the resize mode of the image. See: <a href="https://reactnative.dev/docs/image#resizemode">Image:resizeMode</a></td>
+    <td>Sets the resize mode of the image. (no, <code>'repeat'</code> is not supported.)
+    <blockquote>See: <a href="https://reactnative.dev/docs/image#resizemode">Image::resizeMode</a></blockquote>
+    </td>
     <td>❌</td>
     <td><code>'contain'</code></td>
   </tr>
   <tr>
     <td>All <code>View</code> props</td>
     <td><code>ViewProps</code></td>
-    <td>All properties from the React Native <code>View</code>. Use <code>style.width</code> and <code>style.height</code> for render-widths.</td>
+    <td>All properties from the React Native <code>View</code>. Use <code>style.width</code> and <code>style.height</code> for display-sizes.</td>
     <td>❌</td>
     <td><code>{}</code></td>
   </tr>
@@ -99,7 +125,7 @@ export default function App() {
 }
 ```
 
-### Example App
+> See the [example](example/) App for a full code example.
 
 <table>
   <tr>
@@ -133,8 +159,9 @@ At the moment, the Android decoder is faster than the iOS decoder, I'm not quite
 
 
 ## Resources
-* [this medium article. jesus christ amen thanks for that](https://teabreak.e-spres-oh.com/swift-in-react-native-the-ultimate-guide-part-2-ui-components-907767123d9e)
-* [Native Modules documentation, especially the Swift part](https://reactnative.dev/docs/native-modules-ios.html#exporting-swift)
+* [this medium article.](https://teabreak.e-spres-oh.com/swift-in-react-native-the-ultimate-guide-part-2-ui-components-907767123d9e) jesus christ amen thanks for that
+* [Native Modules documentation](https://reactnative.dev/docs/native-modules-ios.html), especially the [Swift part](https://reactnative.dev/docs/native-modules-ios.html#exporting-swift)
+* [woltapp/blurhash](https://github.com/woltapp/blurhash) of course
 
 
 <a href='https://ko-fi.com/F1F8CLXG' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://az743702.vo.msecnd.net/cdn/kofi2.png?v=0' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
