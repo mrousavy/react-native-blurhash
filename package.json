@@ -28,7 +28,14 @@
     "baseUrl": "https://github.com/mrousavy/react-native-blurhash"
   },
   "keywords": [
-    "react-native"
+    "react-native",
+    "blurhash",
+    "image",
+    "ui",
+    "ux",
+    "component",
+    "loading",
+    "placeholder"
   ],
   "author": {
     "name": "Marc Rousavy",
