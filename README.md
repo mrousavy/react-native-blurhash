@@ -1,6 +1,6 @@
 # Blurhash
 
-> Give your users the loading experience they want.
+> 🖼️ Give your users the loading experience they want.
 
 Install via [npm](https://www.npmjs.com/package/react-native-blurhash):
 
@@ -21,11 +21,7 @@ cd ios; pod install; cd ..
 
 <img src="https://github.com/mrousavy/react-native-blurhash/raw/master/img/explanation.png" alt="Turn grey image boxes into colorful blurred images" width="70%">
 
-
-
 ## Example Workflow
-
-
 
 <table>
 <tr>
@@ -151,12 +147,11 @@ npm run android
 
 ## Performance
 
-The performance of the decoders is really fast, which means you should be able to use them in collections quite easily. Make sure to expect a small delay though, since it is still a complex decoding algorithm. By increasing the `decodeWidth` and `decodeHeight` props, the performance decreases. If you don't care much about the render resolution, use lower `decodeWidth` and `decodeHeight` values (`32` pixels wide is plenty!), and increase `style.width` and `style.height` values (or upscale it any other way like `flex`, `scale`, ...).
+The performance of the decoders is really fast, which means you should be able to use them in collections quite easily. By increasing the `decodeWidth` and `decodeHeight` props, the performance decreases. I'd recommend values of `16` for large lists, and `32` otherwise. Play around with the values but keep in mind that you probably won't see a difference when increasing it to anything above `32`.
 
 With both `decodeWidth` and `decodeHeight` set to `16` the image decoding takes about `2` milliseconds on iOS. For comparison, setting both `decodeWidth` and `decodeHeight` to `400` increases the decoding time to around `1.186` milliseconds.
 
 At the moment, the Android decoder is faster than the iOS decoder, I'm not quite sure why.
-
 
 ## Resources
 * [this medium article.](https://teabreak.e-spres-oh.com/swift-in-react-native-the-ultimate-guide-part-2-ui-components-907767123d9e) jesus christ amen thanks for that
