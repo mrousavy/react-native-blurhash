@@ -44,11 +44,7 @@ class BlurhashView: UIView {
 	@objc var decodeWidth: NSNumber = 32
 	@objc var decodeHeight: NSNumber = 32
 	@objc var decodePunch: NSNumber = 1
-	@objc var resizeMode: NSString = "contain" {
-		didSet {
-			updateImageContainer()
-		}
-	}
+	@objc var resizeMode: NSString = "contain"
 	var lastState: BlurhashCache?
 	let imageContainer: UIImageView
 	
@@ -94,6 +90,9 @@ class BlurhashView: UIView {
 	override func didSetProps(_ changedProps: [String]!) {
 		print("\(LOG_ID): Properties changed! \(String(describing: changedProps))")
 		self.renderBlurhashView()
+		if (changedProps.contains("resizeMode")) {
+			self.updateImageContainer()
+		}
 	}
 	
 	func updateImageContainer() {

@@ -8,12 +8,12 @@ export declare interface BlurhashProps extends ViewProps {
    */
   blurhash: string;
   /**
-   * The width (resolution) to decode to. This is not the same as the React Component's Style width! Higher values decrease performance, `32` is plenty!
+   * The width (resolution) to decode to. Higher values decrease performance, use `16` for large lists, otherwise you can increase it to `32`.
    * @default 32
    */
   decodeWidth?: number;
   /**
-   * The height (resolution) to decode to. This is not the same as the React Component's Style height! Higher values decrease performance, `32` is plenty!
+   * The height (resolution) to decode to. Higher values decrease performance, use `16` for large lists, otherwise you can increase it to `32`.
    * @default 32
    */
   decodeHeight?: number;

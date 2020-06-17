@@ -11,8 +11,6 @@
 		B8EAEFB1248E37CA000932A3 /* BlurhashViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B8EAEFB0248E37CA000932A3 /* BlurhashViewManager.m */; };
 		B8EAEFB4248E37D7000932A3 /* BlurhashViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EAEFB3248E37D7000932A3 /* BlurhashViewManager.swift */; };
 		B8EAEFB7248E3CD6000932A3 /* BlurhashDecode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EAEFB6248E3CD6000932A3 /* BlurhashDecode.swift */; };
-		B8EAEFB9248E3CE5000932A3 /* BlurhashEncode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EAEFB8248E3CE5000932A3 /* BlurhashEncode.swift */; };
-		B8EAEFBB248E3EBB000932A3 /* UIImage+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EAEFBA248E3EBB000932A3 /* UIImage+Color.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,8 +32,6 @@
 		B8EAEFB2248E37D7000932A3 /* BlurhashBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlurhashBridge.h; sourceTree = "<group>"; };
 		B8EAEFB3248E37D7000932A3 /* BlurhashViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurhashViewManager.swift; sourceTree = "<group>"; };
 		B8EAEFB6248E3CD6000932A3 /* BlurhashDecode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurhashDecode.swift; sourceTree = "<group>"; };
-		B8EAEFB8248E3CE5000932A3 /* BlurhashEncode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurhashEncode.swift; sourceTree = "<group>"; };
-		B8EAEFBA248E3EBB000932A3 /* UIImage+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Color.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,8 +57,6 @@
 			isa = PBXGroup;
 			children = (
 				B85DCA1B249764400003228D /* BlurhashView.swift */,
-				B8EAEFBA248E3EBB000932A3 /* UIImage+Color.swift */,
-				B8EAEFB8248E3CE5000932A3 /* BlurhashEncode.swift */,
 				B8EAEFB6248E3CD6000932A3 /* BlurhashDecode.swift */,
 				B8EAEFB5248E39F7000932A3 /* Frameworks */,
 				B8EAEFB3248E37D7000932A3 /* BlurhashViewManager.swift */,
@@ -140,8 +134,6 @@
 				B8EAEFB4248E37D7000932A3 /* BlurhashViewManager.swift in Sources */,
 				B85DCA1C249764400003228D /* BlurhashView.swift in Sources */,
 				B8EAEFB7248E3CD6000932A3 /* BlurhashDecode.swift in Sources */,
-				B8EAEFBB248E3EBB000932A3 /* UIImage+Color.swift in Sources */,
-				B8EAEFB9248E3CE5000932A3 /* BlurhashEncode.swift in Sources */,
 				B8EAEFB1248E37CA000932A3 /* BlurhashViewManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
