@@ -149,7 +149,7 @@ npm run android
 
 The performance of the decoders is really fast, which means you should be able to use them in collections quite easily. By increasing the `decodeWidth` and `decodeHeight` props, the performance decreases. I'd recommend values of `16` for large lists, and `32` otherwise. Play around with the values but keep in mind that you probably won't see a difference when increasing it to anything above `32`.
 
-With both `decodeWidth` and `decodeHeight` set to `16` the image decoding takes about `2` milliseconds on iOS. For comparison, setting both `decodeWidth` and `decodeHeight` to `400` increases the decoding time to around `1.186` milliseconds.
+With both `decodeWidth` and `decodeHeight` set to `16` the image decoding takes about `2` milliseconds on iOS. For comparison, setting both `decodeWidth` and `decodeHeight` to `400` increases the decoding time to around `1186` milliseconds.
 
 At the moment, the Android decoder is faster than the iOS decoder, I'm not quite sure why.
 
