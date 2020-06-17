@@ -93,7 +93,7 @@ The decoders are written in [Swift](ios/BlurhashDecode.swift) and [Kotlin](andro
     <blockquote>See: <a href="https://reactnative.dev/docs/image#resizemode">Image::resizeMode</a></blockquote>
     </td>
     <td>❌</td>
-    <td><code>'contain'</code></td>
+    <td><code>'cover'</code></td>
   </tr>
   <tr>
     <td>All <code>View</code> props</td>

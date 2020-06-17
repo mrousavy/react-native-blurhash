@@ -48,6 +48,7 @@ class BlurhashViewManager : SimpleViewManager<BlurhashImageView>() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             image.clipToOutline = true
         }
+        image.setScaleType(ImageView.ScaleType.CENTER_CROP)
         return image
     }
 

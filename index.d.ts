@@ -24,7 +24,7 @@ export declare interface BlurhashProps extends ViewProps {
   decodePunch?: number;
   /**
    * Adjusts the resize mode of the image.
-   * @default 'contain'
+   * @default 'cover'
    */
   resizeMode?: 'cover' | 'contain' | 'stretch' | 'center';
 }

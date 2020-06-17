@@ -17,7 +17,7 @@ class BlurhashCache {
 	var decodeHeight: Int
 	var decodePunch: Float
 	var image: UIImage
-	
+
 	init(blurhash: String, decodeWidth: Int, decodeHeight: Int, decodePunch: Float, image: UIImage) {
 		self.blurhash = blurhash
 		self.decodeWidth = decodeWidth
@@ -25,7 +25,7 @@ class BlurhashCache {
 		self.decodePunch = decodePunch
 		self.image = image
 	}
-	
+
 	init(blurhash: NSString, decodeWidth: NSNumber, decodeHeight: NSNumber, decodePunch: NSNumber, image: UIImage) {
 		self.blurhash = blurhash as String
 		self.decodeWidth = decodeWidth.intValue
@@ -33,7 +33,7 @@ class BlurhashCache {
 		self.decodePunch = decodePunch.floatValue
 		self.image = image
 	}
-	
+
 	func isDifferent(blurhash: NSString, decodeWidth: NSNumber, decodeHeight: NSNumber, decodePunch: NSNumber) -> Bool {
 		return self.blurhash != blurhash as String || self.decodeWidth != decodeWidth.intValue || self.decodeHeight != decodeHeight.intValue || self.decodePunch != decodePunch.floatValue
 	}
@@ -47,20 +47,20 @@ class BlurhashView: UIView {
 	@objc var resizeMode: NSString = "contain"
 	var lastState: BlurhashCache?
 	let imageContainer: UIImageView
-	
+
 	override init(frame: CGRect) {
 		self.imageContainer = UIImageView()
 		self.imageContainer.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 		self.imageContainer.clipsToBounds = true
-		self.imageContainer.contentMode = .scaleAspectFit
+		self.imageContainer.contentMode = .scaleAspectFill
 		super.init(frame: frame)
 		self.addSubview(self.imageContainer)
 	}
-	
+
 	required init?(coder aDecoder: NSCoder) {
 	  fatalError("init(coder:) has not been implemented")
 	}
-	
+
 	func decodeImage() -> UIImage? {
 		guard let blurhash = self.blurhash else {
 			return nil
@@ -78,7 +78,7 @@ class BlurhashView: UIView {
 		self.lastState = BlurhashCache(blurhash: blurhash, decodeWidth: decodeWidth, decodeHeight: decodeHeight, decodePunch: self.decodePunch, image: image)
 		return image
 	}
-	
+
 	func renderBlurhashView() {
 		guard let image = self.decodeImage() else {
 			return
@@ -86,7 +86,7 @@ class BlurhashView: UIView {
 
 		self.imageContainer.image = image
 	}
-	
+
 	override func didSetProps(_ changedProps: [String]!) {
 		print("\(LOG_ID): Properties changed! \(String(describing: changedProps))")
 		self.renderBlurhashView()
@@ -94,11 +94,11 @@ class BlurhashView: UIView {
 			self.updateImageContainer()
 		}
 	}
-	
+
 	func updateImageContainer() {
 		self.imageContainer.contentMode = parseResizeMode(resizeMode: self.resizeMode)
 	}
-	
+
 	func parseResizeMode(resizeMode: NSString) -> ContentMode {
 		switch (resizeMode) {
 		case "contain":
@@ -110,7 +110,7 @@ class BlurhashView: UIView {
 		case "center":
 			return .center
 		default:
-			return .scaleAspectFit
+			return .scaleAspectFill
 		}
 	}
 }
