@@ -44,7 +44,7 @@ class BlurhashView: UIView {
 	@objc var decodeWidth: NSNumber = 32
 	@objc var decodeHeight: NSNumber = 32
 	@objc var decodePunch: NSNumber = 1
-	@objc var resizeMode: NSString = "contain"
+	@objc var resizeMode: NSString = "cover"
 	var lastState: BlurhashCache?
 	let imageContainer: UIImageView
 
