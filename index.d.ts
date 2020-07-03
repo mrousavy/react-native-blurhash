@@ -23,7 +23,9 @@ export declare interface BlurhashProps extends ViewProps {
    */
   decodePunch?: number;
   /**
-   * Asynchronously decode the Blurhash on a separate (background) Thread instead of the main Thread. Only use this when you are experiencing stutters because of the Blurhash rendering (e.g. in a List). This might be slower because of the Thread-start overhead, but won't block the main thread and can be run in parallel.
+   * Asynchronously decode the Blurhash on a background Thread instead of the UI-Thread.
+   *
+   * Please see: https://github.com/mrousavy/react-native-blurhash#performance
    * @default false
    */
   decodeAsync?: boolean;
