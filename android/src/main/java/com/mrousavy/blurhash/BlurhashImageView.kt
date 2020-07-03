@@ -14,7 +14,6 @@ import kotlin.concurrent.thread
 
 internal class BlurhashCache(private val _blurhash: String?, private val _decodeWidth: Int, private val _decodeHeight: Int, private val _decodePunch: Float) {
     fun isDifferent(blurhash: String?, decodeWidth: Int, decodeHeight: Int, decodePunch: Float): Boolean {
-        Log.d("Comparing: $_blurhash:$blurhash, $_decodeWidth:$decodeWidth, $_decodeHeight:$decodeHeight", ", $_decodePunch:$decodePunch")
         return !safeStringEquals(_blurhash, blurhash) || _decodeWidth != decodeWidth || _decodeHeight != decodeHeight || _decodePunch != decodePunch
     }
 
@@ -67,15 +66,18 @@ class BlurhashImageView(context: Context?, draweeControllerBuilder: AbstractDraw
     }
 
     private fun renderBlurhash() {
+        // TODO: Kotlin Coroutines?
         if (this._decodeAsync) {
             thread(true) {
+                Log.d(REACT_CLASS, "Decoding ${_decodeWidth}x${_decodeHeight} blurhash ($_blurhash) on separate Thread!")
                 val bitmap = decode(_blurhash, _decodeWidth, _decodeHeight, _decodePunch)
-                setImageBitmap(bitmap) // why is this deprecated? https://developer.android.com/reference/android/widget/ImageView#setImageBitmap(android.graphics.Bitmap)
+                setImageBitmap(bitmap) // TODO: why is setImageBitmap() deprecated? https://developer.android.com/reference/android/widget/ImageView#setImageBitmap(android.graphics.Bitmap)
                 _cachedBlurhash = BlurhashCache(_blurhash, _decodeWidth, _decodeHeight, _decodePunch)
             }
         } else {
+            Log.d(REACT_CLASS, "Decoding ${_decodeWidth}x${_decodeHeight} blurhash ($_blurhash) on main Thread!")
             val bitmap = decode(_blurhash, _decodeWidth, _decodeHeight, _decodePunch)
-            setImageBitmap(bitmap) // why is this deprecated? https://developer.android.com/reference/android/widget/ImageView#setImageBitmap(android.graphics.Bitmap)
+            setImageBitmap(bitmap) // TODO: why is setImageBitmap() deprecated? https://developer.android.com/reference/android/widget/ImageView#setImageBitmap(android.graphics.Bitmap)
             _cachedBlurhash = BlurhashCache(_blurhash, _decodeWidth, _decodeHeight, _decodePunch)
         }
     }
@@ -84,7 +86,6 @@ class BlurhashImageView(context: Context?, draweeControllerBuilder: AbstractDraw
         val shouldUpdate = _cachedBlurhash == null || _cachedBlurhash!!.isDifferent(_blurhash, _decodeWidth, _decodeHeight, _decodePunch)
         if (shouldUpdate) {
             if (_decodeWidth > 0 && _decodeHeight > 0 && _decodePunch > 0) {
-                Log.d(REACT_CLASS, "Decoding Bitmap...")
                 renderBlurhash()
             } else {
                 Log.w(REACT_CLASS, "Width, Height and Punch properties of Blurhash View must be greater than 0!")

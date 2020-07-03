@@ -46,6 +46,7 @@ export default class App extends Component {
           }}
           style={styles.blurhashTextInput}
         />
+        {/* To test if `decodeAsync` really doesn't block the UI thread, you can press this Touchable and see it reacting. */}
         <TouchableOpacity style={styles.testButon}>
           <Text>Test me!</Text>
         </TouchableOpacity>
