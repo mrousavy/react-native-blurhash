@@ -9,7 +9,13 @@
  */
 
 import React, {Component} from 'react';
-import {StyleSheet, View, TextInput} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native';
 import {Blurhash} from 'react-native-blurhash';
 
 export default class App extends Component {
@@ -23,9 +29,10 @@ export default class App extends Component {
       <View style={styles.container}>
         <Blurhash
           blurhash={this.state.blurhash}
-          decodeWidth={16}
-          decodeHeight={16}
+          decodeWidth={32}
+          decodeHeight={32}
           decodePunch={1}
+          decodeAsync={false}
           style={styles.blurhashImage}
           resizeMode="cover"
         />
@@ -39,6 +46,9 @@ export default class App extends Component {
           }}
           style={styles.blurhashTextInput}
         />
+        <TouchableOpacity style={styles.testButon}>
+          <Text>Test me!</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -75,5 +85,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#333333',
     marginBottom: 5,
+  },
+  testButon: {
+    marginTop: 30,
+    backgroundColor: 'rgba(255, 0, 150, 0.3)',
+    borderRadius: 15,
+    paddingHorizontal: 30,
+    paddingVertical: 5,
   },
 });

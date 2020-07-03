@@ -33,6 +33,11 @@ class BlurhashViewManager : SimpleViewManager<BlurhashImageView>() {
         view.setDecodePunch(decodePunch)
     }
 
+    @ReactProp(name = "decodeAsync", defaultFloat = 1.0f)
+    fun setDecodeAsync(view: BlurhashImageView, decodeAsync: Boolean) {
+        view.setDecodeAsync(decodeAsync)
+    }
+
     @ReactProp(name = "resizeMode")
     fun setResizeMode(view: BlurhashImageView, resizeMode: String) {
         view.setScaleType(parseResizeMode(resizeMode))

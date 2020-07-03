@@ -87,6 +87,13 @@ The decoders are written in [Swift](ios/BlurhashDecode.swift) and [Kotlin](andro
     <td><code>1.0</code></td>
   </tr>
   <tr>
+    <td><code>decodeAsync</code></td>
+    <td><code>boolean</code></td>
+    <td>Asynchronously decode the Blurhash on a separate (background) Thread instead of the main Thread. Only use this when you are experiencing stutters because of the Blurhash rendering (e.g. in a List). This might be slower because of the Thread-start overhead, but won't block the main thread and can be run in parallel.</td>
+    <td>❌</td>
+    <td><code>false</code></td>
+  </tr>
+  <tr>
     <td><code>resizeMode</code></td>
     <td><code>'cover' | 'contain' | 'stretch' | 'center'</code></td>
     <td>Sets the resize mode of the image. (no, <code>'repeat'</code> is not supported.)

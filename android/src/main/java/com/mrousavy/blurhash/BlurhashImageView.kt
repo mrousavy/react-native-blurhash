@@ -10,6 +10,7 @@ import com.facebook.drawee.controller.AbstractDraweeControllerBuilder
 import com.facebook.react.views.image.GlobalImageLoadListener
 import com.facebook.react.views.image.ReactImageView
 import com.mrousavy.blurhash.BlurHashDecoder.Companion.decode
+import kotlin.concurrent.thread
 
 internal class BlurhashCache(private val _blurhash: String?, private val _decodeWidth: Int, private val _decodeHeight: Int, private val _decodePunch: Float) {
     fun isDifferent(blurhash: String?, decodeWidth: Int, decodeHeight: Int, decodePunch: Float): Boolean {
@@ -37,6 +38,7 @@ class BlurhashImageView(context: Context?, draweeControllerBuilder: AbstractDraw
     private var _decodeWidth = 32
     private var _decodeHeight = 32
     private var _decodePunch = 1.0f
+    private var _decodeAsync = false
     private var _cachedBlurhash: BlurhashCache? = null
 
     fun setBlurhash(blurhash: String?) {
@@ -59,14 +61,31 @@ class BlurhashImageView(context: Context?, draweeControllerBuilder: AbstractDraw
         updateBlurhashBitmap()
     }
 
+    fun setDecodeAsync(decodeAsync: Boolean) {
+        _decodeAsync = decodeAsync
+        // no need to re-render if just this prop has changed.
+    }
+
+    private fun renderBlurhash() {
+        if (this._decodeAsync) {
+            thread(true) {
+                val bitmap = decode(_blurhash, _decodeWidth, _decodeHeight, _decodePunch)
+                setImageBitmap(bitmap) // why is this deprecated? https://developer.android.com/reference/android/widget/ImageView#setImageBitmap(android.graphics.Bitmap)
+                _cachedBlurhash = BlurhashCache(_blurhash, _decodeWidth, _decodeHeight, _decodePunch)
+            }
+        } else {
+            val bitmap = decode(_blurhash, _decodeWidth, _decodeHeight, _decodePunch)
+            setImageBitmap(bitmap) // why is this deprecated? https://developer.android.com/reference/android/widget/ImageView#setImageBitmap(android.graphics.Bitmap)
+            _cachedBlurhash = BlurhashCache(_blurhash, _decodeWidth, _decodeHeight, _decodePunch)
+        }
+    }
+
     private fun updateBlurhashBitmap() {
         val shouldUpdate = _cachedBlurhash == null || _cachedBlurhash!!.isDifferent(_blurhash, _decodeWidth, _decodeHeight, _decodePunch)
         if (shouldUpdate) {
             if (_decodeWidth > 0 && _decodeHeight > 0 && _decodePunch > 0) {
                 Log.d(REACT_CLASS, "Decoding Bitmap...")
-                val bitmap = decode(_blurhash, _decodeWidth, _decodeHeight, _decodePunch)
-                setImageBitmap(bitmap) // why is this deprecated? https://developer.android.com/reference/android/widget/ImageView#setImageBitmap(android.graphics.Bitmap)
-                _cachedBlurhash = BlurhashCache(_blurhash, _decodeWidth, _decodeHeight, _decodePunch)
+                renderBlurhash()
             } else {
                 Log.w(REACT_CLASS, "Width, Height and Punch properties of Blurhash View must be greater than 0!")
             }

@@ -23,6 +23,11 @@ export declare interface BlurhashProps extends ViewProps {
    */
   decodePunch?: number;
   /**
+   * Asynchronously decode the Blurhash on a separate (background) Thread instead of the main Thread. Only use this when you are experiencing stutters because of the Blurhash rendering (e.g. in a List). This might be slower because of the Thread-start overhead, but won't block the main thread and can be run in parallel.
+   * @default false
+   */
+  decodeAsync?: boolean;
+  /**
    * Adjusts the resize mode of the image.
    * @default 'cover'
    */

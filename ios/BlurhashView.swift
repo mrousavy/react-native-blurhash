@@ -45,6 +45,7 @@ class BlurhashView: UIView {
 	@objc var decodeHeight: NSNumber = 32
 	@objc var decodePunch: NSNumber = 1
 	@objc var resizeMode: NSString = "cover"
+	@objc var decodeAsync: Bool = false
 	var lastState: BlurhashCache?
 	let imageContainer: UIImageView
 
@@ -66,10 +67,9 @@ class BlurhashView: UIView {
 			return nil
 		}
 		if (self.lastState?.isDifferent(blurhash: blurhash, decodeWidth: decodeWidth, decodeHeight: decodeHeight, decodePunch: self.decodePunch) == false) {
-			print("\(LOG_ID): Using cached image from last state!")
 			return self.lastState?.image
 		}
-		print("\(LOG_ID): Re-rendering image on \(Thread.isMainThread ? "main" : "separate") thread!")
+		print("\(LOG_ID): Decoding \(decodeWidth)x\(decodeHeight) blurhash (\(blurhash)) on \(Thread.isMainThread ? "main" : "separate") thread!")
 		let size = CGSize(width: decodeWidth.intValue, height: decodeHeight.intValue)
 		let nullableImage = UIImage(blurHash: blurhash as String, size: size, punch: self.decodePunch.floatValue)
 		guard let image = nullableImage else {
@@ -80,15 +80,26 @@ class BlurhashView: UIView {
 	}
 
 	func renderBlurhashView() {
-		guard let image = self.decodeImage() else {
-			return
+		if self.decodeAsync {
+			DispatchQueue.global(qos: .background).async {
+				guard let image = self.decodeImage() else {
+					print("\(LOG_ID): Blurhash decode() returned nil!")
+					return
+				}
+				DispatchQueue.main.async {
+					self.imageContainer.image = image
+				}
+			}
+		} else {
+			guard let image = self.decodeImage() else {
+				print("\(LOG_ID): Blurhash decode() returned nil!")
+				return
+			}
+			self.imageContainer.image = image
 		}
-
-		self.imageContainer.image = image
 	}
 
 	override func didSetProps(_ changedProps: [String]!) {
-		print("\(LOG_ID): Properties changed! \(String(describing: changedProps))")
 		self.renderBlurhashView()
 		if (changedProps.contains("resizeMode")) {
 			self.updateImageContainer()
