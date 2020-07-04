@@ -153,6 +153,17 @@ npm run ios
 npm run android
 ```
 
+## Encoding
+
+This library also includes a **native Image encoder**, so you can **encode** Images to blurhashes straight out of your React Native App!
+
+```ts
+const blurhash = await Blurhash.encode('https://blurha.sh/assets/images/img2.jpg', 4, 3);
+```
+
+Because encoding an Image is a pretty heavy task, this function is **non-blocking** and runs on a separate background Thread.
+
+> Currently supported on iOS! See: [issue #9](https://github.com/mrousavy/react-native-blurhash/issues/9) for more.
 
 ## Performance
 
