@@ -8,7 +8,7 @@ import com.facebook.react.uimanager.ViewManager
 
 class BlurhashPackage : ReactPackage {
     override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> {
-        return emptyList()
+        return listOf<NativeModule>(BlurhashViewModule(reactContext))
     }
 
     // Created for legacy support, it's deprecated now.
