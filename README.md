@@ -191,7 +191,9 @@ As you can see, the [Android decoder](https://github.com/mrousavy/react-native-b
 
 ### Asynchronous Decoding
 
-Use `decodeAsync={true}` to decode the Blurhash on a separate background Thread instead of the main UI-Thread. This is useful when you are experiencing stutters because of the Blurhash's **decoder** - e.g.: in large Lists. Threads are re-used (iOS: `DispatchQueue`, Android: kotlinx Coroutines).
+Use `decodeAsync={true}` to decode the Blurhash on a separate background Thread instead of the main UI-Thread. This is useful when you are experiencing stutters because of the Blurhash's **decoder** - e.g.: in large Lists.
+
+Threads are re-used (iOS: `DispatchQueue`, Android: kotlinx Coroutines).
 
 ## Resources
 * [this medium article.](https://teabreak.e-spres-oh.com/swift-in-react-native-the-ultimate-guide-part-2-ui-components-907767123d9e) jesus christ amen thanks for that

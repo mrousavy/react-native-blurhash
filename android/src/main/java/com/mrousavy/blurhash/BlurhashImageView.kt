@@ -5,7 +5,6 @@ import android.util.Log
 import com.facebook.drawee.controller.AbstractDraweeControllerBuilder
 import com.facebook.react.views.image.GlobalImageLoadListener
 import com.facebook.react.views.image.ReactImageView
-import com.mrousavy.blurhash.BlurHashDecoder.Companion.decode
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -38,7 +37,7 @@ class BlurhashImageView(context: Context?, draweeControllerBuilder: AbstractDraw
     private var _cachedBlurhash: BlurhashCache? = null
     private var _mainThreadId = Thread.currentThread().id
 
-    fun getThreadDescriptor(): String {
+    private fun getThreadDescriptor(): String {
         return if (Thread.currentThread().id == this._mainThreadId) "main"
         else "separate"
     }
@@ -47,13 +46,15 @@ class BlurhashImageView(context: Context?, draweeControllerBuilder: AbstractDraw
         if (decodeAsync) {
             GlobalScope.launch {
                 Log.d(REACT_CLASS, "Decoding ${decodeWidth}x${decodeHeight} blurhash ($blurhash) on ${getThreadDescriptor()} Thread!")
-                val bitmap = decode(blurhash, decodeWidth, decodeHeight, decodePunch)
+                // TODO: Experiment with useCache and parallelTasks
+                val bitmap = BlurHashDecoder.decode(blurhash, decodeWidth, decodeHeight, decodePunch, true, 2)
                 setImageBitmap(bitmap) // TODO: why is setImageBitmap() deprecated? https://developer.android.com/reference/android/widget/ImageView#setImageBitmap(android.graphics.Bitmap)
                 _cachedBlurhash = BlurhashCache(blurhash, decodeWidth, decodeHeight, decodePunch)
             }
         } else {
             Log.d(REACT_CLASS, "Decoding ${decodeWidth}x${decodeHeight} blurhash ($blurhash) on ${getThreadDescriptor()} Thread!")
-            val bitmap = decode(blurhash, decodeWidth, decodeHeight, decodePunch)
+            // TODO: Experiment with useCache and parallelTasks
+            val bitmap = BlurHashDecoder.decode(blurhash, decodeWidth, decodeHeight, decodePunch, true, 1)
             setImageBitmap(bitmap) // TODO: why is setImageBitmap() deprecated? https://developer.android.com/reference/android/widget/ImageView#setImageBitmap(android.graphics.Bitmap)
             _cachedBlurhash = BlurhashCache(blurhash, decodeWidth, decodeHeight, decodePunch)
         }
