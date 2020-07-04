@@ -81,21 +81,14 @@ class BlurhashView: UIView {
 
 	func renderBlurhashView() {
 		if self.decodeAsync {
-			DispatchQueue.global(qos: .background).async {
-				guard let image = self.decodeImage() else {
-					print("\(LOG_ID): Blurhash decode() returned nil!")
-					return
-				}
+			DispatchQueue.global(qos: .userInteractive).async {
+				let image = self.decodeImage()
 				DispatchQueue.main.async {
 					self.imageContainer.image = image
 				}
 			}
 		} else {
-			guard let image = self.decodeImage() else {
-				print("\(LOG_ID): Blurhash decode() returned nil!")
-				return
-			}
-			self.imageContainer.image = image
+			self.imageContainer.image = self.decodeImage()
 		}
 	}
 

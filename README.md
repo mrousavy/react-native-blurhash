@@ -91,7 +91,7 @@ The decoders are written in [Swift](ios/BlurhashDecode.swift) and [Kotlin](andro
     <td><code>boolean</code></td>
     <td>Asynchronously decode the Blurhash on a background Thread instead of the UI-Thread.
     <br/>
-    <blockquote>See: <a href="#performance">performance</a></blockquote></td>
+    <blockquote>See: <a href="#asynchronous-decoding">Asynchronous Decoding</a></blockquote></td>
     <td>❌</td>
     <td><code>false</code></td>
   </tr>
@@ -158,13 +158,40 @@ npm run android
 
 The performance of the decoders is really fast, which means you should be able to use them in collections quite easily. By increasing the `decodeWidth` and `decodeHeight` props, the performance decreases. I'd recommend values of `16` for large lists, and `32` otherwise. Play around with the values but keep in mind that you probably won't see a difference when increasing it to anything above `32`.
 
-With both `decodeWidth` and `decodeHeight` set to `16` the image decoding takes about **2 milliseconds** on iOS. For comparison, setting both `decodeWidth` and `decodeHeight` to `400` increases the decoding time to around **1186 milliseconds**.
+### Benchmarks
 
-Use `decodeAsync={true}` to decode the Blurhash on a separate background Thread instead of the main UI-Thread. This is useful when you are experiencing stutters because of the Blurhash's **decoder** - e.g.: in large Lists. Be aware: Only use this if you _are_ experiencing those stutters, since otherwise the decoding will be significantly slower due to the Thread-start overhead.
+All times are measured in milliseconds and represent exactly the minimum time it took to decode the image and render it. (Best out of 10). These tests were made with `decodeAsync={false}`, so keep in mind that the async decoder might add some time at first run because of the Thread start overhead.
 
-> Implementations differ: on **iOS** a `DispatchQueue` is re-used, on **Android** a new Thread is started for every decode.
+<table>
+  <tr>
+    <th>Blurhash Size</th>
+    <th>iOS</th>
+    <th>Android</th>
+  </tr>
+  <tr>
+    <td><b>32 x 32</b></td>
+    <td><code>8</code> ms</td>
+    <td><code>2</code> ms</td>
+  </tr>
+  <tr>
+    <td><b>400 x 400</b></td>
+    <td><code>1.134</code> ms</td>
+    <td><code>130</code> ms</td>
+  </tr>
+  <tr>
+    <td><b>2000 x 2000</b></td>
+    <td><code>28.894</code>ms</td>
+    <td><code>3.336</code>ms</td>
+  </tr>
+</table>
 
-At the moment, the Android decoder is faster than the iOS decoder, I'm not quite sure why.
+> Values larger than 32 x 32 are only used for Benchmarking purposes, **don't use them in your app!** 32x32 or 16x16 is plenty!
+
+As you can see, the [Android decoder](https://github.com/mrousavy/react-native-blurhash/blob/master/android/src/main/java/com/mrousavy/blurhash/BlurhashDecoder.kt) is a lot faster than the [iOS decoder](https://github.com/mrousavy/react-native-blurhash/blob/master/ios/BlurhashDecode.swift). I'm not quite sure why, I'll gladly accept any pull requests which optimize the Swift decoder.
+
+### Asynchronous Decoding
+
+Use `decodeAsync={true}` to decode the Blurhash on a separate background Thread instead of the main UI-Thread. This is useful when you are experiencing stutters because of the Blurhash's **decoder** - e.g.: in large Lists. Threads are re-used (iOS: `DispatchQueue`, Android: kotlinx Coroutines).
 
 ## Resources
 * [this medium article.](https://teabreak.e-spres-oh.com/swift-in-react-native-the-ultimate-guide-part-2-ui-components-907767123d9e) jesus christ amen thanks for that
