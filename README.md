@@ -169,9 +169,14 @@ All times are measured in milliseconds and represent exactly the minimum time it
     <th>Android</th>
   </tr>
   <tr>
+    <td><b>16 x 16</b></td>
+    <td><code>8</code> ms</td>
+    <td><code>23</code> ms</td>
+  </tr>
+  <tr>
     <td><b>32 x 32</b></td>
     <td><code>8</code> ms</td>
-    <td><code>1</code> ms</td>
+    <td><code>32</code> ms</td>
   </tr>
   <tr>
     <td><b>400 x 400</b></td>
@@ -187,13 +192,17 @@ All times are measured in milliseconds and represent exactly the minimum time it
 
 > Values larger than 32 x 32 are only used for Benchmarking purposes, **don't use them in your app!** 32x32 or 16x16 is plenty!
 
-As you can see, the [Android decoder](https://github.com/mrousavy/react-native-blurhash/blob/master/android/src/main/java/com/mrousavy/blurhash/BlurhashDecoder.kt) is a lot faster than the [iOS decoder](https://github.com/mrousavy/react-native-blurhash/blob/master/ios/BlurhashDecode.swift). I'm not quite sure why, I'll gladly accept any pull requests which optimize the Swift decoder.
+As you can see, at higher values the [Android decoder](https://github.com/mrousavy/react-native-blurhash/blob/master/android/src/main/java/com/mrousavy/blurhash/BlurhashDecoder.kt) is a lot faster than the [iOS decoder](https://github.com/mrousavy/react-native-blurhash/blob/master/ios/BlurhashDecode.swift), but suffers at lower values. I'm not quite sure why, I'll gladly accept any pull requests which optimize the decoders.
 
 ### Asynchronous Decoding
 
 Use `decodeAsync={true}` to decode the Blurhash on a separate background Thread instead of the main UI-Thread. This is useful when you are experiencing stutters because of the Blurhash's **decoder** - e.g.: in large Lists.
 
 Threads are re-used (iOS: `DispatchQueue`, Android: kotlinx Coroutines).
+
+### Caching
+
+Previously rendered Blurhashes will get cached, so they don't re-decode on every state change, as long as the `blurhash`, `decodeWidth`, `decodeHeight` and `decodePunch` properties stay the same.
 
 ## Resources
 * [this medium article.](https://teabreak.e-spres-oh.com/swift-in-react-native-the-ultimate-guide-part-2-ui-components-907767123d9e) jesus christ amen thanks for that

@@ -44,19 +44,16 @@ class BlurhashImageView(context: Context?, draweeControllerBuilder: AbstractDraw
     }
 
     private fun renderBlurhash(decodeAsync: Boolean) {
-        val parallelTasks = ln((decodeWidth * decodeHeight).toDouble() / 64).toInt().coerceAtLeast(1).coerceAtMost(8)
         if (decodeAsync) {
             GlobalScope.launch {
-                Log.d(REACT_CLASS, "Decoding ${decodeWidth}x${decodeHeight} blurhash ($blurhash) on ${getThreadDescriptor()} Thread with $parallelTasks parallel tasks!")
-                // TODO: Experiment with useCache and parallelTasks
-                val bitmap = BlurHashDecoder.decode(blurhash, decodeWidth, decodeHeight, decodePunch, true, parallelTasks)
+                Log.d(REACT_CLASS, "Decoding ${decodeWidth}x${decodeHeight} blurhash ($blurhash) on ${getThreadDescriptor()} Thread!")
+                val bitmap = BlurHashDecoder.decode(blurhash, decodeWidth, decodeHeight, decodePunch)
                 setImageBitmap(bitmap) // TODO: why is setImageBitmap() deprecated? https://developer.android.com/reference/android/widget/ImageView#setImageBitmap(android.graphics.Bitmap)
                 _cachedBlurhash = BlurhashCache(blurhash, decodeWidth, decodeHeight, decodePunch)
             }
         } else {
-            Log.d(REACT_CLASS, "Decoding ${decodeWidth}x${decodeHeight} blurhash ($blurhash) on ${getThreadDescriptor()} Thread with $parallelTasks parallel tasks!")
-            // TODO: Experiment with useCache and parallelTasks
-            val bitmap = BlurHashDecoder.decode(blurhash, decodeWidth, decodeHeight, decodePunch, true, parallelTasks)
+            Log.d(REACT_CLASS, "Decoding ${decodeWidth}x${decodeHeight} blurhash ($blurhash) on ${getThreadDescriptor()} Thread!")
+            val bitmap = BlurHashDecoder.decode(blurhash, decodeWidth, decodeHeight, decodePunch)
             setImageBitmap(bitmap) // TODO: why is setImageBitmap() deprecated? https://developer.android.com/reference/android/widget/ImageView#setImageBitmap(android.graphics.Bitmap)
             _cachedBlurhash = BlurhashCache(blurhash, decodeWidth, decodeHeight, decodePunch)
         }
