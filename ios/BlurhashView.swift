@@ -12,26 +12,23 @@ import UIKit
 let LOG_ID = "BlurhashView"
 
 class BlurhashCache {
-	var blurhash: String
+	var blurhash: String?
 	var decodeWidth: Int
 	var decodeHeight: Int
 	var decodePunch: Float
-	var image: UIImage
 
-	init(blurhash: String, decodeWidth: Int, decodeHeight: Int, decodePunch: Float, image: UIImage) {
+	init(blurhash: String?, decodeWidth: Int, decodeHeight: Int, decodePunch: Float) {
 		self.blurhash = blurhash
 		self.decodeWidth = decodeWidth
 		self.decodeHeight = decodeHeight
 		self.decodePunch = decodePunch
-		self.image = image
 	}
 
-	init(blurhash: NSString, decodeWidth: NSNumber, decodeHeight: NSNumber, decodePunch: NSNumber, image: UIImage) {
-		self.blurhash = blurhash as String
+	init(blurhash: NSString?, decodeWidth: NSNumber, decodeHeight: NSNumber, decodePunch: NSNumber) {
+		self.blurhash = blurhash as String?
 		self.decodeWidth = decodeWidth.intValue
 		self.decodeHeight = decodeHeight.intValue
 		self.decodePunch = decodePunch.floatValue
-		self.image = image
 	}
 
 	func isDifferent(blurhash: NSString, decodeWidth: NSNumber, decodeHeight: NSNumber, decodePunch: NSNumber) -> Bool {
@@ -66,17 +63,19 @@ class BlurhashView: UIView {
 		guard let blurhash = self.blurhash else {
 			return nil
 		}
-		if (self.lastState?.isDifferent(blurhash: blurhash, decodeWidth: decodeWidth, decodeHeight: decodeHeight, decodePunch: self.decodePunch) == false) {
-			return self.lastState?.image
-		}
-		print("\(LOG_ID): Decoding \(decodeWidth)x\(decodeHeight) blurhash (\(blurhash)) on \(Thread.isMainThread ? "main" : "separate") thread!")
-		let size = CGSize(width: decodeWidth.intValue, height: decodeHeight.intValue)
-		let nullableImage = UIImage(blurHash: blurhash as String, size: size, punch: self.decodePunch.floatValue)
-		guard let image = nullableImage else {
+		if (self.decodeWidth.intValue > 0 && self.decodeHeight.intValue > 0 && self.decodePunch.floatValue > 0) {
+			print("\(LOG_ID): Decoding \(decodeWidth)x\(decodeHeight) blurhash (\(blurhash)) on \(Thread.isMainThread ? "main" : "separate") thread!")
+			let size = CGSize(width: decodeWidth.intValue, height: decodeHeight.intValue)
+			let nullableImage = UIImage(blurHash: blurhash as String, size: size, punch: self.decodePunch.floatValue)
+			guard let image = nullableImage else {
+				return nil
+			}
+			return image
+		} else {
+			// TODO: Logging?
+			print("\(LOG_ID): Error! decodeWidth, decodeHeight and decodePunch must be greater than 0!")
 			return nil
 		}
-		self.lastState = BlurhashCache(blurhash: blurhash, decodeWidth: decodeWidth, decodeHeight: decodeHeight, decodePunch: self.decodePunch, image: image)
-		return image
 	}
 
 	func renderBlurhashView() {
@@ -93,10 +92,26 @@ class BlurhashView: UIView {
 	}
 
 	override func didSetProps(_ changedProps: [String]!) {
-		self.renderBlurhashView()
+		let shouldReRender = self.shouldReRender()
+		if (shouldReRender) {
+			self.renderBlurhashView()
+		}
 		if (changedProps.contains("resizeMode")) {
 			self.updateImageContainer()
 		}
+	}
+	
+	func shouldReRender() -> Bool {
+		defer {
+			self.lastState = BlurhashCache(blurhash: self.blurhash, decodeWidth: self.decodeWidth, decodeHeight: self.decodeHeight, decodePunch: self.decodePunch)
+		}
+		guard let lastState = self.lastState else {
+			return true
+		}
+		guard let blurhash = self.blurhash else {
+			return true
+		}
+		return lastState.isDifferent(blurhash: blurhash, decodeWidth: self.decodeWidth, decodeHeight: self.decodeHeight, decodePunch: self.decodePunch)
 	}
 
 	func updateImageContainer() {

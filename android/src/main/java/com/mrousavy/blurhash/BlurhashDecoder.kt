@@ -6,7 +6,7 @@ import kotlin.math.cos
 import kotlin.math.pow
 import kotlin.math.withSign
 
-// TODO: Use decoder from https://github.com/woltapp/blurhash/pull/68 ?
+// TODO: Use parallel decoder from https://github.com/woltapp/blurhash/pull/68 ?
 
 object BlurHashDecoder {
 

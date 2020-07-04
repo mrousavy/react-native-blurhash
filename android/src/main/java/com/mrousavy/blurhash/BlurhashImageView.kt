@@ -7,7 +7,6 @@ import com.facebook.react.views.image.GlobalImageLoadListener
 import com.facebook.react.views.image.ReactImageView
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlin.math.ln
 
 internal class BlurhashCache(private val _blurhash: String?, private val _decodeWidth: Int, private val _decodeHeight: Int, private val _decodePunch: Float) {
     fun isDifferent(blurhash: String?, decodeWidth: Int, decodeHeight: Int, decodePunch: Float): Boolean {
@@ -15,15 +14,19 @@ internal class BlurhashCache(private val _blurhash: String?, private val _decode
     }
 
     private fun safeStringEquals(left: String?, right: String?): Boolean {
-        return if (left == null) {
-            // left: null and right: null
-            right == null
-        } else if (right == null) {
-            // left: not null and right: null
-            false
-        } else {
-            // left: not null and right: not null
-            left == right
+        return when {
+            left == null -> {
+                // left: null and right: null
+                right == null
+            }
+            right == null -> {
+                // left: not null and right: null
+                false
+            }
+            else -> {
+                // left: not null and right: not null
+                left == right
+            }
         }
     }
 
@@ -44,31 +47,39 @@ class BlurhashImageView(context: Context?, draweeControllerBuilder: AbstractDraw
     }
 
     private fun renderBlurhash(decodeAsync: Boolean) {
-        if (decodeAsync) {
-            GlobalScope.launch {
+        if (decodeWidth > 0 && decodeHeight > 0 && decodePunch > 0) {
+            if (decodeAsync) {
+                GlobalScope.launch {
+                    Log.d(REACT_CLASS, "Decoding ${decodeWidth}x${decodeHeight} blurhash ($blurhash) on ${getThreadDescriptor()} Thread!")
+                    val bitmap = BlurHashDecoder.decode(blurhash, decodeWidth, decodeHeight, decodePunch)
+                    setImageBitmap(bitmap) // TODO: why is setImageBitmap() deprecated? https://developer.android.com/reference/android/widget/ImageView#setImageBitmap(android.graphics.Bitmap)
+                }
+            } else {
                 Log.d(REACT_CLASS, "Decoding ${decodeWidth}x${decodeHeight} blurhash ($blurhash) on ${getThreadDescriptor()} Thread!")
                 val bitmap = BlurHashDecoder.decode(blurhash, decodeWidth, decodeHeight, decodePunch)
                 setImageBitmap(bitmap) // TODO: why is setImageBitmap() deprecated? https://developer.android.com/reference/android/widget/ImageView#setImageBitmap(android.graphics.Bitmap)
-                _cachedBlurhash = BlurhashCache(blurhash, decodeWidth, decodeHeight, decodePunch)
             }
         } else {
-            Log.d(REACT_CLASS, "Decoding ${decodeWidth}x${decodeHeight} blurhash ($blurhash) on ${getThreadDescriptor()} Thread!")
-            val bitmap = BlurHashDecoder.decode(blurhash, decodeWidth, decodeHeight, decodePunch)
-            setImageBitmap(bitmap) // TODO: why is setImageBitmap() deprecated? https://developer.android.com/reference/android/widget/ImageView#setImageBitmap(android.graphics.Bitmap)
-            _cachedBlurhash = BlurhashCache(blurhash, decodeWidth, decodeHeight, decodePunch)
+            Log.w(REACT_CLASS, "Width, Height and Punch properties of Blurhash View must be greater than 0!")
+            setImageBitmap(null)
         }
     }
 
     fun updateBlurhash() {
-        val shouldUpdate = _cachedBlurhash == null || _cachedBlurhash!!.isDifferent(blurhash, decodeWidth, decodeHeight, decodePunch)
-        if (shouldUpdate) {
-            if (decodeWidth > 0 && decodeHeight > 0 && decodePunch > 0) {
-                renderBlurhash(this.decodeAsync)
-            } else {
-                Log.w(REACT_CLASS, "Width, Height and Punch properties of Blurhash View must be greater than 0!")
+        val shouldReRender = this.shouldReRender()
+        if (shouldReRender) {
+            renderBlurhash(this.decodeAsync)
+        }
+    }
+
+    private fun shouldReRender(): Boolean {
+        try {
+            if (_cachedBlurhash == null) {
+                return true
             }
-        } else {
-            Log.d(REACT_CLASS, "No props changed -> No update neccessary.")
+            return _cachedBlurhash!!.isDifferent(this.blurhash, this.decodeWidth, this.decodeHeight, this.decodePunch)
+        } finally {
+            _cachedBlurhash = BlurhashCache(this.blurhash, this.decodeWidth, this.decodeHeight, this.decodePunch)
         }
     }
 

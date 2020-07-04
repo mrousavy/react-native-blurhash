@@ -9,18 +9,13 @@
  */
 
 import React, {Component} from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-} from 'react-native';
+import {StyleSheet, View, Text, TextInput, Switch} from 'react-native';
 import {Blurhash} from 'react-native-blurhash';
 
 export default class App extends Component {
   state = {
     blurhash: 'LGFFaXYk^6#M@-5c,1J5@[or[Q6.',
+    decodeAsync: true,
   };
   componentDidMount() {}
 
@@ -32,7 +27,7 @@ export default class App extends Component {
           decodeWidth={32}
           decodeHeight={32}
           decodePunch={1}
-          decodeAsync={false}
+          decodeAsync={this.state.decodeAsync}
           style={styles.blurhashImage}
           resizeMode="cover"
         />
@@ -47,9 +42,13 @@ export default class App extends Component {
           style={styles.blurhashTextInput}
         />
         {/* To test if `decodeAsync` really doesn't block the UI thread, you can press this Touchable and see it reacting. */}
-        <TouchableOpacity style={styles.testButon}>
-          <Text>Test me!</Text>
-        </TouchableOpacity>
+        <View style={styles.row}>
+          <Text style={styles.text}>Decode Async:</Text>
+          <Switch
+            value={this.state.decodeAsync}
+            onValueChange={(v) => this.setState({decodeAsync: v})}
+          />
+        </View>
       </View>
     );
   }
@@ -77,21 +76,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     textAlign: 'center',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-  testButon: {
+  row: {
     marginTop: 30,
-    backgroundColor: 'rgba(255, 0, 150, 0.3)',
-    borderRadius: 15,
-    paddingHorizontal: 30,
-    paddingVertical: 5,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  text: {
+    fontSize: 14,
+    marginBottom: 3,
   },
 });

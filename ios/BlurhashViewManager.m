@@ -1,5 +1,6 @@
 #import "BlurhashBridge.h"
 #import "React/RCTViewManager.h"
+#import "React/RCTLog.h"
 
 @interface RCT_EXTERN_MODULE(BlurhashViewManager, RCTViewManager)
 
