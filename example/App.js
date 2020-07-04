@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   text: {
-    fontSize: 14,
-    marginBottom: 3,
+    fontSize: 16,
+    marginRight: 15,
   },
 });

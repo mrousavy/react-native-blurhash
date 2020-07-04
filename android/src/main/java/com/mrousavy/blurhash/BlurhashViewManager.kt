@@ -6,8 +6,8 @@ import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.react.uimanager.SimpleViewManager
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.annotations.ReactProp
-import com.facebook.yoga.YogaConstants
 
+val DEFAULT_RESIZE_MODE = ImageView.ScaleType.CENTER_CROP
 
 class BlurhashViewManager : SimpleViewManager<BlurhashImageView>() {
     @ReactProp(name = "blurhash")
@@ -30,14 +30,14 @@ class BlurhashViewManager : SimpleViewManager<BlurhashImageView>() {
         view.decodePunch = decodePunch
     }
 
-    @ReactProp(name = "decodeAsync", defaultFloat = 1.0f)
+    @ReactProp(name = "decodeAsync", defaultBoolean = false)
     fun setDecodeAsync(view: BlurhashImageView, decodeAsync: Boolean) {
         view.decodeAsync = decodeAsync
     }
 
     @ReactProp(name = "resizeMode")
     fun setResizeMode(view: BlurhashImageView, resizeMode: String) {
-        view.setScaleType(parseResizeMode(resizeMode))
+        view.scaleType = parseResizeMode(resizeMode)
     }
 
     override fun onAfterUpdateTransaction(view: BlurhashImageView) {
@@ -50,7 +50,7 @@ class BlurhashViewManager : SimpleViewManager<BlurhashImageView>() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             image.clipToOutline = true
         }
-        image.setScaleType(ImageView.ScaleType.CENTER_CROP)
+        image.scaleType = DEFAULT_RESIZE_MODE
         return image
     }
 
@@ -67,7 +67,7 @@ class BlurhashViewManager : SimpleViewManager<BlurhashImageView>() {
                 "cover" -> ImageView.ScaleType.CENTER_CROP
                 "stretch" -> ImageView.ScaleType.FIT_XY
                 "center" -> ImageView.ScaleType.CENTER_INSIDE
-                else -> ImageView.ScaleType.CENTER_CROP
+                else -> DEFAULT_RESIZE_MODE
             }
         }
     }

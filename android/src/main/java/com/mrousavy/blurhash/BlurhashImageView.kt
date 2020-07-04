@@ -3,6 +3,7 @@ package com.mrousavy.blurhash
 import android.content.Context
 import android.util.Log
 import com.facebook.drawee.controller.AbstractDraweeControllerBuilder
+import com.facebook.react.bridge.ReactContext
 import com.facebook.react.views.image.GlobalImageLoadListener
 import com.facebook.react.views.image.ReactImageView
 import kotlinx.coroutines.GlobalScope
@@ -50,23 +51,24 @@ class BlurhashImageView(context: Context?, draweeControllerBuilder: AbstractDraw
         if (decodeWidth > 0 && decodeHeight > 0 && decodePunch > 0) {
             if (decodeAsync) {
                 GlobalScope.launch {
-                    Log.d(REACT_CLASS, "Decoding ${decodeWidth}x${decodeHeight} blurhash ($blurhash) on ${getThreadDescriptor()} Thread!")
+                    log("Decoding ${decodeWidth}x${decodeHeight} blurhash ($blurhash) on ${getThreadDescriptor()} Thread!")
                     val bitmap = BlurHashDecoder.decode(blurhash, decodeWidth, decodeHeight, decodePunch)
                     setImageBitmap(bitmap) // TODO: why is setImageBitmap() deprecated? https://developer.android.com/reference/android/widget/ImageView#setImageBitmap(android.graphics.Bitmap)
                 }
             } else {
-                Log.d(REACT_CLASS, "Decoding ${decodeWidth}x${decodeHeight} blurhash ($blurhash) on ${getThreadDescriptor()} Thread!")
+                log("Decoding ${decodeWidth}x${decodeHeight} blurhash ($blurhash) on ${getThreadDescriptor()} Thread!")
                 val bitmap = BlurHashDecoder.decode(blurhash, decodeWidth, decodeHeight, decodePunch)
                 setImageBitmap(bitmap) // TODO: why is setImageBitmap() deprecated? https://developer.android.com/reference/android/widget/ImageView#setImageBitmap(android.graphics.Bitmap)
             }
         } else {
-            Log.w(REACT_CLASS, "Width, Height and Punch properties of Blurhash View must be greater than 0!")
+            warn("decodeWidth, decodeHeight and decodePunch properties of Blurhash View must be greater than 0!")
             setImageBitmap(null)
         }
     }
 
     fun updateBlurhash() {
         val shouldReRender = this.shouldReRender()
+        RNLog.l("Should re-render: $shouldReRender")
         if (shouldReRender) {
             renderBlurhash(this.decodeAsync)
         }
@@ -81,6 +83,20 @@ class BlurhashImageView(context: Context?, draweeControllerBuilder: AbstractDraw
         } finally {
             _cachedBlurhash = BlurhashCache(this.blurhash, this.decodeWidth, this.decodeHeight, this.decodePunch)
         }
+    }
+
+    private fun log(message: String) {
+        if (BuildConfig.DEBUG) {
+            Log.d(REACT_CLASS, message)
+        }
+        RNLog.t("$REACT_CLASS: $message")
+    }
+
+    private fun warn(message: String) {
+        if (BuildConfig.DEBUG) {
+            Log.w(REACT_CLASS, message)
+        }
+        RNLog.w(context as ReactContext?, "$REACT_CLASS: $message")
     }
 
     companion object {

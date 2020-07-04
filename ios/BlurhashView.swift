@@ -9,8 +9,6 @@
 import Foundation
 import UIKit
 
-let LOG_ID = "BlurhashView"
-
 class BlurhashCache {
 	var blurhash: String?
 	var decodeWidth: Int
@@ -64,7 +62,7 @@ class BlurhashView: UIView {
 			return nil
 		}
 		if (self.decodeWidth.intValue > 0 && self.decodeHeight.intValue > 0 && self.decodePunch.floatValue > 0) {
-			print("\(LOG_ID): Decoding \(decodeWidth)x\(decodeHeight) blurhash (\(blurhash)) on \(Thread.isMainThread ? "main" : "separate") thread!")
+			log(level: .trace, message: "Decoding \(decodeWidth)x\(decodeHeight) blurhash (\(blurhash)) on \(Thread.isMainThread ? "main" : "separate") thread!")
 			let size = CGSize(width: decodeWidth.intValue, height: decodeHeight.intValue)
 			let nullableImage = UIImage(blurHash: blurhash as String, size: size, punch: self.decodePunch.floatValue)
 			guard let image = nullableImage else {
@@ -72,8 +70,7 @@ class BlurhashView: UIView {
 			}
 			return image
 		} else {
-			// TODO: Logging?
-			print("\(LOG_ID): Error! decodeWidth, decodeHeight and decodePunch must be greater than 0!")
+			log(level: .error, message: "Error! decodeWidth, decodeHeight and decodePunch must be greater than 0!")
 			return nil
 		}
 	}
@@ -131,5 +128,9 @@ class BlurhashView: UIView {
 		default:
 			return .scaleAspectFill
 		}
+	}
+	
+	func log(level: RCTLogLevel, message: String, lineNumber: Int = #line) {
+		RCTDefaultLogFunction(level, RCTLogSource.native, "BlurhashView.swift", lineNumber as NSNumber, message)
 	}
 }
