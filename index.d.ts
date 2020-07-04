@@ -38,4 +38,12 @@ export declare interface BlurhashProps extends ViewProps {
 
 export declare class Blurhash extends React.Component<BlurhashProps> {
   public render(): React.ReactNode;
+  /**
+   * Asynchronously encode an Image to a Blurhash. Currently this only works on iOS, please see https://github.com/mrousavy/react-native-blurhash/issues/9 for more details.
+   * @param imageUri The Image's URI to use. Can be URL or base64 data.
+   * @param componentsX The components for the X axis.
+   * @param componentsY The components for the Y axis.
+   * @platform iOS
+   */
+  public static encode(imageUri: string, componentsX: number, componentsY: number): Promise<string>;
 }

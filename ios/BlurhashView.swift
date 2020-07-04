@@ -129,8 +129,4 @@ class BlurhashView: UIView {
 			return .scaleAspectFill
 		}
 	}
-	
-	func log(level: RCTLogLevel, message: String, lineNumber: Int = #line) {
-		RCTDefaultLogFunction(level, RCTLogSource.native, "BlurhashView.swift", lineNumber as NSNumber, message)
-	}
 }

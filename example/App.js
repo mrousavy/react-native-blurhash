@@ -9,15 +9,47 @@
  */
 
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, TextInput, Switch} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TextInput,
+  Switch,
+  TouchableOpacity,
+  ActivityIndicator,
+  Alert,
+} from 'react-native';
 import {Blurhash} from 'react-native-blurhash';
 
 export default class App extends Component {
   state = {
     blurhash: 'LGFFaXYk^6#M@-5c,1J5@[or[Q6.',
     decodeAsync: true,
+    encodingImageUri: '',
+    isEncoding: false,
   };
   componentDidMount() {}
+
+  async startEncoding() {
+    try {
+      if (this.state.encodingImageUri.length < 5) {
+        return;
+      }
+      this.setState({
+        isEncoding: true,
+      });
+      const blurhash = await Blurhash.encode(this.state.encodingImageUri, 4, 3);
+      this.setState({
+        blurhash: blurhash,
+        isEncoding: false,
+      });
+    } catch (e) {
+      this.setState({
+        isEncoding: false,
+      });
+      Alert.alert('Encoding error', e);
+    }
+  }
 
   render() {
     return (
@@ -39,7 +71,7 @@ export default class App extends Component {
               blurhash: text,
             });
           }}
-          style={styles.blurhashTextInput}
+          style={styles.textInput}
         />
         {/* To test if `decodeAsync` really doesn't block the UI thread, you can press this Touchable and see it reacting. */}
         <View style={styles.row}>
@@ -49,6 +81,26 @@ export default class App extends Component {
             onValueChange={(v) => this.setState({decodeAsync: v})}
           />
         </View>
+        <TextInput
+          value={this.state.encodingImageUri}
+          placeholder="Image URL to encode"
+          onChangeText={(text) => {
+            this.setState({
+              encodingImageUri: text,
+            });
+          }}
+          style={styles.textInput}
+        />
+        <TouchableOpacity
+          style={[
+            styles.encodeButton,
+            {opacity: this.state.encodingImageUri < 5 ? 0.5 : 1},
+          ]}
+          disabled={this.state.encodingImageUri < 5}
+          onPress={this.startEncoding.bind(this)}>
+          {!this.state.isEncoding && <Text>Encode</Text>}
+          {this.state.isEncoding && <ActivityIndicator />}
+        </TouchableOpacity>
       </View>
     );
   }
@@ -66,7 +118,7 @@ const styles = StyleSheet.create({
     height: 200,
     // Custom styling for width, height, scaling etc here
   },
-  blurhashTextInput: {
+  textInput: {
     marginTop: 20,
     borderRadius: 5,
     borderWidth: 1,
@@ -84,5 +136,12 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 16,
     marginRight: 15,
+  },
+  encodeButton: {
+    marginTop: 30,
+    backgroundColor: 'rgba(200, 0, 100, 0.4)',
+    borderRadius: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 35,
   },
 });

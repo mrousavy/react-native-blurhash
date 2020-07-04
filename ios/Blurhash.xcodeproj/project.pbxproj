@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B832026424B0C05B00DCFF26 /* BlurhashEncode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B832026324B0C05B00DCFF26 /* BlurhashEncode.swift */; };
+		B832026624B0C1BA00DCFF26 /* ReactLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B832026524B0C1BA00DCFF26 /* ReactLogger.swift */; };
 		B85DCA1C249764400003228D /* BlurhashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85DCA1B249764400003228D /* BlurhashView.swift */; };
 		B8EAEFB1248E37CA000932A3 /* BlurhashViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B8EAEFB0248E37CA000932A3 /* BlurhashViewManager.m */; };
 		B8EAEFB4248E37D7000932A3 /* BlurhashViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EAEFB3248E37D7000932A3 /* BlurhashViewManager.swift */; };
@@ -27,6 +29,8 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libBlurhash.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBlurhash.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B832026324B0C05B00DCFF26 /* BlurhashEncode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurhashEncode.swift; sourceTree = "<group>"; };
+		B832026524B0C1BA00DCFF26 /* ReactLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactLogger.swift; sourceTree = "<group>"; };
 		B85DCA1B249764400003228D /* BlurhashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurhashView.swift; sourceTree = "<group>"; };
 		B8EAEFB0248E37CA000932A3 /* BlurhashViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlurhashViewManager.m; sourceTree = "<group>"; };
 		B8EAEFB2248E37D7000932A3 /* BlurhashBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlurhashBridge.h; sourceTree = "<group>"; };
@@ -56,6 +60,8 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				B832026524B0C1BA00DCFF26 /* ReactLogger.swift */,
+				B832026324B0C05B00DCFF26 /* BlurhashEncode.swift */,
 				B85DCA1B249764400003228D /* BlurhashView.swift */,
 				B8EAEFB6248E3CD6000932A3 /* BlurhashDecode.swift */,
 				B8EAEFB5248E39F7000932A3 /* Frameworks */,
@@ -132,6 +138,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8EAEFB4248E37D7000932A3 /* BlurhashViewManager.swift in Sources */,
+				B832026624B0C1BA00DCFF26 /* ReactLogger.swift in Sources */,
+				B832026424B0C05B00DCFF26 /* BlurhashEncode.swift in Sources */,
 				B85DCA1C249764400003228D /* BlurhashView.swift in Sources */,
 				B8EAEFB7248E3CD6000932A3 /* BlurhashDecode.swift in Sources */,
 				B8EAEFB1248E37CA000932A3 /* BlurhashViewManager.m in Sources */,
