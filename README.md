@@ -32,7 +32,7 @@ cd ios; pod install; cd ..
   This is how I use it in my project:
 
   <li>A user uploads images from the react native app to firebase</li>
-  <li>In firebase, I have a storage trigger function that generates a blurhash string from the uploaded image using the encoder from the <a href="https://github.com/woltapp/blurhash/blob/master/C/encode.c">C implementation</a>. (You can also use the <a href="https://github.com/woltapp/blurhash/blob/master/TypeScript/src/encode.ts">TypeScript implementation</a> if you don't care so much about performance)</li>
+  <li>In firebase, I have a storage trigger function that generates a blurhash string from the uploaded image using the encoder from the <a href="https://github.com/woltapp/blurhash/blob/master/C/encode.c">C implementation</a>. (You can also use the <a href="#encoding">react-native-blurhash encoder</a> to encode an Image straight out of your React Native App!)</li>
   <li>After I generated the blurhash string, I set this as a property on my <code>post</code> document in Firestore</li>
   <li>Now everytime a user loads a feed of <code>posts</code> from my Firestore database, I use a <code>&lt;Blurhash&gt;</code> component (with the post's <code>blurhash</code> property) over my <code>&lt;Image&gt;</code> component, and fade it out once the <code>&lt;Image&gt;</code> component's <a href="https://reactnative.dev/docs/image#onloadend"><code>onLoadEnd</code></a> function has been called.</li>
 </td>
@@ -163,8 +163,6 @@ const blurhash = await Blurhash.encode('https://blurha.sh/assets/images/img2.jpg
 
 Because encoding an Image is a pretty heavy task, this function is **non-blocking** and runs on a separate background Thread.
 
-> Currently supported on iOS! See: [issue #9](https://github.com/mrousavy/react-native-blurhash/issues/9) for more.
-
 ## Performance
 
 The performance of the decoders is really fast, which means you should be able to use them in collections quite easily. By increasing the `decodeWidth` and `decodeHeight` props, the performance decreases. I'd recommend values of `16` for large lists, and `32` otherwise. Play around with the values but keep in mind that you probably won't see a difference when increasing it to anything above `32`.
@@ -218,6 +216,7 @@ Previously rendered Blurhashes will get cached, so they don't re-decode on every
 ## Resources
 * [this medium article.](https://teabreak.e-spres-oh.com/swift-in-react-native-the-ultimate-guide-part-2-ui-components-907767123d9e) jesus christ amen thanks for that
 * [Native Modules documentation](https://reactnative.dev/docs/native-modules-ios.html), especially the [Swift part](https://reactnative.dev/docs/native-modules-ios.html#exporting-swift)
+* [DylanVann/react-native-fast-image](https://github.com/DylanVann/react-native-fast-image) for Native UI Modules reference
 * [woltapp/blurhash](https://github.com/woltapp/blurhash) of course
 
 

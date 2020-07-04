@@ -1,7 +1,7 @@
 #import "BlurhashBridge.h"
 #import "React/RCTViewManager.h"
 
-@interface RCT_EXTERN_MODULE(BlurhashViewManager, RCTViewManager)
+@interface RCT_EXTERN_REMAP_MODULE(BlurhashView, BlurhashViewManager, RCTViewManager)
 
 RCT_EXPORT_VIEW_PROPERTY(blurhash, NSString);
 RCT_EXPORT_VIEW_PROPERTY(decodeWidth, NSNumber);

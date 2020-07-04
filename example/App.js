@@ -25,7 +25,7 @@ export default class App extends Component {
   state = {
     blurhash: 'LGFFaXYk^6#M@-5c,1J5@[or[Q6.',
     decodeAsync: true,
-    encodingImageUri: '',
+    encodingImageUri: 'https://blurha.sh/assets/images/img4.jpg',
     isEncoding: false,
   };
   componentDidMount() {}

@@ -1,8 +1,8 @@
 {
   "name": "react-native-blurhash",
   "title": "React Native Blurhash",
-  "version": "1.0.14",
-  "description": "BlurHash is a compact representation of a placeholder for an image. This is a Native UI Module for React Native to wrap the Blurhash implementations and make them usable in React Native.",
+  "version": "1.0.15",
+  "description": "🖼 BlurHash is a compact representation of a placeholder for an image. This is a Native UI Module for React Native to asynchronously wrap the Blurhash implementations and make them usable in React Native. Also supports encoding!",
   "main": "index.js",
   "types": "index.d.ts",
   "files": [

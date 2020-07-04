@@ -1,8 +1,9 @@
 const React = require('react');
-const { requireNativeComponent, NativeModules, UIManager, Platform } = require('react-native');
+const { requireNativeComponent, NativeModules } = require('react-native');
 
-// TODO: use memo to fix "Cannot redeclare BlurhashView twice" error
-const BlurhashModule = NativeModules.BlurhashViewManager;
+// TODO: use memo to fix "Invariant Violation: Tried to register two views with the same name BlurhashView" error
+// NativeModules automatically resolves 'BlurhashView' to 'BlurhashViewModule'
+const BlurhashModule = NativeModules.BlurhashView;
 
 class Blurhash extends React.Component {
   render() {
@@ -14,8 +15,10 @@ class Blurhash extends React.Component {
 
 
 Blurhash.encode = (imageUri, componentsX, componentsY) => {
-  if (Platform.OS === 'ios') return BlurhashModule.createBlurhashFromImage(imageUri, componentsX, componentsY);
-  else throw new Error("Blurhash Encoding is currently only supported on iOS! Create a pull request and help implementing this on Android here: https://github.com/mrousavy/react-native-blurhash/issues/9")
+  if (typeof imageUri !== 'string') throw new Error("imageUri must be a non-empty string!")
+  if (typeof componentsX !== 'number') throw new Error("componentsX must be a valid positive number!")
+  if (typeof componentsY !== 'number') throw new Error("componentsY must be a valid positive number!")
+  return BlurhashModule.createBlurhashFromImage(imageUri, componentsX, componentsY);
 }
 
 // requireNativeComponent automatically resolves 'BlurhashView' to 'BlurhashViewManager'
