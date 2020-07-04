@@ -170,12 +170,12 @@ All times are measured in milliseconds and represent exactly the minimum time it
   </tr>
   <tr>
     <td><b>16 x 16</b></td>
-    <td><code>8</code> ms</td>
+    <td><code>3</code> ms</td>
     <td><code>23</code> ms</td>
   </tr>
   <tr>
     <td><b>32 x 32</b></td>
-    <td><code>8</code> ms</td>
+    <td><code>10</code> ms</td>
     <td><code>32</code> ms</td>
   </tr>
   <tr>
