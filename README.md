@@ -171,7 +171,7 @@ All times are measured in milliseconds and represent exactly the minimum time it
   <tr>
     <td><b>32 x 32</b></td>
     <td><code>8</code> ms</td>
-    <td><code>2</code> ms</td>
+    <td><code>1</code> ms</td>
   </tr>
   <tr>
     <td><b>400 x 400</b></td>
@@ -181,7 +181,7 @@ All times are measured in milliseconds and represent exactly the minimum time it
   <tr>
     <td><b>2000 x 2000</b></td>
     <td><code>28.894</code>ms</td>
-    <td><code>3.336</code>ms</td>
+    <td><code>1.764</code>ms</td>
   </tr>
 </table>
 
