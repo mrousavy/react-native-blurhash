@@ -24,7 +24,7 @@ class BlurhashViewManager: RCTViewManager {
 		let formattedUri = imageUri.trimmingCharacters(in: .whitespacesAndNewlines) as String
 
 		
-		DispatchQueue.global(qos: .background).async {
+		DispatchQueue.global(qos: .utility).async {
 			if formattedUri.starts(with: "http") {
 				// Load Image from HTTP/HTTPS URL using the React Native Bridge's Image Loader.
 				guard let url = URL(string: formattedUri as String) else {
