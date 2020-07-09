@@ -23,15 +23,19 @@ extension String.Index {
 }
 
 extension String {
-    subscript (bounds: CountableClosedRange<Int>) -> String {
-        let start = index(startIndex, offsetBy: bounds.lowerBound)
-        let end = index(startIndex, offsetBy: bounds.upperBound)
-        return String(self[start...end])
-    }
+	subscript (offset: Int) -> Character {
+		return self[index(startIndex, offsetBy: offset)]
+	}
 
-    subscript (bounds: CountableRange<Int>) -> String {
-        let start = index(startIndex, offsetBy: bounds.lowerBound)
-        let end = index(startIndex, offsetBy: bounds.upperBound)
-        return String(self[start..<end])
-    }
+	subscript (bounds: CountableClosedRange<Int>) -> Substring {
+		let start = index(startIndex, offsetBy: bounds.lowerBound)
+		let end = index(startIndex, offsetBy: bounds.upperBound)
+		return self[start...end]
+	}
+
+	subscript (bounds: CountableRange<Int>) -> Substring {
+		let start = index(startIndex, offsetBy: bounds.lowerBound)
+		let end = index(startIndex, offsetBy: bounds.upperBound)
+		return self[start..<end]
+	}
 }
