@@ -52,6 +52,8 @@ export default class App extends Component {
   }
 
   render() {
+    const buttonOpacity =
+      this.state.encodingImageUri.length < 5 || this.state.isEncoding ? 0.5 : 1;
     return (
       <View style={styles.container}>
         <Blurhash
@@ -92,14 +94,11 @@ export default class App extends Component {
           style={styles.textInput}
         />
         <TouchableOpacity
-          style={[
-            styles.encodeButton,
-            {opacity: this.state.encodingImageUri < 5 ? 0.5 : 1},
-          ]}
-          disabled={this.state.encodingImageUri < 5}
+          style={[styles.encodeButton, {opacity: buttonOpacity}]}
+          disabled={this.state.encodingImageUri.length < 5}
           onPress={this.startEncoding.bind(this)}>
           {!this.state.isEncoding && <Text>Encode</Text>}
-          {this.state.isEncoding && <ActivityIndicator />}
+          {this.state.isEncoding && <ActivityIndicator color="black" />}
         </TouchableOpacity>
       </View>
     );
@@ -138,6 +137,8 @@ const styles = StyleSheet.create({
     marginRight: 15,
   },
   encodeButton: {
+    height: 37,
+    width: 120,
     marginTop: 30,
     backgroundColor: 'rgba(200, 0, 100, 0.4)',
     borderRadius: 10,
