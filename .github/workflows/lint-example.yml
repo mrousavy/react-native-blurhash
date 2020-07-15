@@ -1,0 +1,52 @@
+# This workflow will do a clean install of node dependencies, install dependencies
+# and run ESLint + Prettier for style checking, and TypeScript (tsc) for type-checks
+
+name: Lint example/
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  # Also trigger on page_build, as well as release created events
+  page_build:
+  release:
+    types: # This configuration does not affect the page_build event above
+      - created
+
+jobs:
+  lint:
+    env:
+      working-directory: ./example
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install node v14
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14
+    - name: Cache node modules
+      uses: actions/cache@v1
+      env:
+        cache-name: cache-node-modules
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
+
+    - name: Install dependencies via npm
+      run: npm ci
+      working-directory: ${{env.working-directory}}
+    - name: Install tsc via npm
+      run: npm i tsc
+      working-directory: ${{env.working-directory}}
+    - name: Run ESLint on all *.ts* files
+      run: npx eslint src/**/*.ts*
+      working-directory: ${{env.working-directory}}
+    - name: Run TypeScript without emitting files
+      run: tsc --noEmit -p tsconfig.json
+      working-directory: ${{env.working-directory}}

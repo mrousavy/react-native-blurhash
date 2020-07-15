@@ -1,0 +1,38 @@
+# This workflow will do a clean install of node dependencies, install dependencies
+# and run ESLint + Prettier for style checking, and TypeScript (tsc) for type-checks
+
+name: Build iOS example
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  # Also trigger on page_build, as well as release created events
+  page_build:
+  release:
+    types: # This configuration does not affect the page_build event above
+      - created
+
+jobs:
+  build:
+    env:
+      working-directory: ./example/ios
+    runs-on: macOS-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Select Xcode
+      run: sudo xcode-select -switch /Applications/Xcode_11.3.app
+      working-directory: ${{env.working-directory}}
+    - name: Xcode version
+      run: /usr/bin/xcodebuild -version
+      working-directory: ${{env.working-directory}}
+    - name: Install pods
+      run: pod install
+      working-directory: ${{env.working-directory}}
+    - name: Build archive
+      run: |
+        xcodebuild -sdk iphoneos -project example.xcodeproj \
+          -configuration Debug -scheme example
+      working-directory: ${{env.working-directory}}
