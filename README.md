@@ -34,7 +34,7 @@ cd ios; pod install; cd ..
   <li>A user uploads images from the react native app to firebase</li>
   <li>In firebase, I have a storage trigger function that generates a blurhash string from the uploaded image using the encoder from the <a href="https://github.com/woltapp/blurhash/blob/master/C/encode.c">C implementation</a>. (You can also use the <a href="#encoding">integrated encoder</a> to encode an Image straight out of your React Native App!)</li>
   <li>After I generated the blurhash string, I set this as a property on my <code>post</code> document in Firestore</li>
-  <li>Now everytime a user loads a feed of <code>posts</code> from my Firestore database, I use a <code>&lt;Blurhash&gt;</code> component (with the post's <code>blurhash</code> property) over my <code>&lt;Image&gt;</code> component, and fade it out once the <code>&lt;Image&gt;</code> component's <a href="https://reactnative.dev/docs/image#onloadend"><code>onLoadEnd</code></a> function has been called.</li>
+  <li>Now everytime a user loads a feed of <code>posts</code> from my Firestore database, I show a <code>&lt;Blurhash&gt;</code> component (with the post's <code>.blurhash</code> property) over my <code>&lt;Image&gt;</code> component, and fade it out once the <code>&lt;Image&gt;</code> component's <a href="https://reactnative.dev/docs/image#onloadend"><code>onLoadEnd</code></a> function has been called.</li>
 </td>
 <td width="25%">
 <img src="https://github.com/mrousavy/react-native-blurhash/raw/master/img/demo.gif">
