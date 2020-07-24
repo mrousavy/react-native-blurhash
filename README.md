@@ -44,7 +44,7 @@ cd ios; pod install; cd ..
 
 ## Usage
 
-The decoders are written in [Swift](ios/BlurhashDecode.swift) and [Kotlin](android/src/main/java/com/mrousavy/blurhash/BlurhashDecode.kt), and are copied from the official [woltapp/blurhash](https://github.com/woltapp/blurhash) repository. I use caching techniques, to only re-render the (quite expensive) Blurhash image creation when one of the blurhash specific props (`blurhash`, `decodeWidth`, `decodeHeight` or `decodePunch`) has changed.
+The decoders are written in [Swift](ios/BlurhashDecode.swift) and [Kotlin](android/src/main/java/com/mrousavy/blurhash/BlurhashDecode.kt) and are copied from the official [woltapp/blurhash](https://github.com/woltapp/blurhash) repository (MIT license). I use **light in-memory-caching** techniques to only re-render the (quite expensive) Blurhash image creation when one of the _blurhash specific_ props (`blurhash`, `decodeWidth`, `decodeHeight` or `decodePunch`) has changed.
 
 <table>
   <tr>
