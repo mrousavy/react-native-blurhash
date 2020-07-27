@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class BlurhashCache {
+final class BlurhashCache {
 	var blurhash: String?
 	var decodeWidth: Int
 	var decodeHeight: Int
@@ -29,12 +29,12 @@ class BlurhashCache {
 		self.decodePunch = decodePunch.floatValue
 	}
 
-	func isDifferent(blurhash: NSString, decodeWidth: NSNumber, decodeHeight: NSNumber, decodePunch: NSNumber) -> Bool {
+	final func isDifferent(blurhash: NSString, decodeWidth: NSNumber, decodeHeight: NSNumber, decodePunch: NSNumber) -> Bool {
 		return self.blurhash != blurhash as String || self.decodeWidth != decodeWidth.intValue || self.decodeHeight != decodeHeight.intValue || self.decodePunch != decodePunch.floatValue
 	}
 }
 
-class BlurhashView: UIView {
+final class BlurhashView: UIView {
 	@objc var blurhash: NSString?
 	@objc var decodeWidth: NSNumber = 32
 	@objc var decodeHeight: NSNumber = 32
@@ -57,7 +57,7 @@ class BlurhashView: UIView {
 	  fatalError("init(coder:) has not been implemented")
 	}
 
-	func decodeImage() -> UIImage? {
+	final func decodeImage() -> UIImage? {
 		guard let blurhash = self.blurhash else {
 			return nil
 		}
@@ -75,7 +75,7 @@ class BlurhashView: UIView {
 		}
 	}
 
-	func renderBlurhashView() {
+	final func renderBlurhashView() {
 		if self.decodeAsync {
 			DispatchQueue.global(qos: .userInteractive).async {
 				let image = self.decodeImage()
@@ -88,7 +88,7 @@ class BlurhashView: UIView {
 		}
 	}
 
-	override func didSetProps(_ changedProps: [String]!) {
+	final override func didSetProps(_ changedProps: [String]!) {
 		let shouldReRender = self.shouldReRender()
 		if (shouldReRender) {
 			self.renderBlurhashView()
@@ -98,7 +98,7 @@ class BlurhashView: UIView {
 		}
 	}
 	
-	func shouldReRender() -> Bool {
+	final func shouldReRender() -> Bool {
 		defer {
 			self.lastState = BlurhashCache(blurhash: self.blurhash, decodeWidth: self.decodeWidth, decodeHeight: self.decodeHeight, decodePunch: self.decodePunch)
 		}
@@ -111,11 +111,11 @@ class BlurhashView: UIView {
 		return lastState.isDifferent(blurhash: blurhash, decodeWidth: self.decodeWidth, decodeHeight: self.decodeHeight, decodePunch: self.decodePunch)
 	}
 
-	func updateImageContainer() {
+	final func updateImageContainer() {
 		self.imageContainer.contentMode = parseResizeMode(resizeMode: self.resizeMode)
 	}
 
-	func parseResizeMode(resizeMode: NSString) -> ContentMode {
+	final func parseResizeMode(resizeMode: NSString) -> ContentMode {
 		switch (resizeMode) {
 		case "contain":
 			return .scaleAspectFit

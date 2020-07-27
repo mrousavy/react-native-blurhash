@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 @objc(BlurhashViewManager)
-class BlurhashViewManager: RCTViewManager {
-	override func view() -> UIView! {
+final class BlurhashViewManager: RCTViewManager {
+	final override func view() -> UIView! {
 		return BlurhashView()
 	}
 	
@@ -20,7 +20,7 @@ class BlurhashViewManager: RCTViewManager {
 	}
 	
 	@objc(createBlurhashFromImage:componentsX:componentsY:resolver:rejecter:)
-	func createBlurhashFromImage(_ imageUri: NSString, componentsX: NSNumber, componentsY: NSNumber, resolver resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+	final func createBlurhashFromImage(_ imageUri: NSString, componentsX: NSNumber, componentsY: NSNumber, resolver resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
 		let formattedUri = imageUri.trimmingCharacters(in: .whitespacesAndNewlines) as String
 		
 		DispatchQueue.global(qos: .utility).async {
