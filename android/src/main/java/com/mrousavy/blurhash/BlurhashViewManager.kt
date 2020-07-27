@@ -46,7 +46,7 @@ class BlurhashViewManager : SimpleViewManager<BlurhashImageView>() {
     }
 
     public override fun createViewInstance(context: ThemedReactContext): BlurhashImageView {
-        val image = BlurhashImageView(context, Fresco.newDraweeControllerBuilder(), null, null)
+        val image = BlurhashImageView(context)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             image.clipToOutline = true
         }

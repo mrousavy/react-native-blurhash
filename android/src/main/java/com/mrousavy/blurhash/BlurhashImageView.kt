@@ -2,10 +2,7 @@ package com.mrousavy.blurhash
 
 import android.content.Context
 import android.util.Log
-import com.facebook.drawee.controller.AbstractDraweeControllerBuilder
 import com.facebook.react.bridge.ReactContext
-import com.facebook.react.views.image.GlobalImageLoadListener
-import com.facebook.react.views.image.ReactImageView
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -33,7 +30,7 @@ internal class BlurhashCache(private val _blurhash: String?, private val _decode
 
 }
 
-class BlurhashImageView(context: Context?, draweeControllerBuilder: AbstractDraweeControllerBuilder<*, *, *, *>?, globalImageLoadListener: GlobalImageLoadListener?, callerContext: Any?) : ReactImageView(context, draweeControllerBuilder, globalImageLoadListener, callerContext) {
+class BlurhashImageView(context: Context?): androidx.appcompat.widget.AppCompatImageView(context) {
     var blurhash: String? = null
     var decodeWidth = 32
     var decodeHeight = 32
