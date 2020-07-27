@@ -48,16 +48,18 @@ class BlurhashImageView(context: Context?, draweeControllerBuilder: AbstractDraw
     }
 
     private fun renderBlurhash(decodeAsync: Boolean) {
+        // TODO: Disable Blurhash cache? I'm caching anyways..
+        val useCache = true
         if (decodeWidth > 0 && decodeHeight > 0 && decodePunch > 0) {
             if (decodeAsync) {
                 GlobalScope.launch {
                     log("Decoding ${decodeWidth}x${decodeHeight} blurhash ($blurhash) on ${getThreadDescriptor()} Thread!")
-                    val bitmap = BlurHashDecoder.decode(blurhash, decodeWidth, decodeHeight, decodePunch)
+                    val bitmap = BlurHashDecoder.decode(blurhash, decodeWidth, decodeHeight, decodePunch, useCache)
                     setImageBitmap(bitmap) // TODO: why is setImageBitmap() deprecated? https://developer.android.com/reference/android/widget/ImageView#setImageBitmap(android.graphics.Bitmap)
                 }
             } else {
                 log("Decoding ${decodeWidth}x${decodeHeight} blurhash ($blurhash) on ${getThreadDescriptor()} Thread!")
-                val bitmap = BlurHashDecoder.decode(blurhash, decodeWidth, decodeHeight, decodePunch)
+                val bitmap = BlurHashDecoder.decode(blurhash, decodeWidth, decodeHeight, decodePunch, useCache)
                 setImageBitmap(bitmap) // TODO: why is setImageBitmap() deprecated? https://developer.android.com/reference/android/widget/ImageView#setImageBitmap(android.graphics.Bitmap)
             }
         } else {
