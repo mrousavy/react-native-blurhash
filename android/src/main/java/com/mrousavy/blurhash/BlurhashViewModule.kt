@@ -1,10 +1,7 @@
 package com.mrousavy.blurhash
 
 import android.graphics.BitmapFactory
-import android.net.Uri
 import android.util.Base64
-import com.facebook.drawee.controller.ForwardingControllerListener
-import com.facebook.imagepipeline.request.ImageRequestBuilder
 import com.facebook.react.bridge.*
 import java.net.URL
 import kotlin.concurrent.thread
@@ -63,5 +60,7 @@ class BlurhashViewModule(reactContext: ReactApplicationContext) : ReactContextBa
 
     override fun onHostResume() { }
     override fun onHostPause() { }
-    override fun onHostDestroy() { }
+    override fun onHostDestroy() {
+        BlurHashDecoder.clearCache()
+    }
 }
