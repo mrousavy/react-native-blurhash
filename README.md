@@ -11,7 +11,8 @@ cd ios; pod install; cd ..
 
 <a href='https://ko-fi.com/F1F8CLXG' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://az743702.vo.msecnd.net/cdn/kofi2.png?v=0' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
 
-[![react-native-blurhash](https://badge.fury.io/js/react-native-blurhash.svg)](https://badge.fury.io/js/react-native-blurhash)
+[![npm](https://img.shields.io/npm/v/react-native-blurhash?color=%238B83E6)](https://www.npmjs.com/package/react-native-blurhash)
+[![npm](https://img.shields.io/npm/dt/react-native-blurhash?color=%238B83E6)](https://www.npmjs.com/package/react-native-blurhash)
 [![GitHub stars](https://img.shields.io/github/stars/mrousavy/react-native-blurhash.svg?style=social&label=Star&maxAge=259000)](https://GitHub.com/mrousavy/react-native-blurhash/stargazers/)
 [![GitHub followers](https://img.shields.io/github/followers/mrousavy.svg?style=social&label=Follow&maxAge=259000)](https://github.com/mrousavy?tab=followers)
 
