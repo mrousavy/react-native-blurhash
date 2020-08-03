@@ -170,7 +170,7 @@ The performance of the decoders is really fast, which means you should be able t
 
 ### Benchmarks
 
-All times are measured in milliseconds and represent exactly the minimum time it took to decode the image and render it. (Best out of 10). These tests were made with `decodeAsync={false}`, so keep in mind that the async decoder might add some time at first run because of the Thread start overhead. iOS tests were run on an **iPhone 11** Simulator, while Android tests were run on a **Pixel 3a**, both on the same **MacBook Pro 15" i9**.
+All times are measured in milliseconds and represent exactly the minimum time it took to decode the image and render it. (Best out of 10). These tests were made with `decodeAsync={false}`, so keep in mind that the async decoder might add some time at first run because of the Thread start overhead. iOS tests were run on an **iPhone 11** Simulator, while Android tests were run on a **Pixel 3a** Emulator, both on the same **MacBook Pro 15" i9**.
 
 <table>
   <tr>
