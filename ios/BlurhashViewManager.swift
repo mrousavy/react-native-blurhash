@@ -14,15 +14,15 @@ final class BlurhashViewManager: RCTViewManager {
 	final override func view() -> UIView! {
 		return BlurhashView()
 	}
-	
+
 	override static func requiresMainQueueSetup() -> Bool {
 		return true
 	}
-	
+
 	@objc(createBlurhashFromImage:componentsX:componentsY:resolver:rejecter:)
 	final func createBlurhashFromImage(_ imageUri: NSString, componentsX: NSNumber, componentsY: NSNumber, resolver resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
 		let formattedUri = imageUri.trimmingCharacters(in: .whitespacesAndNewlines) as String
-		
+
 		DispatchQueue.global(qos: .utility).async {
 			if formattedUri.starts(with: "http") {
 				// Load Image from HTTP/HTTPS URL using the React Native Bridge's Image Loader.
@@ -38,7 +38,7 @@ final class BlurhashViewManager: RCTViewManager {
 					reject("MODULE_NOT_FOUND", "Could not find RCTImageLoader module!", nil)
 					return
 				}
-				
+
 				module.loadImage(with: URLRequest(url: url), callback: { (e, image) in
 					if e != nil {
 						reject("LOAD_ERROR", "Failed to load URI!", e)
@@ -56,7 +56,7 @@ final class BlurhashViewManager: RCTViewManager {
 			} else if formattedUri.starts(with: "data:image/") {
 				// Load from Base64 String using UIImage+Base64 extension.
 				guard let image = UIImage(base64: formattedUri) else {
-					reject("INVALID_URI", "The Image could not be loaded from the Base64 URI.", nil)
+					reject("LOAD_ERROR", "The Image could not be loaded from the Base64 URI.", nil)
 					return
 				}
 				log(level: .trace, message: "Encoding \(componentsX)x\(componentsY) Blurhash from URI \(imageUri)...")

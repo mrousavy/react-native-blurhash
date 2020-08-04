@@ -154,12 +154,20 @@ npm run ios
 npm run android
 ```
 
+## Average Color
+
+If your app is **really colorful** you might want to match some containers' colors to the content's context. To achieve this, use the `getAverageColor` function to get an RGB value which represents the average color of the given Blurhash:
+
+```ts
+const averageColor = Blurhash.getAverageColor('LGFFaXYk^6#M@-5c,1J5@[or[Q6.')
+```
+
 ## Encoding
 
 This library also includes a **native Image encoder**, so you can **encode** Images to blurhashes straight out of your React Native App!
 
 ```ts
-const blurhash = await Blurhash.encode('https://blurha.sh/assets/images/img2.jpg', 4, 3);
+const blurhash = await Blurhash.encode('https://blurha.sh/assets/images/img2.jpg', 4, 3)
 ```
 
 Because encoding an Image is a pretty heavy task, this function is **non-blocking** and runs on a separate background Thread.
