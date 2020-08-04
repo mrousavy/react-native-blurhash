@@ -64,7 +64,7 @@ export declare class Blurhash extends React.Component<BlurhashProps> {
   public static encode(imageUri: string, componentsX: number, componentsY: number): Promise<string>;
 
   /**
-   * Get the average color from a Blurhash string by decoding digits 2 to 4. (See [Algorithm Structure](https://github.com/woltapp/blurhash/blob/master/Algorithm.md#structure))
+   * Get the average color from a Blurhash string by decoding digits 3 to 6. (See [Algorithm Structure](https://github.com/woltapp/blurhash/blob/master/Algorithm.md#structure))
    * @param blurhash The Blurhash string to extract the average color from.
    * @returns The Blurhashes average color in RGB format, or undefined if invalid Blurhash.
    * @example
