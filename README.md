@@ -174,43 +174,7 @@ Because encoding an Image is a pretty heavy task, this function is **non-blockin
 
 ## Performance
 
-The performance of the decoders is really fast, which means you should be able to use them in collections quite easily. By increasing the `decodeWidth` and `decodeHeight` props, the performance decreases. I'd recommend values of `16` for large lists, and `32` otherwise. Play around with the values but keep in mind that you probably won't see a difference when increasing it to anything above `32`.
-
-### Benchmarks
-
-All times are measured in milliseconds and represent exactly the minimum time it took to decode the image and render it. (Best out of 10). These tests were made with `decodeAsync={false}`, so keep in mind that the async decoder might add some time at first run because of the Thread start overhead. iOS tests were run on an **iPhone 11** Simulator, while Android tests were run on a **Pixel 3a** Emulator, both on the same **MacBook Pro 15" i9**.
-
-<table>
-  <tr>
-    <th>Blurhash Size</th>
-    <th>iOS</th>
-    <th>Android</th>
-  </tr>
-  <tr>
-    <td><b>16 x 16</b></td>
-    <td><code>3</code> ms</td>
-    <td><code>23</code> ms</td>
-  </tr>
-  <tr>
-    <td><b>32 x 32</b></td>
-    <td><code>10</code> ms</td>
-    <td><code>32</code> ms</td>
-  </tr>
-  <tr>
-    <td><b>400 x 400</b></td>
-    <td><code>1.134</code> ms</td>
-    <td><code>130</code> ms</td>
-  </tr>
-  <tr>
-    <td><b>2000 x 2000</b></td>
-    <td><code>28.894</code>ms</td>
-    <td><code>1.764</code>ms</td>
-  </tr>
-</table>
-
-> Values larger than 32 x 32 are only used for Benchmarking purposes, **don't use them in your app!** 32x32 or 16x16 is plenty!
-
-As you can see, at higher values the [Android decoder](https://github.com/mrousavy/react-native-blurhash/blob/master/android/src/main/java/com/mrousavy/blurhash/BlurhashDecoder.kt) is a lot faster than the [iOS decoder](https://github.com/mrousavy/react-native-blurhash/blob/master/ios/BlurhashDecode.swift), but suffers at lower values. I'm not quite sure why, I'll gladly accept any pull requests which optimize the decoders.
+The performance of the decoders is really fast, which means you should be able to use them in collections quite easily. By increasing the `decodeWidth` and `decodeHeight` props, the _time to decode_ also increases. I'd recommend values of `16` for large lists, and `32` otherwise. Play around with the values but keep in mind that you probably won't see a difference when increasing it to anything above `32`.
 
 ### Asynchronous Decoding
 
