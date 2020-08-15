@@ -9,14 +9,14 @@ Pod::Spec.new do |s|
   s.description  = <<-DESC
                   react-native-blurhash
                    DESC
-  s.homepage     = "https://github.com/github_account/react-native-blurhash"
+  s.homepage     = "https://github.com/mrousavy/react-native-blurhash"
   # brief license entry:
   s.license      = "MIT"
   # optional - use expanded license entry instead:
   # s.license    = { :type => "MIT", :file => "LICENSE" }
   s.authors      = { "Marc Rousavy" => "marcrousavy@hotmail.com" }
   s.platforms    = { :ios => "9.0" }
-  s.source       = { :git => "https://github.com/github_account/react-native-blurhash.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/mrousavy/react-native-blurhash.git", :tag => "#{s.version}" }
 
   s.source_files = "ios/**/*.{h,c,m,swift}"
   s.requires_arc = true
