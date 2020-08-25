@@ -11,7 +11,7 @@ import UIKit
 
 @objc(BlurhashViewManager)
 final class BlurhashViewManager: RCTViewManager {
-	final override func view() -> UIView! {
+	override final func view() -> UIView! {
 		return BlurhashView()
 	}
 
@@ -20,7 +20,7 @@ final class BlurhashViewManager: RCTViewManager {
 	}
 
 	@objc(createBlurhashFromImage:componentsX:componentsY:resolver:rejecter:)
-	final func createBlurhashFromImage(_ imageUri: NSString, componentsX: NSNumber, componentsY: NSNumber, resolver resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+	final func createBlurhashFromImage(_ imageUri: NSString, componentsX: NSNumber, componentsY: NSNumber, resolver resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) {
 		let formattedUri = imageUri.trimmingCharacters(in: .whitespacesAndNewlines) as String
 
 		DispatchQueue.global(qos: .utility).async {
@@ -39,7 +39,7 @@ final class BlurhashViewManager: RCTViewManager {
 					return
 				}
 
-				module.loadImage(with: URLRequest(url: url), callback: { (e, image) in
+				module.loadImage(with: URLRequest(url: url), callback: { e, image in
 					if e != nil {
 						reject("LOAD_ERROR", "Failed to load URI!", e)
 						return

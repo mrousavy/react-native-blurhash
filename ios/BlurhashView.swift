@@ -54,16 +54,16 @@ final class BlurhashView: UIView {
 	}
 
 	required init?(coder aDecoder: NSCoder) {
-	  fatalError("init(coder:) has not been implemented")
+		fatalError("init(coder:) has not been implemented")
 	}
 
 	final func decodeImage() -> UIImage? {
 		guard let blurhash = self.blurhash else {
 			return nil
 		}
-		if (self.decodeWidth.intValue > 0 && self.decodeHeight.intValue > 0 && self.decodePunch.floatValue > 0) {
-			log(level: .trace, message: "Decoding \(decodeWidth)x\(decodeHeight) blurhash (\(blurhash)) on \(Thread.isMainThread ? "main" : "separate") thread!")
-			let size = CGSize(width: decodeWidth.intValue, height: decodeHeight.intValue)
+		if self.decodeWidth.intValue > 0, self.decodeHeight.intValue > 0, self.decodePunch.floatValue > 0 {
+			log(level: .trace, message: "Decoding \(self.decodeWidth)x\(self.decodeHeight) blurhash (\(blurhash)) on \(Thread.isMainThread ? "main" : "separate") thread!")
+			let size = CGSize(width: decodeWidth.intValue, height: self.decodeHeight.intValue)
 			let nullableImage = UIImage(blurHash: blurhash as String, size: size, punch: self.decodePunch.floatValue)
 			guard let image = nullableImage else {
 				return nil
@@ -88,16 +88,16 @@ final class BlurhashView: UIView {
 		}
 	}
 
-	final override func didSetProps(_ changedProps: [String]!) {
+	override final func didSetProps(_ changedProps: [String]!) {
 		let shouldReRender = self.shouldReRender()
-		if (shouldReRender) {
+		if shouldReRender {
 			self.renderBlurhashView()
 		}
-		if (changedProps.contains("resizeMode")) {
+		if changedProps.contains("resizeMode") {
 			self.updateImageContainer()
 		}
 	}
-	
+
 	final func shouldReRender() -> Bool {
 		defer {
 			self.lastState = BlurhashCache(blurhash: self.blurhash, decodeWidth: self.decodeWidth, decodeHeight: self.decodeHeight, decodePunch: self.decodePunch)
@@ -112,11 +112,11 @@ final class BlurhashView: UIView {
 	}
 
 	final func updateImageContainer() {
-		self.imageContainer.contentMode = parseResizeMode(resizeMode: self.resizeMode)
+		self.imageContainer.contentMode = self.parseResizeMode(resizeMode: self.resizeMode)
 	}
 
 	final func parseResizeMode(resizeMode: NSString) -> ContentMode {
-		switch (resizeMode) {
+		switch resizeMode {
 		case "contain":
 			return .scaleAspectFit
 		case "cover":
