@@ -8,16 +8,33 @@
     <Filter Include="Generated Files">
       <UniqueIdentifier>{926ab91d-31b4-48c3-b9a4-e681349f27f0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="woltapp">
+      <UniqueIdentifier>{dcc8cf41-5f8f-4898-b563-772b791fdb52}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="Class.cpp" />
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
     <ClCompile Include="BlurhashViewManager.cpp" />
+    <ClCompile Include="ReactPackageProvider.cpp" />
+    <ClCompile Include="woltapp\blurhash_stb.c">
+      <Filter>woltapp</Filter>
+    </ClCompile>
+    <ClCompile Include="woltapp\encode.c">
+      <Filter>woltapp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="BlurhashViewManager.h" />
+    <ClInclude Include="ReactPackageProvider.h" />
+    <ClInclude Include="woltapp\encode.h">
+      <Filter>woltapp</Filter>
+    </ClInclude>
+    <ClInclude Include="woltapp\stb_image.h">
+      <Filter>woltapp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Midl Include="Class.idl" />

@@ -122,6 +122,9 @@
     <ClInclude Include="Class.h">
       <DependentUpon>Class.idl</DependentUpon>
     </ClInclude>
+    <ClInclude Include="ReactPackageProvider.h" />
+    <ClInclude Include="woltapp\encode.h" />
+    <ClInclude Include="woltapp\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BlurhashViewManager.cpp" />
@@ -132,6 +135,9 @@
       <DependentUpon>Class.idl</DependentUpon>
     </ClCompile>
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+    <ClCompile Include="ReactPackageProvider.cpp" />
+    <ClCompile Include="woltapp\blurhash_stb.c" />
+    <ClCompile Include="woltapp\encode.c" />
   </ItemGroup>
   <ItemGroup>
     <Midl Include="Class.idl" />
