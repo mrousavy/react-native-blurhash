@@ -52,6 +52,8 @@
     "@types/react": "^16.9.47",
     "@types/react-native": "^0.63.9",
     "eslint": "^7.7.0",
+    "react-native": "^0.62.2",
+    "react-native-windows": "^0.62.6",
     "typescript": "^4.0.2"
   }
 }
