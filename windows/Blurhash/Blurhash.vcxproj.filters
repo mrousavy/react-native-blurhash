@@ -13,12 +13,15 @@
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="Class.cpp" />
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+    <ClCompile Include="BlurhashViewManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
+    <ClInclude Include="BlurhashViewManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Midl Include="Class.idl" />
+    <Midl Include="ReactPackageProvider.idl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Blurhash.def" />

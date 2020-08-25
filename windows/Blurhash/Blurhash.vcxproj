@@ -117,12 +117,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BlurhashViewManager.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Class.h">
       <DependentUpon>Class.idl</DependentUpon>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BlurhashViewManager.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
@@ -133,6 +135,7 @@
   </ItemGroup>
   <ItemGroup>
     <Midl Include="Class.idl" />
+    <Midl Include="ReactPackageProvider.idl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Blurhash.def" />
