@@ -27,7 +27,7 @@ func sRGBToLinear<Type: BinaryInteger>(_ value: Type) -> Float {
 
 // MARK: Encoder
 let encodeCharacters: [String] = {
-    return "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz#$%*+,-.:;=?@[]^_{|}~".map { String($0) }
+    "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz#$%*+,-.:;=?@[]^_{|}~".map { String($0) }
 }()
 
 func encodeDC(_ value: (Float, Float, Float)) -> Int {
