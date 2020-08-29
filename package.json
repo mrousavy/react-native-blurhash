@@ -19,7 +19,7 @@
     "react-native-blurhash.podspec"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx ."
   },
   "repository": {
     "type": "git",
