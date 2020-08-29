@@ -5,6 +5,7 @@ import android.widget.ImageView
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.react.uimanager.SimpleViewManager
 import com.facebook.react.uimanager.ThemedReactContext
+import com.facebook.react.uimanager.ViewProps
 import com.facebook.react.uimanager.annotations.ReactProp
 
 val DEFAULT_RESIZE_MODE = ImageView.ScaleType.CENTER_CROP
@@ -35,7 +36,7 @@ class BlurhashViewManager : SimpleViewManager<BlurhashImageView>() {
         view.decodeAsync = decodeAsync
     }
 
-    @ReactProp(name = "resizeMode")
+    @ReactProp(name = ViewProps.RESIZE_MODE)
     fun setResizeMode(view: BlurhashImageView, resizeMode: String) {
         view.scaleType = parseResizeMode(resizeMode)
     }
