@@ -52,12 +52,12 @@ class BlurhashImageView(context: Context?): androidx.appcompat.widget.AppCompatI
                 GlobalScope.launch {
                     log("Decoding ${decodeWidth}x${decodeHeight} blurhash ($blurhash) on ${getThreadDescriptor()} Thread!")
                     val bitmap = BlurHashDecoder.decode(blurhash, decodeWidth, decodeHeight, decodePunch, useCache)
-                    setImageBitmap(bitmap) // TODO: why is setImageBitmap() deprecated? https://developer.android.com/reference/android/widget/ImageView#setImageBitmap(android.graphics.Bitmap)
+                    setImageBitmap(bitmap)
                 }
             } else {
                 log("Decoding ${decodeWidth}x${decodeHeight} blurhash ($blurhash) on ${getThreadDescriptor()} Thread!")
                 val bitmap = BlurHashDecoder.decode(blurhash, decodeWidth, decodeHeight, decodePunch, useCache)
-                setImageBitmap(bitmap) // TODO: why is setImageBitmap() deprecated? https://developer.android.com/reference/android/widget/ImageView#setImageBitmap(android.graphics.Bitmap)
+                setImageBitmap(bitmap)
             }
         } else {
             warn("decodeWidth, decodeHeight and decodePunch properties of Blurhash View must be greater than 0!")
