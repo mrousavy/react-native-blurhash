@@ -18,6 +18,8 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   Alert,
+  StatusBar,
+  SafeAreaView,
 } from 'react-native';
 import {Blurhash} from 'react-native-blurhash';
 
@@ -55,52 +57,55 @@ export default class App extends Component {
     const buttonOpacity =
       this.state.encodingImageUri.length < 5 || this.state.isEncoding ? 0.5 : 1;
     return (
-      <View style={styles.container}>
-        <Blurhash
-          blurhash={this.state.blurhash}
-          decodeWidth={32}
-          decodeHeight={32}
-          decodePunch={1}
-          decodeAsync={this.state.decodeAsync}
-          style={styles.blurhashImage}
-          resizeMode="cover"
-        />
-        <TextInput
-          value={this.state.blurhash}
-          placeholder="Blurhash"
-          onChangeText={(text) => {
-            this.setState({
-              blurhash: text,
-            });
-          }}
-          style={styles.textInput}
-        />
-        {/* To test if `decodeAsync` really doesn't block the UI thread, you can press this Touchable and see it reacting. */}
-        <View style={styles.row}>
-          <Text style={styles.text}>Decode Async:</Text>
-          <Switch
-            value={this.state.decodeAsync}
-            onValueChange={(v) => this.setState({decodeAsync: v})}
+      <>
+        <StatusBar backgroundColor="rgba(100, 0, 100, 0.6)" />
+        <SafeAreaView style={styles.container}>
+          <Blurhash
+            blurhash={this.state.blurhash}
+            decodeWidth={32}
+            decodeHeight={32}
+            decodePunch={1}
+            decodeAsync={this.state.decodeAsync}
+            style={styles.blurhashImage}
+            resizeMode="cover"
           />
-        </View>
-        <TextInput
-          value={this.state.encodingImageUri}
-          placeholder="Image URL to encode"
-          onChangeText={(text) => {
-            this.setState({
-              encodingImageUri: text,
-            });
-          }}
-          style={styles.textInput}
-        />
-        <TouchableOpacity
-          style={[styles.encodeButton, {opacity: buttonOpacity}]}
-          disabled={this.state.encodingImageUri.length < 5}
-          onPress={this.startEncoding.bind(this)}>
-          {!this.state.isEncoding && <Text>Encode</Text>}
-          {this.state.isEncoding && <ActivityIndicator color="black" />}
-        </TouchableOpacity>
-      </View>
+          <TextInput
+            value={this.state.blurhash}
+            placeholder="Blurhash"
+            onChangeText={(text) => {
+              this.setState({
+                blurhash: text,
+              });
+            }}
+            style={styles.textInput}
+          />
+          {/* To test if `decodeAsync` really doesn't block the UI thread, you can press this Touchable and see it reacting. */}
+          <View style={styles.row}>
+            <Text style={styles.text}>Decode Async:</Text>
+            <Switch
+              value={this.state.decodeAsync}
+              onValueChange={(v) => this.setState({decodeAsync: v})}
+            />
+          </View>
+          <TextInput
+            value={this.state.encodingImageUri}
+            placeholder="Image URL to encode"
+            onChangeText={(text) => {
+              this.setState({
+                encodingImageUri: text,
+              });
+            }}
+            style={styles.textInput}
+          />
+          <TouchableOpacity
+            style={[styles.encodeButton, {opacity: buttonOpacity}]}
+            disabled={this.state.encodingImageUri.length < 5}
+            onPress={this.startEncoding.bind(this)}>
+            {!this.state.isEncoding && <Text>Encode</Text>}
+            {this.state.isEncoding && <ActivityIndicator color="black" />}
+          </TouchableOpacity>
+        </SafeAreaView>
+      </>
     );
   }
 }
@@ -122,7 +127,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: 'purple',
+    borderColor: 'rgba(200, 0, 100, 0.5)',
     width: '70%',
     height: 35,
     paddingHorizontal: 20,
