@@ -8,143 +8,113 @@
  * https://github.com/facebook/react-native
  */
 
-import React, {useCallback, useState, useMemo} from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  TextInput,
-  Switch,
-  TouchableOpacity,
-  ActivityIndicator,
-  Alert,
-  StatusBar,
-  SafeAreaView,
-} from 'react-native';
-import {Blurhash} from 'react-native-blurhash';
+import React, { useCallback, useState, useMemo } from 'react';
+import { StyleSheet, View, Text, TextInput, Switch, TouchableOpacity, ActivityIndicator, Alert, StatusBar, SafeAreaView } from 'react-native';
+import { Blurhash } from 'react-native-blurhash';
+
+const COLORS = {
+	background: '#F5FCFF',
+	statusBar: 'rgba(100, 0, 100, 0.6)',
+	textInput: 'rgba(200, 0, 100, 0.5)',
+	button: 'rgba(200, 0, 100, 0.4)',
+};
 
 export default function App() {
-  //#region State & Props
-  const [blurhash, setBlurhash] = useState('LGFFaXYk^6#M@-5c,1J5@[or[Q6.');
-  const [decodeAsync, setDecodeAsync] = useState(true);
-  const [encodingImageUri, setEncodingImageUri] = useState(
-    'https://blurha.sh/assets/images/img4.jpg',
-  );
-  const [isEncoding, setIsEncoding] = useState(false);
-  //#endregion
+	//#region State & Props
+	const [blurhash, setBlurhash] = useState('LGFFaXYk^6#M@-5c,1J5@[or[Q6.');
+	const [decodeAsync, setDecodeAsync] = useState(true);
+	const [encodingImageUri, setEncodingImageUri] = useState('https://blurha.sh/assets/images/img4.jpg');
+	const [isEncoding, setIsEncoding] = useState(false);
+	//#endregion
 
-  //#region Memos
-  const buttonOpacity = useMemo(
-    () => (encodingImageUri.length < 5 || isEncoding ? 0.5 : 1),
-    [encodingImageUri.length, isEncoding],
-  );
-  const encodeButtonStyle = useMemo(
-    () => [styles.encodeButton, {opacity: buttonOpacity}],
-    [buttonOpacity],
-  );
-  //#endregion
+	//#region Memos
+	const buttonOpacity = useMemo(() => (encodingImageUri.length < 5 || isEncoding ? 0.5 : 1), [encodingImageUri.length, isEncoding]);
+	const encodeButtonStyle = useMemo(() => [styles.encodeButton, { opacity: buttonOpacity }], [buttonOpacity]);
+	//#endregion
 
-  //#region Callbacks
-  const startEncoding = useCallback(async () => {
-    try {
-      if (encodingImageUri.length < 5) {
-        return;
-      }
-      setIsEncoding(true);
-      const _blurhash = await Blurhash.encode(encodingImageUri, 4, 3);
-      setBlurhash(_blurhash);
-      setIsEncoding(false);
-    } catch (e) {
-      setIsEncoding(false);
-      Alert.alert('Encoding error', e);
-    }
-  }, [encodingImageUri]);
-  //#endregion
+	//#region Callbacks
+	const startEncoding = useCallback(async () => {
+		try {
+			if (encodingImageUri.length < 5) return;
 
-  return (
-    <>
-      <StatusBar backgroundColor="rgba(100, 0, 100, 0.6)" />
-      <SafeAreaView style={styles.container}>
-        <Blurhash
-          blurhash={blurhash}
-          decodeWidth={32}
-          decodeHeight={32}
-          decodePunch={1}
-          decodeAsync={decodeAsync}
-          style={styles.blurhashImage}
-          resizeMode="cover"
-        />
-        <TextInput
-          value={blurhash}
-          placeholder="Blurhash"
-          onChangeText={setBlurhash}
-          style={styles.textInput}
-        />
-        {/* To test if `decodeAsync` really doesn't block the UI thread, you can press this Touchable and see it reacting. */}
-        <View style={styles.row}>
-          <Text style={styles.text}>Decode Async:</Text>
-          <Switch value={decodeAsync} onValueChange={setDecodeAsync} />
-        </View>
-        <TextInput
-          value={encodingImageUri}
-          placeholder="Image URL to encode"
-          onChangeText={setEncodingImageUri}
-          style={styles.textInput}
-        />
-        <TouchableOpacity
-          style={encodeButtonStyle}
-          disabled={encodingImageUri.length < 5}
-          onPress={startEncoding}>
-          {isEncoding ? (
-            <ActivityIndicator color="black" />
-          ) : (
-            <Text>Encode</Text>
-          )}
-        </TouchableOpacity>
-      </SafeAreaView>
-    </>
-  );
+			setIsEncoding(true);
+			const _blurhash = await Blurhash.encode(encodingImageUri, 4, 3);
+			setBlurhash(_blurhash);
+			setIsEncoding(false);
+		} catch (e) {
+			setIsEncoding(false);
+			Alert.alert('Encoding error', e);
+		}
+	}, [encodingImageUri]);
+	//#endregion
+
+	return (
+		<>
+			<StatusBar backgroundColor={COLORS.statusBar} />
+			<SafeAreaView style={styles.container}>
+				<Blurhash
+					blurhash={blurhash}
+					decodeWidth={32}
+					decodeHeight={32}
+					decodePunch={1}
+					decodeAsync={decodeAsync}
+					style={styles.blurhashImage}
+					resizeMode="cover"
+				/>
+				<TextInput value={blurhash} placeholder="Blurhash" onChangeText={setBlurhash} style={styles.textInput} />
+				{/* To test if `decodeAsync` really doesn't block the UI thread, you can press this Touchable and see it reacting. */}
+				<View style={styles.row}>
+					<Text style={styles.text}>Decode Async:</Text>
+					<Switch value={decodeAsync} onValueChange={setDecodeAsync} />
+				</View>
+				<TextInput value={encodingImageUri} placeholder="Image URL to encode" onChangeText={setEncodingImageUri} style={styles.textInput} />
+				<TouchableOpacity style={encodeButtonStyle} disabled={encodingImageUri.length < 5} onPress={startEncoding}>
+					{isEncoding ? <ActivityIndicator color="black" /> : <Text>Encode</Text>}
+				</TouchableOpacity>
+			</SafeAreaView>
+		</>
+	);
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  blurhashImage: {
-    width: 300,
-    height: 200,
-    borderRadius: 15,
-    // Custom styling for width, height, scaling etc here
-  },
-  textInput: {
-    marginTop: 20,
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: 'rgba(200, 0, 100, 0.5)',
-    width: '70%',
-    height: 35,
-    paddingHorizontal: 20,
-    textAlign: 'center',
-  },
-  row: {
-    marginTop: 30,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  text: {
-    fontSize: 16,
-    marginRight: 15,
-  },
-  encodeButton: {
-    height: 37,
-    width: 120,
-    marginTop: 30,
-    backgroundColor: 'rgba(200, 0, 100, 0.4)',
-    borderRadius: 10,
-    paddingVertical: 10,
-    paddingHorizontal: 35,
-  },
+	container: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+		backgroundColor: COLORS.background,
+	},
+	blurhashImage: {
+		width: 300,
+		height: 200,
+		borderRadius: 15,
+		// Custom styling for width, height, scaling etc here
+	},
+	textInput: {
+		marginTop: 20,
+		borderRadius: 5,
+		borderWidth: 1,
+		borderColor: COLORS.textInput,
+		width: '70%',
+		height: 35,
+		paddingHorizontal: 20,
+		textAlign: 'center',
+	},
+	row: {
+		marginTop: 30,
+		flexDirection: 'row',
+		alignItems: 'center',
+	},
+	text: {
+		fontSize: 16,
+		marginRight: 15,
+	},
+	encodeButton: {
+		height: 37,
+		width: 120,
+		marginTop: 30,
+		backgroundColor: COLORS.button,
+		borderRadius: 10,
+		paddingVertical: 10,
+		paddingHorizontal: 35,
+	},
 });

@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-		"postinstall": "rm -rf node_modules/react-native-blurhash/node_modules",
+    "postinstall": "rm -rf node_modules/react-native-blurhash/node_modules",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
@@ -19,10 +19,16 @@
     "@babel/core": "^7.10.2",
     "@babel/runtime": "^7.10.2",
     "@react-native-community/eslint-config": "^2.0.0",
+    "@react-native-community/eslint-plugin": "^1.1.0",
     "babel-jest": "^26.0.1",
-    "eslint": "^7.2.0",
+    "eslint": "^7.7.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react-hooks": "^4.1.0",
+    "eslint-plugin-react-native": "^3.9.1",
     "jest": "^26.0.1",
     "metro-react-native-babel-preset": "^0.60.0",
+    "prettier": "^2.1.1",
     "react-test-renderer": "16.13.1"
   },
   "jest": {
