@@ -38,6 +38,10 @@ export default function App() {
     () => (encodingImageUri.length < 5 || isEncoding ? 0.5 : 1),
     [encodingImageUri.length, isEncoding],
   );
+  const encodeButtonStyle = useMemo(
+    () => [styles.encodeButton, {opacity: buttonOpacity}],
+    [buttonOpacity],
+  );
   //#endregion
 
   //#region Callbacks
@@ -88,11 +92,14 @@ export default function App() {
           style={styles.textInput}
         />
         <TouchableOpacity
-          style={[styles.encodeButton, {opacity: buttonOpacity}]}
+          style={encodeButtonStyle}
           disabled={encodingImageUri.length < 5}
           onPress={startEncoding}>
-          {!isEncoding && <Text>Encode</Text>}
-          {isEncoding && <ActivityIndicator color="black" />}
+          {isEncoding ? (
+            <ActivityIndicator color="black" />
+          ) : (
+            <Text>Encode</Text>
+          )}
         </TouchableOpacity>
       </SafeAreaView>
     </>
