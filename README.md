@@ -108,7 +108,7 @@ The decoders are written in [Swift](ios/BlurhashDecode.swift) and [Kotlin](andro
   <tr>
     <td>All <code>View</code> props</td>
     <td><code>ViewProps</code></td>
-    <td>All properties from the React Native <code>View</code>. Use <code>style.width</code> and <code>style.height</code> for display-sizes.</td>
+    <td>All properties from the React Native <code>View</code>. Use <code>style.width</code> and <code>style.height</code> for display-sizes. Also, <code>style.borderRadius</code> is natively supported.</td>
     <td>❌</td>
     <td><code>{}</code></td>
   </tr>

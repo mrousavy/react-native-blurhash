@@ -115,6 +115,7 @@ const styles = StyleSheet.create({
   blurhashImage: {
     width: 300,
     height: 200,
+    borderRadius: 15,
     // Custom styling for width, height, scaling etc here
   },
   textInput: {

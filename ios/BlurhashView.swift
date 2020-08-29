@@ -41,6 +41,7 @@ final class BlurhashView: UIView {
 	@objc var decodePunch: NSNumber = 1
 	@objc var resizeMode: NSString = "cover"
 	@objc var decodeAsync: Bool = false
+	@objc var borderRadius: NSNumber = 0
 	var lastState: BlurhashCache?
 	let imageContainer: UIImageView
 
@@ -93,7 +94,7 @@ final class BlurhashView: UIView {
 		if shouldReRender {
 			self.renderBlurhashView()
 		}
-		if changedProps.contains("resizeMode") {
+		if changedProps.contains("resizeMode") || changedProps.contains("borderRadius") {
 			self.updateImageContainer()
 		}
 	}
@@ -113,6 +114,15 @@ final class BlurhashView: UIView {
 
 	final func updateImageContainer() {
 		self.imageContainer.contentMode = self.parseResizeMode(resizeMode: self.resizeMode)
+		if let cornerRadius = CGFloat(exactly: self.borderRadius) {
+			// TODO: shouldRasterize ?
+			let shouldRasterize = cornerRadius > 0 ? true : false
+			self.imageContainer.layer.shouldRasterize = shouldRasterize
+			if shouldRasterize {
+				log(level: .trace, message: "Enabled rasterization for the UIImageView's layer.")
+			}
+			self.imageContainer.layer.cornerRadius = cornerRadius
+		}
 	}
 
 	final func parseResizeMode(resizeMode: NSString) -> ContentMode {

@@ -9,6 +9,7 @@ RCT_EXPORT_VIEW_PROPERTY(decodeHeight, NSNumber);
 RCT_EXPORT_VIEW_PROPERTY(decodePunch, NSNumber);
 RCT_EXPORT_VIEW_PROPERTY(decodeAsync, BOOL);
 RCT_EXPORT_VIEW_PROPERTY(resizeMode, NSString);
+RCT_EXPORT_VIEW_PROPERTY(borderRadius, NSNumber);
 
 RCT_EXTERN_METHOD(createBlurhashFromImage:(nonnull NSString *)imageUri componentsX:(nonnull NSNumber *)componentsX componentsY:(nonnull NSNumber *)componentsY resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject);
 
