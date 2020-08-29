@@ -27,14 +27,15 @@ jobs:
         cache-name: cache-node-modules
       with:
         path: ~/.npm
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
         restore-keys: |
           ${{ runner.os }}-build-${{ env.cache-name }}-
           ${{ runner.os }}-build-
           ${{ runner.os }}-
 
-    - name: Install dependencies via npm
-      run: npm ci
+    - name: Install dependencies via yarn
+    # Can't use npm because of the softlink to the library (../)
+      run: yarn install --frozen-lockfile
       working-directory: ${{env.working-directory}}
     - name: Run ESLint on all *.js*/*.ts* files
       run: npx eslint --ext .js,.jsx,.ts,.tsx .
