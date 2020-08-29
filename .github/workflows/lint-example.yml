@@ -1,5 +1,5 @@
 # This workflow will do a clean install of node dependencies, install dependencies
-# and run ESLint + Prettier for style checking, and TypeScript (tsc) for type-checks
+# and run ESLint + Prettier for style checking
 
 name: Lint example/
 
@@ -8,11 +8,6 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-  # Also trigger on page_build, as well as release created events
-  page_build:
-  release:
-    types: # This configuration does not affect the page_build event above
-      - created
 
 jobs:
   lint:
@@ -41,12 +36,6 @@ jobs:
     - name: Install dependencies via npm
       run: npm ci
       working-directory: ${{env.working-directory}}
-    - name: Install tsc via npm
-      run: npm i tsc
-      working-directory: ${{env.working-directory}}
-    - name: Run ESLint on all *.ts* files
-      run: npx eslint src/**/*.ts*
-      working-directory: ${{env.working-directory}}
-    - name: Run TypeScript without emitting files
-      run: tsc --noEmit -p tsconfig.json
+    - name: Run ESLint on all *.js*/*.ts* files
+      run: npx eslint --ext .js,.jsx,.ts,.tsx .
       working-directory: ${{env.working-directory}}
