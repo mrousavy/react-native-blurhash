@@ -1,13 +1,12 @@
 #pragma once
 
-#include "pch.h"
-
 #include "winrt/Microsoft.ReactNative.h"
+#include "NativeModules.h"
+#include "BlurhashView.h"
 
 namespace winrt::Blurhash::implementation
 {
-
-    struct BlurhashViewManager : winrt::implements<
+    class BlurhashViewManager : public winrt::implements<
         BlurhashViewManager,
         winrt::Microsoft::ReactNative::IViewManager,
         winrt::Microsoft::ReactNative::IViewManagerWithNativeProperties>
@@ -29,13 +28,8 @@ namespace winrt::Blurhash::implementation
             winrt::Windows::UI::Xaml::FrameworkElement const& view,
             winrt::Microsoft::ReactNative::IJSValueReader const& propertyMapReader) noexcept;
 
-        // IViewManagerWithCommands
-        winrt::Windows::Foundation::Collections::IVectorView<winrt::hstring> Commands() noexcept;
-
-        void DispatchCommand(
-            winrt::Windows::UI::Xaml::FrameworkElement const& view,
-            winrt::hstring const& commandId,
-            winrt::Microsoft::ReactNative::IJSValueReader const& commandArgsReader) noexcept;
+    private:
+        winrt::Blurhash::implementation::BlurhashView _blurhashView { nullptr };
+        winrt::Microsoft::ReactNative::IReactContext _reactContext{ nullptr };
     };
-
 }

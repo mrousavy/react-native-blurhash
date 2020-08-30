@@ -1,21 +1,22 @@
 #include "pch.h"
+
 #include "BlurhashViewManager.h"
-
-#include "JSValueReader.h"
 #include "NativeModules.h"
+#include "BlurhashView.h"
+#include "JSValueXaml.h"
 
-using namespace winrt;
-using namespace Microsoft::ReactNative;
-using namespace Windows::Foundation;
-using namespace Windows::Foundation::Collections;
-
-using namespace Windows::UI::Xaml;
-using namespace Windows::UI::Xaml::Media;
-using namespace Windows::UI::Xaml::Controls;
+namespace winrt
+{
+    using namespace Microsoft::ReactNative;
+    using namespace Windows::Foundation;
+    using namespace Windows::Foundation::Collections;
+    using namespace Windows::UI;
+    using namespace Windows::UI::Xaml;
+    using namespace Windows::UI::Xaml::Controls;
+}
 
 namespace winrt::Blurhash::implementation
 {
-
     // IViewManager
     hstring BlurhashViewManager::Name() noexcept
     {
@@ -24,7 +25,8 @@ namespace winrt::Blurhash::implementation
 
     FrameworkElement BlurhashViewManager::CreateView() noexcept
     {
-        return winrt::Blurhash::implementation::BlurhashView();
+        _blurhashView = *winrt::make_self<BlurhashView>(_reactContext);
+        return _blurhashView;
     }
 
     // IViewManagerWithNativeProperties
@@ -32,9 +34,12 @@ namespace winrt::Blurhash::implementation
     {
         auto nativeProps = winrt::single_threaded_map<hstring, ViewManagerPropertyType>();
 
-        nativeProps.Insert(L"label", ViewManagerPropertyType::String);
-        nativeProps.Insert(L"color", ViewManagerPropertyType::Color);
-        nativeProps.Insert(L"backgroundColor", ViewManagerPropertyType::Color);
+        nativeProps.Insert(L"blurhash", ViewManagerPropertyType::String);
+        nativeProps.Insert(L"decodeWidth", ViewManagerPropertyType::Number);
+        nativeProps.Insert(L"decodeHeight", ViewManagerPropertyType::Number);
+        nativeProps.Insert(L"decodePunch", ViewManagerPropertyType::Number);
+        nativeProps.Insert(L"decodeAsync", ViewManagerPropertyType::Boolean);
+        nativeProps.Insert(L"resizeMode", ViewManagerPropertyType::String);
 
         return nativeProps.GetView();
     }
@@ -43,9 +48,9 @@ namespace winrt::Blurhash::implementation
         FrameworkElement const& view,
         IJSValueReader const& propertyMapReader) noexcept
     {
-        if (auto control = view.try_as<winrt::Blurhash::BlurhashView>())
+        if (auto control = view.try_as<winrt::Blurhash::implementation::BlurhashView>())
         {
-
+            // TODO: Properties
             const JSValueObject& propertyMap = JSValue::ReadObjectFrom(propertyMapReader);
 
             for (auto const& pair : propertyMap)
@@ -90,28 +95,4 @@ namespace winrt::Blurhash::implementation
             }
         }
     }
-
-    // IViewManagerWithCommands
-    IVectorView<hstring> BlurhashViewManager::Commands() noexcept
-    {
-        auto commands = winrt::single_threaded_vector<hstring>();
-        commands.Append(L"CustomCommand");
-        return commands.GetView();
-    }
-
-    void BlurhashViewManager::DispatchCommand(
-        FrameworkElement const& view,
-        winrt::hstring const& commandId,
-        winrt::Microsoft::ReactNative::IJSValueReader const& commandArgsReader) noexcept
-    {
-        if (auto control = view.try_as<winrt::SampleLibraryCPP::CustomUserControlCPP>())
-        {
-            if (commandId == L"CustomCommand")
-            {
-                const JSValueArray& commandArgs = JSValue::ReadArrayFrom(commandArgsReader);
-                // Execute command
-            }
-        }
-    }
-
 }
