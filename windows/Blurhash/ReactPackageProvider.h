@@ -16,4 +16,4 @@ namespace winrt::Blurhash::implementation
 namespace winrt::Blurhash::factory_implementation
 {
     struct ReactPackageProvider : ReactPackageProviderT<ReactPackageProvider, implementation::ReactPackageProvider> {};
-}
+} // namespace winrt::Blurhash::factory_implementation

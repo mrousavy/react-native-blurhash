@@ -19,3 +19,4 @@ namespace winrt::Blurhash::implementation
     }
 
 } // namespace winrt::ViewManagerSample::implementation
+

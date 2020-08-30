@@ -14,7 +14,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
-    <ClCompile Include="Class.cpp" />
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
     <ClCompile Include="BlurhashViewManager.cpp" />
     <ClCompile Include="ReactPackageProvider.cpp" />
@@ -39,7 +38,6 @@
     <ClInclude Include="BlurhashView.h" />
   </ItemGroup>
   <ItemGroup>
-    <Midl Include="Class.idl" />
     <Midl Include="ReactPackageProvider.idl" />
     <Midl Include="BlurhashView.idl" />
   </ItemGroup>
