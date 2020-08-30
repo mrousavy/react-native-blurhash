@@ -117,6 +117,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BlurhashView.h" />
     <ClInclude Include="BlurhashViewManager.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Class.h">
@@ -127,6 +128,7 @@
     <ClInclude Include="woltapp\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BlurhashView.cpp" />
     <ClCompile Include="BlurhashViewManager.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

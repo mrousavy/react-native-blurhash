@@ -10,8 +10,7 @@ namespace winrt::Blurhash::implementation
     struct BlurhashViewManager : winrt::implements<
         BlurhashViewManager,
         winrt::Microsoft::ReactNative::IViewManager,
-        winrt::Microsoft::ReactNative::IViewManagerWithNativeProperties,
-        winrt::Microsoft::ReactNative::IViewManagerWithCommands>
+        winrt::Microsoft::ReactNative::IViewManagerWithNativeProperties>
     {
     public:
         BlurhashViewManager() = default;

@@ -24,6 +24,7 @@
     <ClCompile Include="woltapp\encode.c">
       <Filter>woltapp</Filter>
     </ClCompile>
+    <ClCompile Include="BlurhashView.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -35,6 +36,7 @@
     <ClInclude Include="woltapp\stb_image.h">
       <Filter>woltapp</Filter>
     </ClInclude>
+    <ClInclude Include="BlurhashView.h" />
   </ItemGroup>
   <ItemGroup>
     <Midl Include="Class.idl" />
