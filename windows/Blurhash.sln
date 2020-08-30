@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Blurhash", "Blurhash\Blurhash.vcxproj", "{5DC67CF2-93AB-453D-B985-A7FFE04673FE}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReactNative", "ReactNative", "{800AB6FF-D824-4A71-8FFA-2F357EED8087}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReactNative", "ReactNative", "{6030669C-4F4D-4889-B38E-0299826D8C01}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chakra", "..\node_modules\react-native-windows\Chakra\Chakra.vcxitems", "{C38970C0-5FBF-4D69-90D8-CBAC225AE895}"
 EndProject
@@ -23,13 +23,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Microsoft.ReactNative.Cxx",
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Microsoft.ReactNative.SharedManaged", "..\node_modules\react-native-windows\Microsoft.ReactNative.SharedManaged\Microsoft.ReactNative.SharedManaged.shproj", "{67A1076F-7790-4203-86EA-4402CCB5E782}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Mso", "..\node_modules\react-native-windows\Mso\Mso.vcxitems", "{84E05BFA-CBAF-4F0D-BFB6-4CE85742A57E}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ReactCommon", "..\node_modules\react-native-windows\ReactCommon\ReactCommon.vcxproj", "{A9D95A91-4DB7-4F72-BEB6-FE8A5C89BFBD}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ReactWindowsCore", "..\node_modules\react-native-windows\ReactWindowsCore\ReactWindowsCore.vcxproj", "{11C084A3-A57C-4296-A679-CAC17B603144}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ReactUWP", "..\node_modules\react-native-windows\ReactUWP\ReactUWP.vcxproj", "{2D5D43D9-CFFC-4C40-B4CD-02EFB4E2742B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Shared", "..\node_modules\react-native-windows\Shared\Shared.vcxitems", "{2049DBE9-8D13-42C9-AE4B-413AE38FFFD0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ReactWindowsCore", "..\node_modules\react-native-windows\ReactWindowsCore\ReactWindowsCore.vcxproj", "{11C084A3-A57C-4296-A679-CAC17B603144}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -234,20 +232,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{C38970C0-5FBF-4D69-90D8-CBAC225AE895} = {800AB6FF-D824-4A71-8FFA-2F357EED8087}
-		{FCA38F3C-7C73-4C47-BE4E-32F77FA8538D} = {800AB6FF-D824-4A71-8FFA-2F357EED8087}
-		{A990658C-CE31-4BCC-976F-0FC6B1AF693D} = {800AB6FF-D824-4A71-8FFA-2F357EED8087}
-		{0CC28589-39E4-4288-B162-97B959F8B843} = {800AB6FF-D824-4A71-8FFA-2F357EED8087}
-		{A62D504A-16B8-41D2-9F19-E2E86019E5E4} = {800AB6FF-D824-4A71-8FFA-2F357EED8087}
-		{F7D32BD0-2749-483E-9A0D-1635EF7E3136} = {800AB6FF-D824-4A71-8FFA-2F357EED8087}
-		{DA8B35B3-DA00-4B02-BDE6-6A397B3FD46B} = {800AB6FF-D824-4A71-8FFA-2F357EED8087}
-		{67A1076F-7790-4203-86EA-4402CCB5E782} = {800AB6FF-D824-4A71-8FFA-2F357EED8087}
-		{84E05BFA-CBAF-4F0D-BFB6-4CE85742A57E} = {800AB6FF-D824-4A71-8FFA-2F357EED8087}
-		{A9D95A91-4DB7-4F72-BEB6-FE8A5C89BFBD} = {800AB6FF-D824-4A71-8FFA-2F357EED8087}
-		{11C084A3-A57C-4296-A679-CAC17B603144} = {800AB6FF-D824-4A71-8FFA-2F357EED8087}
-		{2049DBE9-8D13-42C9-AE4B-413AE38FFFD0} = {800AB6FF-D824-4A71-8FFA-2F357EED8087}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B2D27B2E-2DDC-4C44-9AE3-078EB5593FB8}
