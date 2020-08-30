@@ -18,10 +18,7 @@
     <ClCompile Include="BlurhashViewManager.cpp" />
     <ClCompile Include="ReactPackageProvider.cpp" />
     <ClCompile Include="BlurhashView.cpp" />
-    <ClCompile Include="woltapp\encode.cpp">
-      <Filter>woltapp</Filter>
-    </ClCompile>
-    <ClCompile Include="woltapp\blurhash_stb.cpp">
+    <ClCompile Include="blurhash.cpp">
       <Filter>woltapp</Filter>
     </ClCompile>
   </ItemGroup>
@@ -29,13 +26,10 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="BlurhashViewManager.h" />
     <ClInclude Include="ReactPackageProvider.h" />
-    <ClInclude Include="woltapp\encode.h">
-      <Filter>woltapp</Filter>
-    </ClInclude>
-    <ClInclude Include="woltapp\stb_image.h">
-      <Filter>woltapp</Filter>
-    </ClInclude>
     <ClInclude Include="BlurhashView.h" />
+    <ClInclude Include="blurhash.hpp">
+      <Filter>woltapp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Midl Include="ReactPackageProvider.idl" />

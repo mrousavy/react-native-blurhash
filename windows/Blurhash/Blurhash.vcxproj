@@ -115,6 +115,7 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="blurhash.hpp" />
     <ClInclude Include="BlurhashView.h">
       <DependentUpon>BlurhashView.idl</DependentUpon>
     </ClInclude>
@@ -123,10 +124,9 @@
     <ClInclude Include="ReactPackageProvider.h">
       <DependentUpon>ReactPackageProvider.idl</DependentUpon>
     </ClInclude>
-    <ClInclude Include="woltapp\encode.h" />
-    <ClInclude Include="woltapp\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="blurhash.cpp" />
     <ClCompile Include="BlurhashView.cpp">
       <DependentUpon>BlurhashView.idl</DependentUpon>
     </ClCompile>
@@ -138,8 +138,6 @@
       <DependentUpon>ReactPackageProvider.idl</DependentUpon>
     </ClCompile>
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
-    <ClCompile Include="woltapp\blurhash_stb.cpp" />
-    <ClCompile Include="woltapp\encode.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Midl Include="BlurhashView.idl" />
