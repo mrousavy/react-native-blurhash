@@ -5,6 +5,7 @@
 #include "AutolinkedNativeModules.g.h"
 #include "ReactPackageProvider.h"
 
+#include "winrt/Blurhash.h"
 
 using namespace winrt::example;
 using namespace winrt::example::implementation;

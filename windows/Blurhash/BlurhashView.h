@@ -1,7 +1,6 @@
 #pragma once
 
 #include "winrt/Microsoft.ReactNative.h"
-#include "NativeModules.h"
 
 namespace winrt::Blurhash::implementation
 {

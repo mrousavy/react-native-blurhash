@@ -1,5 +1,4 @@
 #pragma once
-
 #include "ReactPackageProvider.g.h"
 
 using namespace winrt::Microsoft::ReactNative;

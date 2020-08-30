@@ -24,7 +24,7 @@ namespace winrt::Blurhash::implementation
 
     FrameworkElement BlurhashViewManager::CreateView() noexcept
     {
-        return winrt::Blurhash::BlurhashView();
+        return winrt::Blurhash::implementation::BlurhashView();
     }
 
     // IViewManagerWithNativeProperties
