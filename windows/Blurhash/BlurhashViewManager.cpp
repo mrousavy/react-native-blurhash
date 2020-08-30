@@ -4,6 +4,7 @@
 #include "NativeModules.h"
 #include "BlurhashView.h"
 #include "JSValueXaml.h"
+#include <windows.ui.xaml.media.h>
 
 namespace winrt
 {
