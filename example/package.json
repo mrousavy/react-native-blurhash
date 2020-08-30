@@ -3,17 +3,19 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-		"postinstall": "rm -rf node_modules/react-native-blurhash/node_modules",
+    "postinstall": "rm -rf node_modules/react-native-blurhash/node_modules",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "windows": "react-native run-windows"
   },
   "dependencies": {
     "react": "16.13.1",
-    "react-native": "0.63.1",
-    "react-native-blurhash": "link:.."
+    "react-native": "^0.62.0-0",
+    "react-native-blurhash": "link:..",
+    "react-native-windows": "^0.62.0-0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",

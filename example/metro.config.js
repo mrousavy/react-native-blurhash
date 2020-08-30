@@ -1,28 +1,33 @@
-// metro.config.js
-//
-// with multiple workarounds for this issue with symlinks:
-// https://github.com/facebook/metro/issues/1
-//
-// with thanks to @johnryan (<https://github.com/johnryan>)
-// for the pointers to multiple workaround solutions here:
-// https://github.com/facebook/metro/issues/1#issuecomment-541642857
-//
-// see also this discussion:
-// https://github.com/brodybits/create-react-native-module/issues/232
-
-const path = require('path')
+/**
+ * Metro configuration for React Native
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ */
+const path = require('path');
+const blacklist = require('metro-config/src/defaults/blacklist');
 
 module.exports = {
-  // workaround for an issue with symlinks encountered starting with
-  // metro@0.55 / React Native 0.61
-  // (not needed with React Native 0.60 / metro@0.54)
   resolver: {
-    extraNodeModules: new Proxy(
-      {},
-      { get: (_, name) => path.resolve('.', 'node_modules', name) }
-    )
+    blacklistRE: blacklist([
+      // This stops "react-native run-windows" from causing the metro server to crash if its already running
+      new RegExp(
+        `${path.resolve(__dirname, 'windows').replace(/[/\\]/g, '/')}.*`,
+      ),
+      // This prevents "react-native run-windows" from hitting: EBUSY: resource busy or locked, open msbuild.ProjectImports.zip
+      new RegExp(
+        `${path
+          .resolve(__dirname, 'msbuild.ProjectImports.zip')
+          .replace(/[/\\]/g, '/')}.*`,
+      ),
+    ]),
   },
-
-  // quick workaround for another issue with symlinks
-  watchFolders: ['.', '..']
-}
+  transformer: {
+    getTransformOptions: async () => ({
+      transform: {
+        experimentalImportSupport: false,
+        inlineRequires: false,
+      },
+    }),
+  },
+};
