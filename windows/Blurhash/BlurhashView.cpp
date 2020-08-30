@@ -1,5 +1,7 @@
 #include "pch.h"
+#include "JSValueXaml.h"
 #include "BlurhashView.h"
+#include "BlurhashView.g.cpp"
 
 namespace winrt
 {

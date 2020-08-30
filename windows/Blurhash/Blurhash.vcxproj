@@ -142,6 +142,7 @@
     <ClCompile Include="woltapp\encode.c" />
   </ItemGroup>
   <ItemGroup>
+    <Midl Include="BlurhashView.idl" />
     <Midl Include="Class.idl" />
     <Midl Include="ReactPackageProvider.idl" />
   </ItemGroup>

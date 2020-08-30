@@ -41,6 +41,7 @@
   <ItemGroup>
     <Midl Include="Class.idl" />
     <Midl Include="ReactPackageProvider.idl" />
+    <Midl Include="BlurhashView.idl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Blurhash.def" />

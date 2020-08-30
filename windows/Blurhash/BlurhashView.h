@@ -1,10 +1,12 @@
 #pragma once
 
 #include "winrt/Microsoft.ReactNative.h"
+#include "NativeModules.h"
+#include "BlurhashView.g.h"
 
 namespace winrt::Blurhash::implementation
 {
-	class BlurhashView
+	class BlurhashView : public BlurhashViewT<BlurhashView>
 	{
 	public:
 		BlurhashView(Microsoft::ReactNative::IReactContext const& reactContext);
@@ -16,3 +18,7 @@ namespace winrt::Blurhash::implementation
 	};
 }
 
+namespace winrt::Blurhash::factory_implementation
+{
+	struct BlurhashView : BlurhashViewT<BlurhashView, implementation::BlurhashView> {};
+} // namespace winrt::BlurhashView::factory_implementation
