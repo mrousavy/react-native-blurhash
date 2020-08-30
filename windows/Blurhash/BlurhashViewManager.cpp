@@ -4,7 +4,6 @@
 #include "NativeModules.h"
 #include "BlurhashView.h"
 #include "JSValueXaml.h"
-#include <windows.ui.xaml.media.h>
 
 namespace winrt
 {
@@ -75,8 +74,7 @@ namespace winrt::Blurhash::implementation
 				if (propertyName == "blurhash") {
 					if (propertyValue != nullptr)
 					{
-						SolidColorBrush brush = SolidColorBrush(winrt::Colors::AliceBlue());
-						blurhashView->Background(brush);
+						blurhashView->Height(120);
 						/*
 						auto const& value = winrt::box_value(winrt::to_hstring(propertyValue.String()));
 						blurhashView.SetValue(winrt::Blurhash::BlurhashView::LabelProperty(), propertyValue);
