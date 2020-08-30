@@ -4,7 +4,6 @@
   <PropertyGroup Label="Globals">
     <CppWinRTOptimized>true</CppWinRTOptimized>
     <CppWinRTRootNamespaceAutoMerge>true</CppWinRTRootNamespaceAutoMerge>
-    <CppWinRTGenerateWindowsMetadata>true</CppWinRTGenerateWindowsMetadata>
     <MinimalCoreWin>true</MinimalCoreWin>
     <ProjectGuid>{5dc67cf2-93ab-453d-b985-a7ffe04673fe}</ProjectGuid>
     <ProjectName>Blurhash</ProjectName>
@@ -95,9 +94,8 @@
       <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
       <!--Temporarily disable cppwinrt heap enforcement to work around xaml compiler generated std::shared_ptr use -->
       <AdditionalOptions Condition="'$(CppWinRTHeapEnforcement)'==''">/DWINRT_NO_MAKE_DETECTION %(AdditionalOptions)</AdditionalOptions>
-      <DisableSpecificWarnings>
-      </DisableSpecificWarnings>
-      <PreprocessorDefinitions>_WINRT_DLL;WIN32_LEAN_AND_MEAN;WINRT_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <DisableSpecificWarnings>28204</DisableSpecificWarnings>
+      <PreprocessorDefinitions>_WINRT_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
     </ClCompile>
     <Link>
@@ -115,10 +113,6 @@
     <ClCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <Link>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-    </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="BlurhashView.h">
@@ -152,18 +146,16 @@
     <Midl Include="ReactPackageProvider.idl" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Blurhash.def" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="PropertySheet.props" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-    <None Include="Blurhash.def" />
-    <Text Include="readme.txt">
-      <DeploymentContent>false</DeploymentContent>
-    </Text>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\node_modules\react-native-windows\Microsoft.ReactNative\Microsoft.ReactNative.vcxproj">
+    <ProjectReference Include="$(ReactNativeWindowsDir)\Microsoft.ReactNative\Microsoft.ReactNative.vcxproj">
       <Project>{f7d32bd0-2749-483e-9a0d-1635ef7e3136}</Project>
+      <Private>false</Private>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
