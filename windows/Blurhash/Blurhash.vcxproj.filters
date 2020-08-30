@@ -17,13 +17,13 @@
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
     <ClCompile Include="BlurhashViewManager.cpp" />
     <ClCompile Include="ReactPackageProvider.cpp" />
-    <ClCompile Include="woltapp\blurhash_stb.c">
-      <Filter>woltapp</Filter>
-    </ClCompile>
-    <ClCompile Include="woltapp\encode.c">
-      <Filter>woltapp</Filter>
-    </ClCompile>
     <ClCompile Include="BlurhashView.cpp" />
+    <ClCompile Include="woltapp\encode.cpp">
+      <Filter>woltapp</Filter>
+    </ClCompile>
+    <ClCompile Include="woltapp\blurhash_stb.cpp">
+      <Filter>woltapp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -47,8 +47,5 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="PropertySheet.props" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="readme.txt" />
   </ItemGroup>
 </Project>

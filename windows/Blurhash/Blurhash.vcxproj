@@ -138,8 +138,8 @@
       <DependentUpon>ReactPackageProvider.idl</DependentUpon>
     </ClCompile>
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
-    <ClCompile Include="woltapp\blurhash_stb.c" />
-    <ClCompile Include="woltapp\encode.c" />
+    <ClCompile Include="woltapp\blurhash_stb.cpp" />
+    <ClCompile Include="woltapp\encode.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Midl Include="BlurhashView.idl" />

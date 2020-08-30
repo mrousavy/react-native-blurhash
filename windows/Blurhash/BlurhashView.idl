@@ -1,6 +1,6 @@
 namespace Blurhash {
     [default_interface]
-    runtimeclass BlurhashView : Windows.UI.Xaml.Controls.UserControl{
+    runtimeclass BlurhashView : Windows.UI.Xaml.Controls.UserControl {
         BlurhashView(Microsoft.ReactNative.IReactContext context);
         Windows.UI.Xaml.Controls.Image GetView();
     };

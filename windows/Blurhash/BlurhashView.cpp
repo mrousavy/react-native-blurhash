@@ -22,10 +22,8 @@ namespace winrt::Blurhash::implementation
         _imageView= winrt::Image();
     }
 
-
     winrt::Windows::UI::Xaml::Controls::Image BlurhashView::GetView()
     {
         return _imageView;
     }
-
 }

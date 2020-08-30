@@ -21,4 +21,4 @@ namespace winrt::Blurhash::implementation
 namespace winrt::Blurhash::factory_implementation
 {
 	struct BlurhashView : BlurhashViewT<BlurhashView, implementation::BlurhashView> {};
-} // namespace winrt::BlurhashView::factory_implementation
+} // namespace winrt::Blurhash::factory_implementation

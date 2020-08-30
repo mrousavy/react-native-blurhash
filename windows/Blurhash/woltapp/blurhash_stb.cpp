@@ -1,3 +1,5 @@
+#include "pch.h"
+
 #include "encode.h"
 
 #define STB_IMAGE_IMPLEMENTATION

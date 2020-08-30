@@ -13,6 +13,7 @@ namespace winrt
 	using namespace Windows::UI;
 	using namespace Windows::UI::Xaml;
 	using namespace Windows::UI::Xaml::Controls;
+	using namespace Windows::UI::Xaml::Media;
 }
 
 namespace winrt::Blurhash::implementation
@@ -25,8 +26,20 @@ namespace winrt::Blurhash::implementation
 
 	FrameworkElement BlurhashViewManager::CreateView() noexcept
 	{
-		_blurhashView = *winrt::make_self<BlurhashView>(_reactContext);
-		return _blurhashView.GetView();
+		_blurhashView = winrt::make_self<BlurhashView>
+			(_reactContext);
+		return _blurhashView->GetView();
+	}
+
+	// IViewManagerWithReactContext
+	winrt::IReactContext BlurhashViewManager::ReactContext() noexcept
+	{
+		return _reactContext;
+	}
+
+	void BlurhashViewManager::ReactContext(IReactContext reactContext) noexcept
+	{
+		_reactContext = reactContext;
 	}
 
 	// IViewManagerWithNativeProperties
@@ -58,23 +71,20 @@ namespace winrt::Blurhash::implementation
 				auto const& propertyName = pair.first;
 				auto const& propertyValue = pair.second;
 
-				switch (propertyName)
-				{
-					case "blurhash":
-						if (propertyValue != nullptr)
-						{
-							auto color = propertyValue.To<winrt::Color>();
-							blurhashView.DefaultBackgroundColor(color);
-							/*
-							auto const& value = winrt::box_value(winrt::to_hstring(propertyValue.String()));
-							blurhashView.SetValue(winrt::Blurhash::BlurhashView::LabelProperty(), propertyValue);
-							*/
-						}
-						else
-						{
-							//blurhashView.ClearValue(winrt::Blurhash::BlurhashView::LabelProperty());
-						}
-						break;
+				if (propertyName == "blurhash") {
+					if (propertyValue != nullptr)
+					{
+						SolidColorBrush brush = SolidColorBrush(winrt::Colors::AliceBlue());
+						blurhashView->Background(brush);
+						/*
+						auto const& value = winrt::box_value(winrt::to_hstring(propertyValue.String()));
+						blurhashView.SetValue(winrt::Blurhash::BlurhashView::LabelProperty(), propertyValue);
+						*/
+					}
+					else
+					{
+						//blurhashView.ClearValue(winrt::Blurhash::BlurhashView::LabelProperty());
+					}
 				}
 			}
 		}

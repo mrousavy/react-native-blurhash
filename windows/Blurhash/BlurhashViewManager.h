@@ -9,6 +9,7 @@ namespace winrt::Blurhash::implementation
     class BlurhashViewManager : public winrt::implements<
         BlurhashViewManager,
         winrt::Microsoft::ReactNative::IViewManager,
+        winrt::Microsoft::ReactNative::IViewManagerWithReactContext,
         winrt::Microsoft::ReactNative::IViewManagerWithNativeProperties>
     {
     public:
@@ -18,6 +19,10 @@ namespace winrt::Blurhash::implementation
         winrt::hstring Name() noexcept;
 
         winrt::Windows::UI::Xaml::FrameworkElement CreateView() noexcept;
+
+        // IViewManagerWithReactContext
+        winrt::Microsoft::ReactNative::IReactContext ReactContext() noexcept;
+        void ReactContext(winrt::Microsoft::ReactNative::IReactContext reactContext) noexcept;
 
         // IViewManagerWithNativeProperties
         winrt::Windows::Foundation::Collections::
@@ -29,7 +34,7 @@ namespace winrt::Blurhash::implementation
             winrt::Microsoft::ReactNative::IJSValueReader const& propertyMapReader) noexcept;
 
     private:
-        winrt::Blurhash::implementation::BlurhashView _blurhashView { nullptr };
-        winrt::Microsoft::ReactNative::IReactContext _reactContext{ nullptr };
+        winrt::com_ptr<winrt::Blurhash::implementation::BlurhashView> _blurhashView{ nullptr };
+         winrt::Microsoft::ReactNative::IReactContext _reactContext{ nullptr };
     };
 }
