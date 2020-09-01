@@ -20,6 +20,7 @@ const COLORS = {
 	switchEnabled: 'rgba(200, 0, 100, 0.5)',
 	switchDisabled: 'rgba(200, 0, 100, 0.2)',
 	switchThumb: 'white',
+	shadow: 'black',
 };
 const SWITCH_THUMB_COLORS = { false: COLORS.switchDisabled, true: COLORS.switchEnabled };
 
@@ -57,15 +58,17 @@ export default function App() {
 			<StatusBar backgroundColor={COLORS.statusBar} />
 			<SafeAreaView style={styles.container}>
 				<View style={styles.blurhashContainer}>
-					<Blurhash
-						blurhash={blurhash}
-						decodeWidth={32}
-						decodeHeight={32}
-						decodePunch={1}
-						decodeAsync={decodeAsync}
-						style={styles.blurhashImage}
-						resizeMode="cover"
-					/>
+					<View style={styles.blurhashRadiusMask}>
+						<Blurhash
+							blurhash={blurhash}
+							decodeWidth={32}
+							decodeHeight={32}
+							decodePunch={1}
+							decodeAsync={decodeAsync}
+							style={styles.blurhashImage}
+							resizeMode="cover"
+						/>
+					</View>
 				</View>
 				<TextInput value={blurhash} placeholder="Blurhash" onChangeText={setBlurhash} style={styles.textInput} />
 				{/* To test if `decodeAsync` really doesn't block the UI thread, you can press this Touchable and see it reacting. */}
@@ -96,6 +99,18 @@ const styles = StyleSheet.create({
 		backgroundColor: COLORS.background,
 	},
 	blurhashContainer: {
+		shadowRadius: 3,
+		shadowColor: COLORS.shadow,
+		shadowOffset: {
+			height: 2,
+			width: 0,
+		},
+		shadowOpacity: 0.4,
+		overflow: 'visible',
+	},
+	// on iOS you can also apply borderRadius directly to the Blurhash's style. I'm working on it for Android.
+	blurhashRadiusMask: {
+		elevation: 5,
 		borderRadius: 5,
 		overflow: 'hidden',
 	},
