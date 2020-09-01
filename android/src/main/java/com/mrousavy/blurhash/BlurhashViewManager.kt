@@ -2,7 +2,6 @@ package com.mrousavy.blurhash
 
 import android.os.Build
 import android.widget.ImageView
-import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.react.uimanager.SimpleViewManager
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.ViewProps
@@ -39,6 +38,7 @@ class BlurhashViewManager : SimpleViewManager<BlurhashImageView>() {
     @ReactProp(name = ViewProps.RESIZE_MODE)
     fun setResizeMode(view: BlurhashImageView, resizeMode: String) {
         view.scaleType = parseResizeMode(resizeMode)
+        view.redraw()
     }
 
     override fun onAfterUpdateTransaction(view: BlurhashImageView) {

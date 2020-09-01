@@ -1,6 +1,7 @@
 package com.mrousavy.blurhash
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.util.Log
 import com.facebook.react.bridge.ReactContext
 import kotlinx.coroutines.GlobalScope
@@ -38,6 +39,7 @@ class BlurhashImageView(context: Context?): androidx.appcompat.widget.AppCompatI
     var decodeAsync = false
     private var _cachedBlurhash: BlurhashCache? = null
     private var _mainThreadId = Thread.currentThread().id
+    private var _bitmap: Bitmap? = null
 
     private fun getThreadDescriptor(): String {
         return if (Thread.currentThread().id == this._mainThreadId) "main"
@@ -51,13 +53,13 @@ class BlurhashImageView(context: Context?): androidx.appcompat.widget.AppCompatI
             if (decodeAsync) {
                 GlobalScope.launch {
                     log("Decoding ${decodeWidth}x${decodeHeight} blurhash ($blurhash) on ${getThreadDescriptor()} Thread!")
-                    val bitmap = BlurHashDecoder.decode(blurhash, decodeWidth, decodeHeight, decodePunch, useCache)
-                    setImageBitmap(bitmap)
+                    _bitmap = BlurHashDecoder.decode(blurhash, decodeWidth, decodeHeight, decodePunch, useCache)
+                    setImageBitmap(_bitmap)
                 }
             } else {
                 log("Decoding ${decodeWidth}x${decodeHeight} blurhash ($blurhash) on ${getThreadDescriptor()} Thread!")
-                val bitmap = BlurHashDecoder.decode(blurhash, decodeWidth, decodeHeight, decodePunch, useCache)
-                setImageBitmap(bitmap)
+                _bitmap = BlurHashDecoder.decode(blurhash, decodeWidth, decodeHeight, decodePunch, useCache)
+                setImageBitmap(_bitmap)
             }
         } else {
             warn("decodeWidth, decodeHeight and decodePunch properties of Blurhash View must be greater than 0!")
@@ -71,6 +73,10 @@ class BlurhashImageView(context: Context?): androidx.appcompat.widget.AppCompatI
         if (shouldReRender) {
             renderBlurhash(this.decodeAsync)
         }
+    }
+
+    fun redraw() {
+        setImageBitmap(_bitmap)
     }
 
     private fun shouldReRender(): Boolean {
