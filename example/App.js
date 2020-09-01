@@ -17,7 +17,11 @@ const COLORS = {
 	statusBar: 'rgba(100, 0, 100, 0.6)',
 	textInput: 'rgba(200, 0, 100, 0.5)',
 	button: 'rgba(200, 0, 100, 0.4)',
+	switchEnabled: 'rgba(200, 0, 100, 0.5)',
+	switchDisabled: 'rgba(200, 0, 100, 0.2)',
+	switchThumb: 'white',
 };
+const SWITCH_THUMB_COLORS = { false: COLORS.switchDisabled, true: COLORS.switchEnabled };
 
 export default function App() {
 	//#region State & Props
@@ -52,20 +56,28 @@ export default function App() {
 		<>
 			<StatusBar backgroundColor={COLORS.statusBar} />
 			<SafeAreaView style={styles.container}>
-				<Blurhash
-					blurhash={blurhash}
-					decodeWidth={32}
-					decodeHeight={32}
-					decodePunch={1}
-					decodeAsync={decodeAsync}
-					style={styles.blurhashImage}
-					resizeMode="cover"
-				/>
+				<View style={styles.blurhashContainer}>
+					<Blurhash
+						blurhash={blurhash}
+						decodeWidth={32}
+						decodeHeight={32}
+						decodePunch={1}
+						decodeAsync={decodeAsync}
+						style={styles.blurhashImage}
+						resizeMode="cover"
+					/>
+				</View>
 				<TextInput value={blurhash} placeholder="Blurhash" onChangeText={setBlurhash} style={styles.textInput} />
 				{/* To test if `decodeAsync` really doesn't block the UI thread, you can press this Touchable and see it reacting. */}
 				<View style={styles.row}>
 					<Text style={styles.text}>Decode Async:</Text>
-					<Switch value={decodeAsync} onValueChange={setDecodeAsync} />
+					<Switch
+						thumbColor={COLORS.switchThumb}
+						trackColor={SWITCH_THUMB_COLORS}
+						ios_backgroundColor={COLORS.switchDisabled}
+						value={decodeAsync}
+						onValueChange={setDecodeAsync}
+					/>
 				</View>
 				<TextInput value={encodingImageUri} placeholder="Image URL to encode" onChangeText={setEncodingImageUri} style={styles.textInput} />
 				<TouchableOpacity style={encodeButtonStyle} disabled={encodingImageUri.length < 5} onPress={startEncoding}>
@@ -83,10 +95,14 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		backgroundColor: COLORS.background,
 	},
+	blurhashContainer: {
+		borderRadius: 5,
+		overflow: 'hidden',
+	},
 	blurhashImage: {
 		width: 300,
 		height: 200,
-		borderRadius: 15,
+		borderRadius: 5, // only supported on iOS
 		// Custom styling for width, height, scaling etc here
 	},
 	textInput: {
@@ -116,5 +132,6 @@ const styles = StyleSheet.create({
 		borderRadius: 10,
 		paddingVertical: 10,
 		paddingHorizontal: 35,
+		justifyContent: 'center',
 	},
 });
