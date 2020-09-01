@@ -139,8 +139,8 @@ export default function App() {
     <th>Android Screenshot</th>
   </tr>
   <tr>
-    <td><img src="https://github.com/mrousavy/react-native-blurhash/raw/master/img/demo.ios.png" alt="iOS Demo Screenshot"></td>
-    <td><img src="https://github.com/mrousavy/react-native-blurhash/raw/master/img/demo.android.png" alt="Android Demo Screenshot"></td>
+    <td width="50%"><img src="https://github.com/mrousavy/react-native-blurhash/raw/master/img/demo_ios.png" alt="iOS Demo Screenshot"></td>
+    <td width="50%"><img src="https://github.com/mrousavy/react-native-blurhash/raw/master/img/demo_android.png" alt="Android Demo Screenshot"></td>
   </tr>
 </table>
 
