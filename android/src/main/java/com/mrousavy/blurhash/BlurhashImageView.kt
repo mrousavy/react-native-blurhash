@@ -50,32 +50,28 @@ class BlurhashImageView(context: Context?): androidx.appcompat.widget.AppCompatI
         else "separate"
     }
 
-    private fun renderBlurhashForReal() {
+    private fun renderBlurhash() {
         try {
+            emitBlurhashLoadStart()
+            if (!(decodeWidth > 0)) {
+                throw Exception("decodeWidth must be greater than 0! Actual: $decodeWidth")
+            }
+            if (!(decodeHeight > 0)) {
+                throw Exception("decodeHeight must be greater than 0! Actual: $decodeWidth")
+            }
+            if (!(decodePunch > 0)) {
+                throw Exception("decodePunch must be greater than 0! Actual: $decodeWidth")
+            }
+            // TODO: Disable Blurhash cache? I'm caching anyways..
             val useCache = true
             log("Decoding ${decodeWidth}x${decodeHeight} blurhash ($blurhash) on ${getThreadDescriptor()} Thread!")
             _bitmap = BlurHashDecoder.decode(blurhash, decodeWidth, decodeHeight, decodePunch, useCache)
             setImageBitmap(_bitmap)
             emitBlurhashLoadEnd()
         } catch (e: Exception) {
-            emitBlurhashLoadError(e.message)
-        }
-    }
-
-    private fun renderBlurhash(decodeAsync: Boolean) {
-        // TODO: Disable Blurhash cache? I'm caching anyways..
-        emitBlurhashLoadStart()
-        if (decodeWidth > 0 && decodeHeight > 0 && decodePunch > 0) {
-            if (decodeAsync) {
-                GlobalScope.launch {
-                    renderBlurhashForReal()
-                }
-            } else {
-                renderBlurhashForReal()
-            }
-        } else {
-            warn("decodeWidth, decodeHeight and decodePunch properties of Blurhash View must be greater than 0!")
+            // TODO: Set to null (= clear Image) or leave unchanged (= display last Blurhash)?
             setImageBitmap(null)
+            emitBlurhashLoadError(e.message)
         }
     }
 
@@ -83,7 +79,13 @@ class BlurhashImageView(context: Context?): androidx.appcompat.widget.AppCompatI
         val shouldReRender = this.shouldReRender()
         RNLog.l("Should re-render: $shouldReRender")
         if (shouldReRender) {
-            renderBlurhash(this.decodeAsync)
+            if (decodeAsync) {
+                GlobalScope.launch {
+                    renderBlurhash()
+                }
+            } else {
+                renderBlurhash()
+            }
         }
     }
 
