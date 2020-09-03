@@ -3,9 +3,13 @@ package com.mrousavy.blurhash
 import android.content.Context
 import android.graphics.Bitmap
 import android.util.Log
+import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReactContext
+import com.facebook.react.bridge.WritableMap
+import com.facebook.react.uimanager.events.RCTEventEmitter
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+
 
 internal class BlurhashCache(private val _blurhash: String?, private val _decodeWidth: Int, private val _decodeHeight: Int, private val _decodePunch: Float) {
     fun isDifferent(blurhash: String?, decodeWidth: Int, decodeHeight: Int, decodePunch: Float): Boolean {
@@ -46,20 +50,28 @@ class BlurhashImageView(context: Context?): androidx.appcompat.widget.AppCompatI
         else "separate"
     }
 
+    private fun renderBlurhashForReal() {
+        try {
+            val useCache = true
+            log("Decoding ${decodeWidth}x${decodeHeight} blurhash ($blurhash) on ${getThreadDescriptor()} Thread!")
+            _bitmap = BlurHashDecoder.decode(blurhash, decodeWidth, decodeHeight, decodePunch, useCache)
+            setImageBitmap(_bitmap)
+            emitBlurhashLoadEnd()
+        } catch (e: Exception) {
+            emitBlurhashLoadError(e.message)
+        }
+    }
+
     private fun renderBlurhash(decodeAsync: Boolean) {
         // TODO: Disable Blurhash cache? I'm caching anyways..
-        val useCache = true
+        emitBlurhashLoadStart()
         if (decodeWidth > 0 && decodeHeight > 0 && decodePunch > 0) {
             if (decodeAsync) {
                 GlobalScope.launch {
-                    log("Decoding ${decodeWidth}x${decodeHeight} blurhash ($blurhash) on ${getThreadDescriptor()} Thread!")
-                    _bitmap = BlurHashDecoder.decode(blurhash, decodeWidth, decodeHeight, decodePunch, useCache)
-                    setImageBitmap(_bitmap)
+                    renderBlurhashForReal()
                 }
             } else {
-                log("Decoding ${decodeWidth}x${decodeHeight} blurhash ($blurhash) on ${getThreadDescriptor()} Thread!")
-                _bitmap = BlurHashDecoder.decode(blurhash, decodeWidth, decodeHeight, decodePunch, useCache)
-                setImageBitmap(_bitmap)
+                renderBlurhashForReal()
             }
         } else {
             warn("decodeWidth, decodeHeight and decodePunch properties of Blurhash View must be greater than 0!")
@@ -88,6 +100,32 @@ class BlurhashImageView(context: Context?): androidx.appcompat.widget.AppCompatI
         } finally {
             _cachedBlurhash = BlurhashCache(this.blurhash, this.decodeWidth, this.decodeHeight, this.decodePunch)
         }
+    }
+
+    private fun emitBlurhashLoadStart() {
+        val reactContext = context as ReactContext
+        reactContext.getJSModule(RCTEventEmitter::class.java).receiveEvent(
+                id,
+                "blurhashLoadStart",
+                null)
+    }
+
+    private fun emitBlurhashLoadEnd() {
+        val reactContext = context as ReactContext
+        reactContext.getJSModule(RCTEventEmitter::class.java).receiveEvent(
+                id,
+                "blurhashLoadEnd",
+                null)
+    }
+
+    private fun emitBlurhashLoadError(error: String?) {
+        val event = Arguments.createMap()
+        event.putString("error", error)
+        val reactContext = context as ReactContext
+        reactContext.getJSModule(RCTEventEmitter::class.java).receiveEvent(
+                id,
+                "blurhashLoadError",
+                event)
     }
 
     private fun log(message: String) {
