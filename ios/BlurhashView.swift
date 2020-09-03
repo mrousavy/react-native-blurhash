@@ -59,6 +59,7 @@ final class BlurhashView: UIView {
 	}
 
 	final func decodeImage() -> UIImage? {
+		// TODO: Begin loaded, end loaded and error events calling!
 		guard let blurhash = self.blurhash else {
 			return nil
 		}
@@ -125,6 +126,7 @@ final class BlurhashView: UIView {
 		}
 	}
 
+	// TODO: Extract to Objective-C RCTConvert
 	final func parseResizeMode(resizeMode: NSString) -> ContentMode {
 		switch resizeMode {
 		case "contain":
