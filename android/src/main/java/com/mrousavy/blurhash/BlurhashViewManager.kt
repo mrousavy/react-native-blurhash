@@ -2,10 +2,12 @@ package com.mrousavy.blurhash
 
 import android.os.Build
 import android.widget.ImageView
+import com.facebook.react.common.MapBuilder
 import com.facebook.react.uimanager.SimpleViewManager
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.ViewProps
 import com.facebook.react.uimanager.annotations.ReactProp
+
 
 val DEFAULT_RESIZE_MODE = ImageView.ScaleType.CENTER_CROP
 
@@ -54,6 +56,27 @@ class BlurhashViewManager : SimpleViewManager<BlurhashImageView>() {
         image.scaleType = DEFAULT_RESIZE_MODE
         return image
     }
+
+    override fun getExportedCustomBubblingEventTypeConstants(): MutableMap<String, Any>? {
+        return MapBuilder.builder<String, Any>()
+                .put(
+                        "blurhashLoadError",
+                        MapBuilder.of(
+                                "phasedRegistrationNames",
+                                MapBuilder.of("bubbled", "onBlurhashError")))
+                .put(
+                        "blurhashLoadStart",
+                        MapBuilder.of(
+                                "phasedRegistrationNames",
+                                MapBuilder.of("bubbled", "onBlurhashLoadStart")))
+                .put(
+                        "blurhashLoadEnd",
+                        MapBuilder.of(
+                                "phasedRegistrationNames",
+                                MapBuilder.of("bubbled", "onBlurhashLoadEnd")))
+                .build()
+    }
+
 
     override fun getName(): String {
         return REACT_CLASS
