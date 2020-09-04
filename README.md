@@ -210,6 +210,7 @@ Previously rendered Blurhashes will get cached, so they don't re-decode on every
 ## Resources
 * [this medium article.](https://teabreak.e-spres-oh.com/swift-in-react-native-the-ultimate-guide-part-2-ui-components-907767123d9e) jesus christ amen thanks for that
 * [Native Modules documentation](https://reactnative.dev/docs/native-modules-ios.html), especially the [Swift part](https://reactnative.dev/docs/native-modules-ios.html#exporting-swift)
+* [This cheatsheet gist](https://gist.github.com/chourobin/f83f3b3a6fd2053fad29fff69524f91c) thank you @chourobin.
 * [DylanVann/react-native-fast-image](https://github.com/DylanVann/react-native-fast-image) as a reference for native UI modules
 * [woltapp/blurhash](https://github.com/woltapp/blurhash) of course
 
