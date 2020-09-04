@@ -11,6 +11,7 @@
 // https://github.com/brodybits/create-react-native-module/issues/232
 
 const path = require('path');
+const blacklist = require('metro-config/src/defaults/blacklist');
 
 module.exports = {
 	// workaround for an issue with symlinks encountered starting with
@@ -18,6 +19,7 @@ module.exports = {
 	// (not needed with React Native 0.60 / metro@0.54)
 	resolver: {
 		extraNodeModules: new Proxy({}, { get: (_, name) => path.resolve('.', 'node_modules', name) }),
+		blacklistRE: blacklist([/node_modules\/react-native-macos\/.*/]),
 	},
 
 	// quick workaround for another issue with symlinks
