@@ -10,20 +10,22 @@ import Foundation
 import UIKit
 
 
-
 final class BlurhashView: UIView {
 	@objc var blurhash: NSString?
 	@objc var decodeWidth: NSNumber = 32
 	@objc var decodeHeight: NSNumber = 32
 	@objc var decodePunch: NSNumber = 1
-	@objc var resizeMode: NSString = "cover"
 	@objc var decodeAsync: Bool = false
+	
+	@objc var resizeMode: NSString = "cover"
 	@objc var borderRadius: NSNumber = 0
-	var lastState: BlurhashCache?
-	let imageContainer: UIImageView
+	
 	@objc var onLoadStart: RCTDirectEventBlock?
 	@objc var onLoadEnd: RCTDirectEventBlock?
 	@objc var onLoadError: RCTDirectEventBlock?
+	
+	private var lastState: BlurhashCache?
+	private let imageContainer: UIImageView
 
 	override init(frame: CGRect) {
 		self.imageContainer = UIImageView()
@@ -38,49 +40,65 @@ final class BlurhashView: UIView {
 		fatalError("init(coder:) has not been implemented")
 	}
 
-	final func decodeImage() -> UIImage? {
-		// TODO: Begin loaded, end loaded and error events calling!
-		guard let blurhash = self.blurhash else {
-			return nil
-		}
-		if self.decodeWidth.intValue > 0, self.decodeHeight.intValue > 0, self.decodePunch.floatValue > 0 {
+	private final func renderBlurhash() {
+		do {
+			emitLoadStartEvent()
+			guard let blurhash = self.blurhash else {
+				throw BlurhashError.invalidBlurhashString(isNil: true)
+			}
+			guard self.decodeWidth.intValue > 0 else {
+				throw BlurhashError.invalidBlurhashDecodeWidth(actualValue: self.decodeWidth.intValue)
+			}
+			guard self.decodeHeight.intValue > 0 else {
+				throw BlurhashError.invalidBlurhashDecodeHeight(actualValue: self.decodeHeight.intValue)
+			}
+			guard self.decodePunch.floatValue > 0 else {
+				throw BlurhashError.invalidBlurhashDecodePunch(actualValue: self.decodePunch.floatValue)
+			}
+			
 			log(level: .trace, message: "Decoding \(self.decodeWidth)x\(self.decodeHeight) blurhash (\(blurhash)) on \(Thread.isMainThread ? "main" : "separate") thread!")
 			let size = CGSize(width: decodeWidth.intValue, height: self.decodeHeight.intValue)
 			let nullableImage = UIImage(blurHash: blurhash as String, size: size, punch: self.decodePunch.floatValue)
 			guard let image = nullableImage else {
-				return nil
+				throw BlurhashError.invalidBlurhashString(isNil: false)
 			}
-			return image
-		} else {
-			log(level: .error, message: "Error! decodeWidth, decodeHeight and decodePunch must be greater than 0!")
-			return nil
+			setImageContainerImage(image: image)
+			emitLoadEndEvent()
+			return
+		} catch BlurhashError.decodeError(let message) {
+			emitLoadErrorEvent(message: message)
+		} catch BlurhashError.invalidBlurhashString(let isNil) {
+			emitLoadErrorEvent(message: isNil ? "The provided Blurhash string must not be null!" : "The provided Blurhash string was invalid.")
+		} catch BlurhashError.invalidBlurhashDecodeWidth(let actualValue) {
+			emitLoadErrorEvent(message: "decodeWidth must be greater than 0! Actual: \(actualValue)")
+		} catch BlurhashError.invalidBlurhashDecodeHeight(let actualValue) {
+			emitLoadErrorEvent(message: "decodeHeight must be greater than 0! Actual: \(actualValue)")
+		} catch BlurhashError.invalidBlurhashDecodePunch(let actualValue) {
+			emitLoadErrorEvent(message: "decodePunch must be greater than 0! Actual: \(actualValue)")
+		} catch {
+			emitLoadErrorEvent(message: "An unknown error occured while trying to decode the blurhash!")
 		}
-	}
-
-	final func renderBlurhashView() {
-		if self.decodeAsync {
-			DispatchQueue.global(qos: .userInteractive).async {
-				let image = self.decodeImage()
-				DispatchQueue.main.async {
-					self.imageContainer.image = image
-				}
-			}
-		} else {
-			self.imageContainer.image = self.decodeImage()
-		}
+		// Called if Error was thrown: Set image to nil to clear the outdated Blurhash
+		setImageContainerImage(image: nil)
 	}
 
 	override final func didSetProps(_ changedProps: [String]!) {
 		let shouldReRender = self.shouldReRender()
 		if shouldReRender {
-			self.renderBlurhashView()
+			if self.decodeAsync {
+				DispatchQueue.global(qos: .userInteractive).async {
+					self.renderBlurhash()
+				}
+			} else {
+				self.renderBlurhash()
+			}
 		}
 		if changedProps.contains("resizeMode") || changedProps.contains("borderRadius") {
 			self.updateImageContainer()
 		}
 	}
 
-	final func shouldReRender() -> Bool {
+	private final func shouldReRender() -> Bool {
 		defer {
 			self.lastState = BlurhashCache(blurhash: self.blurhash, decodeWidth: self.decodeWidth, decodeHeight: self.decodeHeight, decodePunch: self.decodePunch)
 		}
@@ -93,7 +111,7 @@ final class BlurhashView: UIView {
 		return lastState.isDifferent(blurhash: blurhash, decodeWidth: self.decodeWidth, decodeHeight: self.decodeHeight, decodePunch: self.decodePunch)
 	}
 
-	final func updateImageContainer() {
+	private final func updateImageContainer() {
 		self.imageContainer.contentMode = self.parseResizeMode(resizeMode: self.resizeMode)
 		if let cornerRadius = CGFloat(exactly: self.borderRadius) {
 			// TODO: shouldRasterize ?
@@ -105,6 +123,17 @@ final class BlurhashView: UIView {
 			self.imageContainer.layer.cornerRadius = cornerRadius
 		}
 	}
+	
+	private final func setImageContainerImage(image: UIImage?) {
+		if Thread.isMainThread {
+			self.imageContainer.image = image
+		} else {
+			DispatchQueue.main.async {
+				self.imageContainer.image = image
+			}
+		}
+	}
+	
 	private final func emitLoadErrorEvent(message: String?) {
 		if let onLoadError = self.onLoadError {
 			onLoadError(["message": message as Any])
@@ -128,8 +157,7 @@ final class BlurhashView: UIView {
 		log(level: .trace, message: "Emitted onLoadEnd event.")
 	}
 
-	// TODO: Extract to Objective-C RCTConvert
-	final func parseResizeMode(resizeMode: NSString) -> ContentMode {
+	private final func parseResizeMode(resizeMode: NSString) -> ContentMode {
 		switch resizeMode {
 		case "contain":
 			return .scaleAspectFit
