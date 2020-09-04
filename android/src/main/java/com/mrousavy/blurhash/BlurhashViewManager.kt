@@ -63,17 +63,17 @@ class BlurhashViewManager : SimpleViewManager<BlurhashImageView>() {
                         "blurhashLoadError",
                         MapBuilder.of(
                                 "phasedRegistrationNames",
-                                MapBuilder.of("bubbled", "onBlurhashError")))
+                                MapBuilder.of("bubbled", "onLoadError")))
                 .put(
                         "blurhashLoadStart",
                         MapBuilder.of(
                                 "phasedRegistrationNames",
-                                MapBuilder.of("bubbled", "onBlurhashLoadStart")))
+                                MapBuilder.of("bubbled", "onLoadStart")))
                 .put(
                         "blurhashLoadEnd",
                         MapBuilder.of(
                                 "phasedRegistrationNames",
-                                MapBuilder.of("bubbled", "onBlurhashLoadEnd")))
+                                MapBuilder.of("bubbled", "onLoadEnd")))
                 .build()
     }
 

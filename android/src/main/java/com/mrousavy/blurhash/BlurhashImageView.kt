@@ -125,9 +125,9 @@ class BlurhashImageView(context: Context?): androidx.appcompat.widget.AppCompatI
                 null)
     }
 
-    private fun emitBlurhashLoadError(error: String?) {
+    private fun emitBlurhashLoadError(message: String?) {
         val event = Arguments.createMap()
-        event.putString("error", error)
+        event.putString("message", message)
         val reactContext = context as ReactContext
         reactContext.getJSModule(RCTEventEmitter::class.java).receiveEvent(
                 id,
