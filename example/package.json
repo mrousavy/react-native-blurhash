@@ -8,12 +8,14 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx ."
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
+    "start:macos": "node node_modules/react-native-macos/local-cli/cli.js start --use-react-native-macos"
   },
   "dependencies": {
     "react": "16.13.1",
     "react-native": "0.63.1",
-    "react-native-blurhash": "link:.."
+    "react-native-blurhash": "link:..",
+    "react-native-macos": "^0.62.0-0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",
