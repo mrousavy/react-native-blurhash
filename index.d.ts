@@ -86,4 +86,14 @@ export declare class Blurhash extends React.Component<BlurhashProps> {
 	 * const averageColor = Blurhash.getAverageColor(`LGFFaXYk^6#M@-5c,1J5@[or[Q6.`)
 	 */
 	public static getAverageColor(blurhash: string): RGB | undefined;
+
+	/**
+	 * Clear the Android Cosine operations array cache. Call this function if your memory usage is high.
+	 *
+	 * _Note: This is a no-op on iOS._
+	 *
+	 * @platform Android
+	 * @see https://github.com/mrousavy/react-native-blurhash#cosine-operations
+	 */
+	public static clearCosineCache(): void;
 }

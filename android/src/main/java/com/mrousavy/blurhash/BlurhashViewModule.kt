@@ -58,6 +58,11 @@ class BlurhashViewModule(reactContext: ReactApplicationContext) : ReactContextBa
         }
     }
 
+    @ReactMethod
+    fun clearCosineCache() {
+        BlurHashDecoder.clearCache()
+    }
+
     override fun onHostResume() { }
     override fun onHostPause() { }
     override fun onHostDestroy() {

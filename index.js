@@ -1,5 +1,5 @@
 const React = require('react');
-const { requireNativeComponent, NativeModules } = require('react-native');
+const { requireNativeComponent, NativeModules, Platform } = require('react-native');
 const { decode83, decodeDC } = require('./utils');
 
 // TODO: use memo to fix "Invariant Violation: Tried to register two views with the same name BlurhashView" error
@@ -43,6 +43,10 @@ Blurhash.getAverageColor = (blurhash) => {
 
 	const value = decode83(blurhash.substring(2, 6));
 	return decodeDC(value);
+};
+
+Blurhash.clearCosineCache = () => {
+	if (Platform.OS === 'android') BlurhashModule.clearCosineCache();
 };
 
 // requireNativeComponent automatically resolves 'BlurhashView' to 'BlurhashViewManager'
