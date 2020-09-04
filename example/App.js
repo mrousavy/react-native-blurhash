@@ -44,8 +44,8 @@ export default function App() {
 	const onLoadEnd = useCallback(() => {
 		console.log('onLoadEnd called!');
 	}, []);
-	const onLoadError = useCallback(({ nativeEvent }) => {
-		console.log(`onLoadError called! Message: ${nativeEvent.message}`);
+	const onLoadError = useCallback((message) => {
+		console.log(`onLoadError called! Message: ${message}`);
 	}, []);
 	const startEncoding = useCallback(async () => {
 		try {

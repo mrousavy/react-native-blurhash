@@ -107,21 +107,21 @@ The decoders are written in [Swift](ios/BlurhashDecode.swift) and [Kotlin](andro
   </tr>
   <tr>
     <td><code>onLoadStart</code></td>
-    <td><code>(event: BlurhashLoadStartEvent) => void</code></td>
+    <td><code>() => void</code></td>
     <td>Emitted when the Blurhash received new parameters and started to decode the given <code>blurhash</code> string.</td>
     <td>❌</td>
     <td><code>null</code></td>
   </tr>
   <tr>
     <td><code>onLoadEnd</code></td>
-    <td><code>(event: BlurhashLoadEndEvent) => void</code></td>
+    <td><code>() => void</code></td>
     <td>Emitted when the Blurhash successfully decoded the given <code>blurhash</code> string and rendered the image to the <code>&lt;Blurhash&gt;</code> view.</td>
     <td>❌</td>
     <td><code>null</code></td>
   </tr>
   <tr>
     <td><code>onLoadError</code></td>
-    <td><code>(event: BlurhashLoadErrorEvent) => void</code></td>
+    <td><code>(message?: string) => void</code></td>
     <td>Emitted when the Blurhash failed to load. Use <code>event.nativeEvent.message</code> to get the error message.</td>
     <td>❌</td>
     <td><code>null</code></td>
