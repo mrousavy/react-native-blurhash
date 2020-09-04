@@ -38,6 +38,15 @@ export default function App() {
 	//#endregion
 
 	//#region Callbacks
+	const onLoadStart = useCallback(() => {
+		console.log('onLoadStart called!');
+	}, []);
+	const onLoadEnd = useCallback(() => {
+		console.log('onLoadEnd called!');
+	}, []);
+	const onLoadError = useCallback(({ nativeEvent }) => {
+		console.log(`onLoadError called! Message: ${nativeEvent.message}`);
+	}, []);
 	const startEncoding = useCallback(async () => {
 		try {
 			if (encodingImageUri.length < 5) return;
@@ -65,6 +74,9 @@ export default function App() {
 							decodeHeight={32}
 							decodePunch={1}
 							decodeAsync={decodeAsync}
+							onLoadStart={onLoadStart}
+							onLoadEnd={onLoadEnd}
+							onLoadError={onLoadError}
 							style={styles.blurhashImage}
 							resizeMode="cover"
 						/>

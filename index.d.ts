@@ -1,5 +1,9 @@
 import React from 'react';
-import { ViewProps } from 'react-native';
+import { ViewProps, NativeSyntheticEvent } from 'react-native';
+
+export type BlurhashLoadStartEvent = NativeSyntheticEvent<{}>;
+export type BlurhashLoadEndEvent = NativeSyntheticEvent<{}>;
+export type BlurhashLoadErrorEvent = NativeSyntheticEvent<{ message: string }>;
 
 export declare interface RGB {
 	/**
@@ -48,6 +52,27 @@ export declare interface BlurhashProps extends ViewProps {
 	 * @default 'cover'
 	 */
 	resizeMode?: 'cover' | 'contain' | 'stretch' | 'center';
+
+	/**
+	 * Emitted when the Blurhash received new parameters and started to decode the given `blurhash` string.
+	 *
+	 * `{nativeEvent: { }}`
+	 */
+	onLoadStart?: (event: BlurhashLoadStartEvent) => void;
+
+	/**
+	 * Emitted when the Blurhash successfully decoded the given `blurhash` string and rendered the image to the `<Blurhash>` view.
+	 *
+	 * `{nativeEvent: { }}`
+	 */
+	onLoadEnd?: (event: BlurhashLoadEndEvent) => void;
+
+	/**
+	 * Emitted when the Blurhash failed to load.
+	 *
+	 * `{nativeEvent: { message: string }}`
+	 */
+	onLoadError?: (event: BlurhashLoadErrorEvent) => void;
 }
 
 export declare class Blurhash extends React.Component<BlurhashProps> {
