@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		B814198724B7D41C00DADC7A /* ../ios/String+Decode83.swift in Sources */ = {isa = PBXBuildFile; fileRef = B814198624B7D41C00DADC7A /* ../ios/String+Decode83.swift */; };
-		B822DECC2502626200077DA6 /* Blurhash_macos.h in Headers */ = {isa = PBXBuildFile; fileRef = B822DECB2502626200077DA6 /* Blurhash_macos.h */; };
-		B822DECE2502626200077DA6 /* Blurhash_macos.m in Sources */ = {isa = PBXBuildFile; fileRef = B822DECD2502626200077DA6 /* Blurhash_macos.m */; };
 		B832026424B0C05B00DCFF26 /* ../ios/UIImage+BlurhashEncode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B832026324B0C05B00DCFF26 /* ../ios/UIImage+BlurhashEncode.swift */; };
 		B832026624B0C1BA00DCFF26 /* ../ios/ReactLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B832026524B0C1BA00DCFF26 /* ../ios/ReactLogger.swift */; };
 		B8377375250237310040F1AE /* ../ios/BlurhashCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8377374250237310040F1AE /* ../ios/BlurhashCache.swift */; };
@@ -25,6 +23,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		38116A2F23BBECB700ACE311 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		58B511D91A9E6C8500147676 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -40,8 +47,6 @@
 		134814201AA4EA6300B7C361 /* libBlurhash.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBlurhash.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B814198624B7D41C00DADC7A /* ../ios/String+Decode83.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "../ios/String+Decode83.swift"; sourceTree = "<group>"; };
 		B822DEC92502626200077DA6 /* libBlurhash-macos.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libBlurhash-macos.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B822DECB2502626200077DA6 /* Blurhash_macos.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Blurhash_macos.h; sourceTree = "<group>"; };
-		B822DECD2502626200077DA6 /* Blurhash_macos.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Blurhash_macos.m; sourceTree = "<group>"; };
 		B832026324B0C05B00DCFF26 /* ../ios/UIImage+BlurhashEncode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "../ios/UIImage+BlurhashEncode.swift"; sourceTree = "<group>"; };
 		B832026524B0C1BA00DCFF26 /* ../ios/ReactLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ../ios/ReactLogger.swift; sourceTree = "<group>"; };
 		B8377374250237310040F1AE /* ../ios/BlurhashCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ../ios/BlurhashCache.swift; sourceTree = "<group>"; };
@@ -100,41 +105,12 @@
 				B8CC0E9724B0E65D00A02204 /* ../ios/UIImage+Base64.swift */,
 				B8EAEFB6248E3CD6000932A3 /* ../ios/UIImage+BlurhashDecode.swift */,
 				B832026324B0C05B00DCFF26 /* ../ios/UIImage+BlurhashEncode.swift */,
-				B822DECA2502626200077DA6 /* Blurhash-macos */,
-				B8EAEFB5248E39F7000932A3 /* Frameworks */,
 				134814211AA4EA7D00B7C361 /* Products */,
 				B822DEC92502626200077DA6 /* libBlurhash-macos.a */,
 			);
 			sourceTree = "<group>";
 		};
-		B822DECA2502626200077DA6 /* Blurhash-macos */ = {
-			isa = PBXGroup;
-			children = (
-				B822DECB2502626200077DA6 /* Blurhash_macos.h */,
-				B822DECD2502626200077DA6 /* Blurhash_macos.m */,
-			);
-			path = "Blurhash-macos";
-			sourceTree = "<group>";
-		};
-		B8EAEFB5248E39F7000932A3 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
-
-/* Begin PBXHeadersBuildPhase section */
-		B822DEC52502626200077DA6 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B822DECC2502626200077DA6 /* Blurhash_macos.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		58B511DA1A9E6C8500147676 /* Blurhash */ = {
@@ -158,16 +134,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B822DED12502626200077DA6 /* Build configuration list for PBXNativeTarget "Blurhash-macos" */;
 			buildPhases = (
-				B822DEC52502626200077DA6 /* Headers */,
-				B822DEC62502626200077DA6 /* Sources */,
 				B822DEC72502626200077DA6 /* Frameworks */,
+				38116A2F23BBECB700ACE311 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "Blurhash-macos";
-			productName = "Blurhash-macos";
+			productName = RCTDataManager;
 			productReference = B822DEC92502626200077DA6 /* libBlurhash-macos.a */;
 			productType = "com.apple.product-type.library.static";
 		};
@@ -228,14 +203,6 @@
 				B8CC0E9824B0E65D00A02204 /* ../ios/UIImage+Base64.swift in Sources */,
 				B83D414D24B0EBFB00D1D771 /* ../ios/String+Index.swift in Sources */,
 				B8377377250237470040F1AE /* ../ios/BlurhashError.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B822DEC62502626200077DA6 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B822DECE2502626200077DA6 /* Blurhash_macos.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,7 +334,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Blurhash;
-				SDKROOT = macosx;
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = ../ios/BlurhashBridge.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -399,13 +366,6 @@
 		B822DECF2502626200077DA6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-macos/React/**";
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react-native-macos/React/**",
-					"$(SRCROOT)/../../react-native-macos/React/**",
-				);
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -415,7 +375,14 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = CJW62Q77E7;
 				EXECUTABLE_PREFIX = lib;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-macos/React/**";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-macos/React/**",
+					"$(SRCROOT)/../../react-native-macos/React/**",
+				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -428,13 +395,6 @@
 		B822DED02502626200077DA6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-macos/React/**";
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react-native-macos/React/**",
-					"$(SRCROOT)/../../react-native-macos/React/**",
-				);
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -445,7 +405,14 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = CJW62Q77E7;
 				EXECUTABLE_PREFIX = lib;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-macos/React/**";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-macos/React/**",
+					"$(SRCROOT)/../../react-native-macos/React/**",
+				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
