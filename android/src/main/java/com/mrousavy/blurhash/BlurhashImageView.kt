@@ -111,28 +111,19 @@ class BlurhashImageView(context: Context?): androidx.appcompat.widget.AppCompatI
 
     private fun emitBlurhashLoadStart() {
         val reactContext = context as ReactContext
-        reactContext.getJSModule(RCTEventEmitter::class.java).receiveEvent(
-                id,
-                "blurhashLoadStart",
-                null)
+        reactContext.getJSModule(RCTEventEmitter::class.java).receiveEvent(id, "blurhashLoadStart", null)
     }
 
     private fun emitBlurhashLoadEnd() {
         val reactContext = context as ReactContext
-        reactContext.getJSModule(RCTEventEmitter::class.java).receiveEvent(
-                id,
-                "blurhashLoadEnd",
-                null)
+        reactContext.getJSModule(RCTEventEmitter::class.java).receiveEvent(id, "blurhashLoadEnd", null)
     }
 
     private fun emitBlurhashLoadError(message: String?) {
         val event = Arguments.createMap()
         event.putString("message", message)
         val reactContext = context as ReactContext
-        reactContext.getJSModule(RCTEventEmitter::class.java).receiveEvent(
-                id,
-                "blurhashLoadError",
-                event)
+        reactContext.getJSModule(RCTEventEmitter::class.java).receiveEvent(id, "blurhashLoadError", event)
     }
 
     private fun log(message: String) {

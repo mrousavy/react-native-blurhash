@@ -57,23 +57,11 @@ class BlurhashViewManager : SimpleViewManager<BlurhashImageView>() {
         return image
     }
 
-    override fun getExportedCustomBubblingEventTypeConstants(): MutableMap<String, Any>? {
+    override fun getExportedCustomDirectEventTypeConstants(): MutableMap<String, Any>? {
         return MapBuilder.builder<String, Any>()
-                .put(
-                        "blurhashLoadError",
-                        MapBuilder.of(
-                                "phasedRegistrationNames",
-                                MapBuilder.of("bubbled", "onLoadError")))
-                .put(
-                        "blurhashLoadStart",
-                        MapBuilder.of(
-                                "phasedRegistrationNames",
-                                MapBuilder.of("bubbled", "onLoadStart")))
-                .put(
-                        "blurhashLoadEnd",
-                        MapBuilder.of(
-                                "phasedRegistrationNames",
-                                MapBuilder.of("bubbled", "onLoadEnd")))
+                .put("blurhashLoadError", MapBuilder.of("registrationName", "onLoadError"))
+                .put("blurhashLoadStart", MapBuilder.of("registrationName", "onLoadStart"))
+                .put("blurhashLoadEnd", MapBuilder.of("registrationName", "onLoadEnd"))
                 .build()
     }
 
