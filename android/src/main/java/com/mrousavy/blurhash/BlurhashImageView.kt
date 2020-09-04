@@ -35,6 +35,8 @@ internal class BlurhashCache(private val _blurhash: String?, private val _decode
 
 }
 
+const val USE_COSINES_CACHE = true
+
 class BlurhashImageView(context: Context?): androidx.appcompat.widget.AppCompatImageView(context) {
     var blurhash: String? = null
     var decodeWidth = 32
@@ -53,23 +55,26 @@ class BlurhashImageView(context: Context?): androidx.appcompat.widget.AppCompatI
     private fun renderBlurhash() {
         try {
             emitBlurhashLoadStart()
-            if (!(decodeWidth > 0)) {
+            if (blurhash == null) {
+                throw Exception("The provided Blurhash string must not be null!")
+            }
+            if (decodeWidth <= 0) {
                 throw Exception("decodeWidth must be greater than 0! Actual: $decodeWidth")
             }
-            if (!(decodeHeight > 0)) {
+            if (decodeHeight <= 0) {
                 throw Exception("decodeHeight must be greater than 0! Actual: $decodeWidth")
             }
-            if (!(decodePunch > 0)) {
+            if (decodePunch <= 0) {
                 throw Exception("decodePunch must be greater than 0! Actual: $decodeWidth")
             }
-            // TODO: Disable Blurhash cache? I'm caching anyways..
-            val useCache = true
             log("Decoding ${decodeWidth}x${decodeHeight} blurhash ($blurhash) on ${getThreadDescriptor()} Thread!")
-            _bitmap = BlurHashDecoder.decode(blurhash, decodeWidth, decodeHeight, decodePunch, useCache)
+            _bitmap = BlurHashDecoder.decode(blurhash, decodeWidth, decodeHeight, decodePunch, USE_COSINES_CACHE)
+            if (_bitmap == null) {
+                throw Exception("The provided Blurhash string was invalid.")
+            }
             setImageBitmap(_bitmap)
             emitBlurhashLoadEnd()
         } catch (e: Exception) {
-            // TODO: Set to null (= clear Image) or leave unchanged (= display last Blurhash)?
             setImageBitmap(null)
             emitBlurhashLoadError(e.message)
         }
