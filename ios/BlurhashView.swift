@@ -21,6 +21,9 @@ final class BlurhashView: UIView {
 	@objc var borderRadius: NSNumber = 0
 	var lastState: BlurhashCache?
 	let imageContainer: UIImageView
+	@objc var onLoadStart: RCTDirectEventBlock?
+	@objc var onLoadEnd: RCTDirectEventBlock?
+	@objc var onLoadError: RCTDirectEventBlock?
 
 	override init(frame: CGRect) {
 		self.imageContainer = UIImageView()
@@ -101,6 +104,28 @@ final class BlurhashView: UIView {
 			}
 			self.imageContainer.layer.cornerRadius = cornerRadius
 		}
+	}
+	private final func emitLoadErrorEvent(message: String?) {
+		if let onLoadError = self.onLoadError {
+			onLoadError(["message": message as Any])
+		}
+		if let message = message {
+			log(level: .error, message: message)
+		}
+	}
+	
+	private final func emitLoadStartEvent() {
+		if let onLoadStart = self.onLoadStart {
+			onLoadStart(nil)
+		}
+		log(level: .trace, message: "Emitted onLoadStart event.")
+	}
+	
+	private final func emitLoadEndEvent() {
+		if let onLoadEnd = self.onLoadEnd {
+			onLoadEnd(nil)
+		}
+		log(level: .trace, message: "Emitted onLoadEnd event.")
 	}
 
 	// TODO: Extract to Objective-C RCTConvert
