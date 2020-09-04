@@ -7,24 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3515965E21A3C86000623BFA /* RNCWKProcessPoolManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3515965D21A3C86000623BFA /* RNCWKProcessPoolManager.m */; };
-		38116A2B23BBECB700ACE311 /* RNCWebViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E91B351B21446E6C00F9801F /* RNCWebViewManager.m */; };
-		38116A2C23BBECB700ACE311 /* RNCWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = E91B351C21446E6C00F9801F /* RNCWebView.m */; };
-		38116A2D23BBECB700ACE311 /* RNCWKProcessPoolManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3515965D21A3C86000623BFA /* RNCWKProcessPoolManager.m */; };
-		E91B351D21446E6C00F9801F /* RNCWebViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E91B351B21446E6C00F9801F /* RNCWebViewManager.m */; };
-		E91B351E21446E6C00F9801F /* RNCWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = E91B351C21446E6C00F9801F /* RNCWebView.m */; };
+		B814198724B7D41C00DADC7A /* String+Decode83.swift in Sources */ = {isa = PBXBuildFile; fileRef = B814198624B7D41C00DADC7A /* String+Decode83.swift */; };
+		B832026424B0C05B00DCFF26 /* UIImage+BlurhashEncode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B832026324B0C05B00DCFF26 /* UIImage+BlurhashEncode.swift */; };
+		B832026624B0C1BA00DCFF26 /* ReactLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B832026524B0C1BA00DCFF26 /* ReactLogger.swift */; };
+		B8377375250237310040F1AE /* BlurhashCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8377374250237310040F1AE /* BlurhashCache.swift */; };
+		B8377377250237470040F1AE /* BlurhashError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8377376250237470040F1AE /* BlurhashError.swift */; };
+		B83D414D24B0EBFB00D1D771 /* String+Index.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83D414C24B0EBFB00D1D771 /* String+Index.swift */; };
+		B85D3FC524B7D555005790E3 /* BinaryInteger+Encode83.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85D3FC424B7D555005790E3 /* BinaryInteger+Encode83.swift */; };
+		B85DCA1C249764400003228D /* BlurhashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85DCA1B249764400003228D /* BlurhashView.swift */; };
+		B88F825D24B7D70000CDF22C /* BlurhashHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88F825C24B7D70000CDF22C /* BlurhashHelper.swift */; };
+		B8CC0E9824B0E65D00A02204 /* UIImage+Base64.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CC0E9724B0E65D00A02204 /* UIImage+Base64.swift */; };
+		B8EAEFB1248E37CA000932A3 /* BlurhashViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B8EAEFB0248E37CA000932A3 /* BlurhashViewManager.m */; };
+		B8EAEFB4248E37D7000932A3 /* BlurhashViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EAEFB3248E37D7000932A3 /* BlurhashViewManager.swift */; };
+		B8EAEFB7248E3CD6000932A3 /* UIImage+BlurhashDecode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EAEFB6248E3CD6000932A3 /* UIImage+BlurhashDecode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		38116A2F23BBECB700ACE311 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "include/$(PRODUCT_NAME)";
-			dstSubfolderSpec = 16;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		58B511D91A9E6C8500147676 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -37,24 +35,24 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		134814201AA4EA6300B7C361 /* libRNCWebView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNCWebView.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		3515965D21A3C86000623BFA /* RNCWKProcessPoolManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = RNCWKProcessPoolManager.m; path = ../apple/RNCWKProcessPoolManager.m; sourceTree = "<group>"; };
-		3515965F21A3C87E00623BFA /* RNCWKProcessPoolManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RNCWKProcessPoolManager.h; path = ../apple/RNCWKProcessPoolManager.h; sourceTree = "<group>"; };
-		38116A3323BBECB700ACE311 /* libRNCWebView-macOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libRNCWebView-macOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E91B351921446E6C00F9801F /* RNCWebViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNCWebViewManager.h; path = ../apple/RNCWebViewManager.h; sourceTree = "<group>"; };
-		E91B351A21446E6C00F9801F /* RNCWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNCWebView.h; path = ../apple/RNCWebView.h; sourceTree = "<group>"; };
-		E91B351B21446E6C00F9801F /* RNCWebViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNCWebViewManager.m; path = ../apple/RNCWebViewManager.m; sourceTree = "<group>"; };
-		E91B351C21446E6C00F9801F /* RNCWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNCWebView.m; path = ../apple/RNCWebView.m; sourceTree = "<group>"; };
+		134814201AA4EA6300B7C361 /* libBlurhash.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBlurhash.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B814198624B7D41C00DADC7A /* String+Decode83.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "../ios/String+Decode83.swift"; sourceTree = "<group>"; };
+		B832026324B0C05B00DCFF26 /* UIImage+BlurhashEncode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "../ios/UIImage+BlurhashEncode.swift"; sourceTree = "<group>"; };
+		B832026524B0C1BA00DCFF26 /* ReactLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ../ios/ReactLogger.swift; sourceTree = "<group>"; };
+		B8377374250237310040F1AE /* BlurhashCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ../ios/BlurhashCache.swift; sourceTree = "<group>"; };
+		B8377376250237470040F1AE /* BlurhashError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ../ios/BlurhashError.swift; sourceTree = "<group>"; };
+		B83D414C24B0EBFB00D1D771 /* String+Index.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "../ios/String+Index.swift"; sourceTree = "<group>"; };
+		B85D3FC424B7D555005790E3 /* BinaryInteger+Encode83.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "../ios/BinaryInteger+Encode83.swift"; sourceTree = "<group>"; };
+		B85DCA1B249764400003228D /* BlurhashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ../ios/BlurhashView.swift; sourceTree = "<group>"; };
+		B88F825C24B7D70000CDF22C /* BlurhashHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ../ios/BlurhashHelper.swift; sourceTree = "<group>"; };
+		B8CC0E9724B0E65D00A02204 /* UIImage+Base64.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "../ios/UIImage+Base64.swift"; sourceTree = "<group>"; };
+		B8EAEFB0248E37CA000932A3 /* BlurhashViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ../ios/BlurhashViewManager.m; sourceTree = "<group>"; };
+		B8EAEFB2248E37D7000932A3 /* BlurhashBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ../ios/BlurhashBridge.h; sourceTree = "<group>"; };
+		B8EAEFB3248E37D7000932A3 /* BlurhashViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ../ios/BlurhashViewManager.swift; sourceTree = "<group>"; };
+		B8EAEFB6248E3CD6000932A3 /* UIImage+BlurhashDecode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "../ios/UIImage+BlurhashDecode.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		38116A2E23BBECB700ACE311 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		58B511D81A9E6C8500147676 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -68,7 +66,7 @@
 		134814211AA4EA7D00B7C361 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				134814201AA4EA6300B7C361 /* libRNCWebView.a */,
+				134814201AA4EA6300B7C361 /* libBlurhash.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -76,40 +74,38 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
-				E91B351A21446E6C00F9801F /* RNCWebView.h */,
-				E91B351C21446E6C00F9801F /* RNCWebView.m */,
-				E91B351921446E6C00F9801F /* RNCWebViewManager.h */,
-				E91B351B21446E6C00F9801F /* RNCWebViewManager.m */,
-				3515965F21A3C87E00623BFA /* RNCWKProcessPoolManager.h */,
-				3515965D21A3C86000623BFA /* RNCWKProcessPoolManager.m */,
+				B8377376250237470040F1AE /* BlurhashError.swift */,
+				B8377374250237310040F1AE /* BlurhashCache.swift */,
+				B8EAEFB2248E37D7000932A3 /* BlurhashBridge.h */,
+				B8EAEFB0248E37CA000932A3 /* BlurhashViewManager.m */,
+				B8EAEFB3248E37D7000932A3 /* BlurhashViewManager.swift */,
+				B85DCA1B249764400003228D /* BlurhashView.swift */,
+				B832026524B0C1BA00DCFF26 /* ReactLogger.swift */,
+				B88F825C24B7D70000CDF22C /* BlurhashHelper.swift */,
+				B85D3FC424B7D555005790E3 /* BinaryInteger+Encode83.swift */,
+				B83D414C24B0EBFB00D1D771 /* String+Index.swift */,
+				B814198624B7D41C00DADC7A /* String+Decode83.swift */,
+				B8CC0E9724B0E65D00A02204 /* UIImage+Base64.swift */,
+				B8EAEFB6248E3CD6000932A3 /* UIImage+BlurhashDecode.swift */,
+				B832026324B0C05B00DCFF26 /* UIImage+BlurhashEncode.swift */,
+				B8EAEFB5248E39F7000932A3 /* Frameworks */,
 				134814211AA4EA7D00B7C361 /* Products */,
-				38116A3323BBECB700ACE311 /* libRNCWebView-macOS.a */,
 			);
+			sourceTree = "<group>";
+		};
+		B8EAEFB5248E39F7000932A3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		38116A2923BBECB700ACE311 /* RNCWebView-macOS */ = {
+		58B511DA1A9E6C8500147676 /* Blurhash */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 38116A3023BBECB700ACE311 /* Build configuration list for PBXNativeTarget "RNCWebView-macOS" */;
-			buildPhases = (
-				38116A2A23BBECB700ACE311 /* Sources */,
-				38116A2E23BBECB700ACE311 /* Frameworks */,
-				38116A2F23BBECB700ACE311 /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "RNCWebView-macOS";
-			productName = RCTDataManager;
-			productReference = 38116A3323BBECB700ACE311 /* libRNCWebView-macOS.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		58B511DA1A9E6C8500147676 /* RNCWebView */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "RNCWebView" */;
+			buildConfigurationList = 58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "Blurhash" */;
 			buildPhases = (
 				58B511D71A9E6C8500147676 /* Sources */,
 				58B511D81A9E6C8500147676 /* Frameworks */,
@@ -119,9 +115,9 @@
 			);
 			dependencies = (
 			);
-			name = RNCWebView;
+			name = Blurhash;
 			productName = RCTDataManager;
-			productReference = 134814201AA4EA6300B7C361 /* libRNCWebView.a */;
+			productReference = 134814201AA4EA6300B7C361 /* libBlurhash.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -130,106 +126,82 @@
 		58B511D31A9E6C8500147676 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					58B511DA1A9E6C8500147676 = {
 						CreatedOnToolsVersion = 6.1.1;
+						LastSwiftMigration = 1150;
 					};
 				};
 			};
-			buildConfigurationList = 58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "RNCWebView" */;
+			buildConfigurationList = 58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "Blurhash" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 58B511D21A9E6C8500147676;
 			productRefGroup = 58B511D21A9E6C8500147676;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				58B511DA1A9E6C8500147676 /* RNCWebView */,
-				38116A2923BBECB700ACE311 /* RNCWebView-macOS */,
+				58B511DA1A9E6C8500147676 /* Blurhash */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		38116A2A23BBECB700ACE311 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				38116A2B23BBECB700ACE311 /* RNCWebViewManager.m in Sources */,
-				38116A2C23BBECB700ACE311 /* RNCWebView.m in Sources */,
-				38116A2D23BBECB700ACE311 /* RNCWKProcessPoolManager.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		58B511D71A9E6C8500147676 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E91B351D21446E6C00F9801F /* RNCWebViewManager.m in Sources */,
-				E91B351E21446E6C00F9801F /* RNCWebView.m in Sources */,
-				3515965E21A3C86000623BFA /* RNCWKProcessPoolManager.m in Sources */,
+				B814198724B7D41C00DADC7A /* String+Decode83.swift in Sources */,
+				B8EAEFB4248E37D7000932A3 /* BlurhashViewManager.swift in Sources */,
+				B832026624B0C1BA00DCFF26 /* ReactLogger.swift in Sources */,
+				B832026424B0C05B00DCFF26 /* UIImage+BlurhashEncode.swift in Sources */,
+				B88F825D24B7D70000CDF22C /* BlurhashHelper.swift in Sources */,
+				B85DCA1C249764400003228D /* BlurhashView.swift in Sources */,
+				B8EAEFB7248E3CD6000932A3 /* UIImage+BlurhashDecode.swift in Sources */,
+				B8377375250237310040F1AE /* BlurhashCache.swift in Sources */,
+				B85D3FC524B7D555005790E3 /* BinaryInteger+Encode83.swift in Sources */,
+				B8EAEFB1248E37CA000932A3 /* BlurhashViewManager.m in Sources */,
+				B8CC0E9824B0E65D00A02204 /* UIImage+Base64.swift in Sources */,
+				B83D414D24B0EBFB00D1D771 /* String+Index.swift in Sources */,
+				B8377377250237470040F1AE /* BlurhashError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		38116A3123BBECB700ACE311 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-macos/React/**";
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react-native-macos/React/**",
-				);
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		38116A3223BBECB700ACE311 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-macos/React/**";
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react-native-macos/React/**",
-				);
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
 		58B511ED1A9E6C8500147676 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -251,7 +223,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
+					"\"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)\"",
+					"\"$(inherited)\"",
+				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -262,18 +240,27 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -288,7 +275,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
+					"\"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)\"",
+					"\"$(inherited)\"",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -298,48 +291,52 @@
 		58B511F01A9E6C8500147676 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-macos/React/**";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-macos/React/**",
-					"$(SRCROOT)/../../react-native-macos/React/**",
 				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				SDKROOT = macosx;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = RNCWebView;
+				PRODUCT_NAME = Blurhash;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = BlurhashBridge.h;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				SYSTEM_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
 		};
 		58B511F11A9E6C8500147676 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-macos/React/**";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-macos/React/**",
-					"$(SRCROOT)/../../react-native-macos/React/**",
 				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				SDKROOT = macosx;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = RNCWebView;
+				PRODUCT_NAME = Blurhash;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = BlurhashBridge.h;
+				SWIFT_VERSION = 5.0;
+				SYSTEM_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		38116A3023BBECB700ACE311 /* Build configuration list for PBXNativeTarget "RNCWebView-macOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				38116A3123BBECB700ACE311 /* Debug */,
-				38116A3223BBECB700ACE311 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "RNCWebView" */ = {
+		58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "Blurhash" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				58B511ED1A9E6C8500147676 /* Debug */,
@@ -348,7 +345,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "RNCWebView" */ = {
+		58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "Blurhash" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				58B511F01A9E6C8500147676 /* Debug */,
