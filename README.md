@@ -108,23 +108,23 @@ The decoders are written in [Swift](ios/BlurhashDecode.swift) and [Kotlin](andro
   <tr>
     <td><code>onLoadStart</code></td>
     <td><code>() => void</code></td>
-    <td>Emitted when the Blurhash received new parameters and started to decode the given <code>blurhash</code> string.</td>
+    <td>A callback to call when the Blurhash started to decode the given <code>blurhash</code> string.</td>
     <td>❌</td>
-    <td><code>null</code></td>
+    <td><code>undefined</code></td>
   </tr>
   <tr>
     <td><code>onLoadEnd</code></td>
     <td><code>() => void</code></td>
-    <td>Emitted when the Blurhash successfully decoded the given <code>blurhash</code> string and rendered the image to the <code>&lt;Blurhash&gt;</code> view.</td>
+    <td>A callback to call when the Blurhash successfully decoded the given <code>blurhash</code> string and rendered the image to the <code>&lt;Blurhash&gt;</code> view.</td>
     <td>❌</td>
-    <td><code>null</code></td>
+    <td><code>undefined</code></td>
   </tr>
   <tr>
     <td><code>onLoadError</code></td>
     <td><code>(message?: string) => void</code></td>
-    <td>Emitted when the Blurhash failed to load. Use the <code>message</code> parameter to get the error message.</td>
+    <td>A callback to call when the Blurhash failed to load. Use the <code>message</code> parameter to get the error message.</td>
     <td>❌</td>
-    <td><code>null</code></td>
+    <td><code>undefined</code></td>
   </tr>
   <tr>
     <td>All <code>View</code> props</td>
@@ -205,7 +205,17 @@ Threads are re-used (iOS: `DispatchQueue`, Android: kotlinx Coroutines).
 
 ### Caching
 
-Previously rendered Blurhashes will get cached, so they don't re-decode on every state change, as long as the `blurhash`, `decodeWidth`, `decodeHeight` and `decodePunch` properties stay the same.
+#### Image
+
+Previously rendered Blurhashes will get cached, so they don't re-decode on every state change, as long as the `blurhash`, `decodeWidth`, `decodeHeight` and `decodePunch` properties stay the same. 
+
+#### Cosine Operations
+
+Cosine operations get cached in memory to avoid expensive re-calculation (~24.576 `cos(...)` calls per 32x32 blurhash). Since this can affect memory usage, you can manually clear the cosine array cache by calling:
+
+```ts
+Blurhash.clearCosineCache()
+```
 
 ## Resources
 * [this medium article.](https://teabreak.e-spres-oh.com/swift-in-react-native-the-ultimate-guide-part-2-ui-components-907767123d9e) jesus christ amen thanks for that
