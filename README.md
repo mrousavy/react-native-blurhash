@@ -45,7 +45,7 @@ cd ios; pod install; cd ..
 
 ## Usage
 
-The decoders are written in [Swift](ios/BlurhashDecode.swift) and [Kotlin](android/src/main/java/com/mrousavy/blurhash/BlurhashDecode.kt) and are copied from the official [woltapp/blurhash](https://github.com/woltapp/blurhash) repository (MIT license). I use **light in-memory-caching** techniques to only re-render the (quite expensive) Blurhash image creation when one of the _blurhash specific_ props (`blurhash`, `decodeWidth`, `decodeHeight` or `decodePunch`) has changed.
+The `<Blurhash>` component has the following properties:
 
 <table>
   <tr>
@@ -135,8 +135,6 @@ The decoders are written in [Swift](ios/BlurhashDecode.swift) and [Kotlin](andro
   </tr>
 </table>
 
-> Read the [algorithm description](https://github.com/woltapp/blurhash/blob/master/Algorithm.md) for more details
-
 Example Usage:
 
 ```tsx
@@ -165,17 +163,7 @@ export default function App() {
   </tr>
 </table>
 
-To run the example App, execute the following commands:
-
-```sh
-cd react-native-blurhash/example/
-yarn
-cd ios; pod install; cd ..
-npm run ios
-npm run android
-```
-
-## Average Color
+### Average Color
 
 If your app is **really colorful** you might want to match some containers' colors to the content's context. To achieve this, use the `getAverageColor` function to get an RGB value which represents the average color of the given Blurhash:
 
@@ -183,7 +171,7 @@ If your app is **really colorful** you might want to match some containers' colo
 const averageColor = Blurhash.getAverageColor('LGFFaXYk^6#M@-5c,1J5@[or[Q6.')
 ```
 
-## Encoding
+### Encoding
 
 This library also includes a **native Image encoder**, so you can **encode** Images to blurhashes straight out of your React Native App!
 
