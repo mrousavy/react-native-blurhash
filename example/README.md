@@ -19,7 +19,6 @@ To get started, run the following commands:
 git clone https://github.com/mrousavy/react-native-blurhash
 cd react-native-blurhash/example
 yarn
-rm -rf node_modules/react-native-blurhash/node_modules
 cd ios; pod install; cd ..
 npm run ios
 npm run android
