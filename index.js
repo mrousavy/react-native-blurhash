@@ -49,6 +49,8 @@ Blurhash.clearCosineCache = () => {
 	if (Platform.OS === 'android') BlurhashModule.clearCosineCache();
 };
 
+Blurhash.displayName = 'Blurhash';
+
 // requireNativeComponent automatically resolves 'BlurhashView' to 'BlurhashViewManager'
 const NativeBlurhashView = requireNativeComponent('BlurhashView', Blurhash);
 module.exports = { Blurhash };
