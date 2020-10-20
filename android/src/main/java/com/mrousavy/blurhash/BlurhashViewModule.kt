@@ -1,9 +1,16 @@
 package com.mrousavy.blurhash
 
-import android.graphics.BitmapFactory
-import android.util.Base64
+import android.graphics.Bitmap
+import android.net.Uri
+import androidx.annotation.Nullable
+import com.facebook.common.executors.CallerThreadExecutor
+import com.facebook.common.references.CloseableReference
+import com.facebook.datasource.DataSource
+import com.facebook.drawee.backends.pipeline.Fresco
+import com.facebook.imagepipeline.datasource.BaseBitmapDataSubscriber
+import com.facebook.imagepipeline.image.CloseableImage
+import com.facebook.imagepipeline.request.ImageRequestBuilder
 import com.facebook.react.bridge.*
-import java.net.URL
 import kotlin.concurrent.thread
 
 
@@ -21,36 +28,53 @@ class BlurhashViewModule(reactContext: ReactApplicationContext) : ReactContextBa
         thread(true) {
             RNLog.l("Thread started")
             if (componentsX < 1 || componentsY < 1) {
-                promise.reject("INVALID_COMPONENTS", java.lang.Exception("The componentX and componentY arguments must be greater than 0!"))
+                promise.reject("INVALID_COMPONENTS", Exception("The componentX and componentY arguments must be greater than 0!"))
                 return@thread
             }
             try {
                 val formattedUri = imageUri.trim()
-                // TODO: Use an Image Loader from React for maximum compatibility - Can't find one though???
-                val bitmap = when {
-                    formattedUri.startsWith("http", ignoreCase = true) -> {
-                        val url = URL(formattedUri)
-                        BitmapFactory.decodeStream(url.openConnection().getInputStream())
+
+                val imageRequest = ImageRequestBuilder
+                        .newBuilderWithSource(Uri.parse(formattedUri))
+                        .build()
+                val imagePipeline = Fresco.getImagePipeline()
+                val dataSource = imagePipeline.fetchDecodedImage(imageRequest, reactApplicationContext)
+                dataSource.subscribe(object : BaseBitmapDataSubscriber() {
+                    override fun onNewResultImpl(@Nullable bitmap: Bitmap?) {
+                        try {
+                            if (dataSource.isFinished && bitmap != null) {
+                                val debugDescription = if (formattedUri.length > 100) {
+                                    formattedUri.substring(0, 99)
+                                } else {
+                                    formattedUri
+                                }
+                                RNLog.l("Encoding ${componentsX}x${componentsY} Blurhash from URI $debugDescription...")
+                                val blurhash = BlurHashEncoder.encode(bitmap, componentsX, componentsY)
+                                promise.resolve(blurhash)
+                            } else {
+                                if (dataSource.failureCause != null) {
+                                    promise.reject("LOAD_ERROR", dataSource.failureCause)
+                                } else {
+                                    promise.reject("LOAD_ERROR", Exception("Failed to load URI!"))
+                                }
+                            }
+                        } finally {
+                            dataSource?.close()
+                        }
                     }
-                    formattedUri.startsWith("data:image/") -> {
-                        val base64 = formattedUri.substring(formattedUri.indexOf(",") + 1)
-                        val decodedString: ByteArray = Base64.decode(base64, Base64.DEFAULT)
-                        BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+
+                    override fun onFailureImpl(dataSource: DataSource<CloseableReference<CloseableImage>>?) {
+                        try {
+                            if (dataSource?.failureCause != null) {
+                                promise.reject("LOAD_ERROR", dataSource.failureCause)
+                            } else {
+                                promise.reject("LOAD_ERROR", Exception("Failed to load URI!"))
+                            }
+                        } finally {
+                            dataSource?.close()
+                        }
                     }
-                    else -> {
-                        promise.reject("INVALID_URI", java.lang.Exception("The provided URI is invalid! (does not start with `http` or `data:image/`)"))
-                        return@thread
-                    }
-                }
-                if (bitmap == null) {
-                    promise.reject("INVALID_URI", java.lang.Exception("Failed to resolve URI $formattedUri!"))
-                    return@thread
-                }
-                val debugDescription =  if (formattedUri.length > 100) { formattedUri.substring(0, 99) }
-                                        else { formattedUri }
-                RNLog.l("Encoding ${componentsX}x${componentsY} Blurhash from URI $debugDescription...")
-                val blurhash = BlurHashEncoder.encode(bitmap, componentsX, componentsY)
-                promise.resolve(blurhash)
+                }, CallerThreadExecutor.getInstance())
             } catch (e: Exception) {
                 RNLog.e(reactApplicationContext, "Failed to encode Image to Blurhash! ${e.message}")
                 promise.reject("INTERNAL", e)
