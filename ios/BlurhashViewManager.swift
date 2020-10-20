@@ -24,47 +24,35 @@ final class BlurhashViewManager: RCTViewManager {
 		let formattedUri = imageUri.trimmingCharacters(in: .whitespacesAndNewlines) as String
 
 		DispatchQueue.global(qos: .utility).async {
-			if formattedUri.starts(with: "http") {
-				// Load Image from HTTP/HTTPS URL using the React Native Bridge's Image Loader.
-				guard let url = URL(string: formattedUri as String) else {
-					reject("URI_NULL", "URI was null!", nil)
-					return
-				}
-				if !self.bridge.isValid {
-					reject("BRIDGE_NOT_SET", "Bridge was not set!", nil)
-					return
-				}
-				guard let module = self.bridge.module(for: RCTImageLoader.self) as? RCTImageLoader else {
-					reject("MODULE_NOT_FOUND", "Could not find RCTImageLoader module!", nil)
-					return
-				}
+            // Load Image from URI using the React Native Bridge's Image Loader.
+            // The RCTImageLoader supports http, https, base64 and local files (afaik).
+            guard let url = URL(string: formattedUri as String) else {
+                reject("URI_NULL", "URI was null!", nil)
+                return
+            }
+            if !self.bridge.isValid {
+                reject("BRIDGE_NOT_SET", "Bridge was not set!", nil)
+                return
+            }
+            guard let module = self.bridge.module(for: RCTImageLoader.self) as? RCTImageLoader else {
+                reject("MODULE_NOT_FOUND", "Could not find RCTImageLoader module!", nil)
+                return
+            }
+            
+            module.loadImage(with: URLRequest(url: url), callback: { e, image in
+                if e != nil {
+                    reject("LOAD_ERROR", "Failed to load URI!", e)
+                    return
+                }
+                guard let image = image else {
+                    reject("IMAGE_NULL", "No error was thrown but Image was null.", nil)
+                    return
+                }
 
-				module.loadImage(with: URLRequest(url: url), callback: { e, image in
-					if e != nil {
-						reject("LOAD_ERROR", "Failed to load URI!", e)
-						return
-					}
-					guard let image = image else {
-						reject("IMAGE_NULL", "No error was thrown but Image was null.", nil)
-						return
-					}
-
-					log(level: .trace, message: "Encoding \(componentsX)x\(componentsY) Blurhash from URI \(imageUri)...")
-					let blurhash = image.encodeBlurhash(numberOfComponents: (componentsX.intValue, componentsY.intValue))
-					resolve(blurhash)
-				})
-			} else if formattedUri.starts(with: "data:image/") {
-				// Load from Base64 String using UIImage+Base64 extension.
-				guard let image = UIImage(base64: formattedUri) else {
-					reject("LOAD_ERROR", "The Image could not be loaded from the Base64 URI.", nil)
-					return
-				}
-				log(level: .trace, message: "Encoding \(componentsX)x\(componentsY) Blurhash from URI \(imageUri)...")
-				let blurhash = image.encodeBlurhash(numberOfComponents: (componentsX.intValue, componentsY.intValue))
-				resolve(blurhash)
-			} else {
-				reject("INVALID_URI", "The given URI was invalid! URIs must either start with `http` or `data:image/`", nil)
-			}
+                log(level: .trace, message: "Encoding \(componentsX)x\(componentsY) Blurhash from URI \(imageUri)...")
+                let blurhash = image.encodeBlurhash(numberOfComponents: (componentsX.intValue, componentsY.intValue))
+                resolve(blurhash)
+            })
 		}
 	}
 }

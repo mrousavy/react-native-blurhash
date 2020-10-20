@@ -57,7 +57,8 @@ export default function App() {
 			setIsEncoding(false);
 		} catch (e) {
 			setIsEncoding(false);
-			Alert.alert('Encoding error', e);
+			console.warn('Failed to encode!', e);
+			Alert.alert('Encoding error', e.message);
 		}
 	}, [encodingImageUri]);
 	//#endregion
