@@ -1,5 +1,5 @@
 import React from 'react';
-import { ViewProps } from 'react-native';
+import { ImageURISource, ViewProps } from 'react-native';
 
 export declare interface RGB {
 	/**
@@ -69,14 +69,14 @@ export declare class Blurhash extends React.Component<BlurhashProps> {
 	public render(): React.ReactNode;
 	/**
 	 * Asynchronously encode an Image URI to a Blurhash.
-	 * @param imageUri The Image URI to use. Can be a URL (`'http'`) or base64 data (`'data:image/'`).
+	 * @param imageSource The Image URI source to use.
 	 * @param componentsX The components for the X axis.
 	 * @param componentsY The components for the Y axis.
 	 * @returns A promise which resolves with the Blurhash string, or rejects if an error occured.
 	 * @example
 	 * const blurhash = await Blurhash.encode('https://blurha.sh/assets/images/img2.jpg')
 	 */
-	public static encode(imageUri: string, componentsX: number, componentsY: number): Promise<string>;
+	public static encode(imageSource: ImageURISource, componentsX: number, componentsY: number): Promise<string>;
 
 	/**
 	 * Get the average color from a Blurhash string by decoding digits 3 to 6. (See [Algorithm Structure](https://github.com/woltapp/blurhash/blob/master/Algorithm.md#structure))

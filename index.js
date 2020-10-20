@@ -30,12 +30,12 @@ class Blurhash extends React.Component {
 	}
 }
 
-Blurhash.encode = (imageUri, componentsX, componentsY) => {
-	if (typeof imageUri !== 'string') throw new Error('imageUri must be a non-empty string!');
+Blurhash.encode = (imageSource, componentsX, componentsY) => {
+	if (imageSource == null || typeof imageSource.uri !== 'string') throw new Error('imageSource must be a valid image source!');
 	if (typeof componentsX !== 'number') throw new Error('componentsX must be a valid positive number!');
 	if (typeof componentsY !== 'number') throw new Error('componentsY must be a valid positive number!');
 
-	return BlurhashModule.createBlurhashFromImage(imageUri, componentsX, componentsY);
+	return BlurhashModule.createBlurhashFromImage(imageSource, componentsX, componentsY);
 };
 
 Blurhash.getAverageColor = (blurhash) => {

@@ -7,6 +7,7 @@
 #import <React/RCTViewManager.h>
 #import <React/RCTImageLoader.h>
 #import <React/RCTEventEmitter.h>
+#import <React/RCTImageSource.h>
 
 @interface BlurhashBridge: RCTViewManager
 @end

@@ -52,7 +52,7 @@ export default function App() {
 			if (encodingImageUri.length < 5) return;
 
 			setIsEncoding(true);
-			const _blurhash = await Blurhash.encode(encodingImageUri, 4, 3);
+			const _blurhash = await Blurhash.encode({ uri: encodingImageUri }, 4, 3);
 			setBlurhash(_blurhash);
 			setIsEncoding(false);
 		} catch (e) {

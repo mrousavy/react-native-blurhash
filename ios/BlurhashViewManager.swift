@@ -20,14 +20,13 @@ final class BlurhashViewManager: RCTViewManager {
     }
 
     @objc(createBlurhashFromImage:componentsX:componentsY:resolver:rejecter:)
-    final func createBlurhashFromImage(_ imageUri: NSString, componentsX: NSNumber, componentsY: NSNumber, resolver resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) {
-        let formattedUri = imageUri.trimmingCharacters(in: .whitespacesAndNewlines) as String
-
+    final func createBlurhashFromImage(_ imageSource: Any, componentsX: NSNumber, componentsY: NSNumber, resolver resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) {
         DispatchQueue.global(qos: .utility).async {
             // Load Image from URI using the React Native Bridge's Image Loader.
             // The RCTImageLoader supports http, https, base64 and local files (afaik).
-            guard let url = URL(string: formattedUri as String) else {
-                reject("URI_NULL", "URI was null!", nil)
+
+            guard let source = RCTConvert.rctImageSource(imageSource) else {
+                reject("INVALID_SOURCE", "The image source is invalid! Provided: \(imageSource)", nil)
                 return
             }
             if !self.bridge.isValid {
@@ -39,9 +38,9 @@ final class BlurhashViewManager: RCTViewManager {
                 return
             }
 
-            module.loadImage(with: URLRequest(url: url), callback: { e, image in
-                if e != nil {
-                    reject("LOAD_ERROR", "Failed to load URI!", e)
+            module.loadImage(with: source.request, size: source.size, scale: source.scale, clipped: false, resizeMode: .stretch, progressBlock: nil, partialLoad: nil, completionBlock: { error, image in
+                if error != nil {
+                    reject("LOAD_ERROR", "Failed to load URI!", error)
                     return
                 }
                 guard let image = image else {
@@ -49,7 +48,7 @@ final class BlurhashViewManager: RCTViewManager {
                     return
                 }
 
-                log(level: .trace, message: "Encoding \(componentsX)x\(componentsY) Blurhash from URI \(imageUri)...")
+                log(level: .trace, message: "Encoding \(componentsX)x\(componentsY) Blurhash from URI \(source.request.debugDescription)...")
                 let blurhash = image.encodeBlurhash(numberOfComponents: (componentsX.intValue, componentsY.intValue))
                 resolve(blurhash)
             })

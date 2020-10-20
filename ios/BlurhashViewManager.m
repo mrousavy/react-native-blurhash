@@ -16,6 +16,6 @@ RCT_EXPORT_VIEW_PROPERTY(onLoadStart, RCTDirectEventBlock);
 RCT_EXPORT_VIEW_PROPERTY(onLoadEnd, RCTDirectEventBlock);
 RCT_EXPORT_VIEW_PROPERTY(onLoadError, RCTDirectEventBlock);
 
-RCT_EXTERN_METHOD(createBlurhashFromImage:(nonnull NSString *)imageUri componentsX:(nonnull NSNumber *)componentsX componentsY:(nonnull NSNumber *)componentsY resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject);
+RCT_EXTERN_METHOD(createBlurhashFromImage:(id)imageUri componentsX:(nonnull NSNumber *)componentsX componentsY:(nonnull NSNumber *)componentsY resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject);
 
 @end

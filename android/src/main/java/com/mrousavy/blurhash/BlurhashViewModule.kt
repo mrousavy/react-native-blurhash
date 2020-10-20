@@ -11,6 +11,7 @@ import com.facebook.imagepipeline.datasource.BaseBitmapDataSubscriber
 import com.facebook.imagepipeline.image.CloseableImage
 import com.facebook.imagepipeline.request.ImageRequestBuilder
 import com.facebook.react.bridge.*
+import com.facebook.react.views.imagehelper.ImageSource
 import kotlin.concurrent.thread
 
 
@@ -24,7 +25,7 @@ class BlurhashViewModule(reactContext: ReactApplicationContext) : ReactContextBa
     }
 
     @ReactMethod
-    fun createBlurhashFromImage(imageUri: String, componentsX: Int, componentsY: Int, promise: Promise) {
+    fun createBlurhashFromImage(imageSource: ImageSource, componentsX: Int, componentsY: Int, promise: Promise) {
         thread(true) {
             RNLog.l("Thread started")
             if (componentsX < 1 || componentsY < 1) {
@@ -32,23 +33,14 @@ class BlurhashViewModule(reactContext: ReactApplicationContext) : ReactContextBa
                 return@thread
             }
             try {
-                val formattedUri = imageUri.trim()
-
-                val imageRequest = ImageRequestBuilder
-                        .newBuilderWithSource(Uri.parse(formattedUri))
-                        .build()
+                val imageRequest = ImageRequestBuilder.newBuilderWithSource(imageSource.uri).build()
                 val imagePipeline = Fresco.getImagePipeline()
                 val dataSource = imagePipeline.fetchDecodedImage(imageRequest, reactApplicationContext)
                 dataSource.subscribe(object : BaseBitmapDataSubscriber() {
                     override fun onNewResultImpl(@Nullable bitmap: Bitmap?) {
                         try {
                             if (dataSource.isFinished && bitmap != null) {
-                                val debugDescription = if (formattedUri.length > 100) {
-                                    formattedUri.substring(0, 99)
-                                } else {
-                                    formattedUri
-                                }
-                                RNLog.l("Encoding ${componentsX}x${componentsY} Blurhash from URI $debugDescription...")
+                                RNLog.l("Encoding ${componentsX}x${componentsY} Blurhash from URI ${imageSource.source}...")
                                 val blurhash = BlurHashEncoder.encode(bitmap, componentsX, componentsY)
                                 promise.resolve(blurhash)
                             } else {
