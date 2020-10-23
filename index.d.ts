@@ -16,7 +16,7 @@ export declare interface RGB {
 	b: number;
 }
 
-export declare interface BlurhashProps extends ViewProps {
+export declare interface BlurhashProps extends Omit<ViewProps, 'children'> {
 	/**
 	 * The blurhash string to use. Example: `LGFFaXYk^6#M@-5c,1J5@[or[Q6`.
 	 */
