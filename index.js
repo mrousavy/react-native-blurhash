@@ -9,14 +9,17 @@ const BlurhashModule = NativeModules.BlurhashView;
 
 function BlurhashBase(props) {
 	const _onLoadStart = useCallback(() => {
-		if (this.props.onLoadStart != null) this.props.onLoadStart();
-	}, []);
+		if (props.onLoadStart != null) props.onLoadStart();
+	}, [props]);
 	const _onLoadEnd = useCallback(() => {
-		if (this.props.onLoadEnd != null) this.props.onLoadEnd();
-	}, []);
-	const _onLoadError = useCallback((event) => {
-		if (this.props.onLoadError != null) this.props.onLoadError(event?.nativeEvent?.message);
-	}, []);
+		if (props.onLoadEnd != null) props.onLoadEnd();
+	}, [props]);
+	const _onLoadError = useCallback(
+		(event) => {
+			if (props.onLoadError != null) props.onLoadError(event?.nativeEvent?.message);
+		},
+		[props],
+	);
 
 	return <NativeBlurhashView {...props} onLoadStart={_onLoadStart} onLoadEnd={_onLoadEnd} onLoadError={_onLoadError} />;
 }
