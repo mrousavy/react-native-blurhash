@@ -3,10 +3,8 @@
 //
 
 #import <Foundation/Foundation.h>
-//#import "React/RCTBridgeModule.h"
 #import <React/RCTViewManager.h>
 #import <React/RCTImageLoader.h>
-#import <React/RCTEventEmitter.h>
 
 @interface BlurhashBridge: RCTViewManager
 @end

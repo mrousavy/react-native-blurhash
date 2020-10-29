@@ -236,7 +236,7 @@ PODS:
     - React-cxxreact (= 0.63.1)
     - React-jsi (= 0.63.1)
   - React-jsinspector (0.63.1)
-  - react-native-blurhash (1.0.26):
+  - react-native-blurhash (1.0.27):
     - React
   - React-RCTActionSheet (0.63.1):
     - React-Core/RCTActionSheetHeaders (= 0.63.1)
@@ -450,7 +450,7 @@ SPEC CHECKSUMS:
   React-jsi: b32a31da32e030f30bbf9a8d3a9c8325df9e793f
   React-jsiexecutor: 7ab9cdcdd18d57652fb041f8a147fe9658d4e00a
   React-jsinspector: 2e28bb487e42dda6c94dbfa0c648d1343767a0fb
-  react-native-blurhash: 33d8434466ade284603574ec22479fa45c66b5e8
+  react-native-blurhash: 8d6a3bd592e05ae52bc49fbf55a0a3bf0950f1de
   React-RCTActionSheet: 1702a1a85e550b5c36e2e03cb2bd3adea053de95
   React-RCTAnimation: ddda576010a878865a4eab83a78acd92176ef6a1
   React-RCTBlob: 34334384284c81577409d5205bd2b9ff594d8ab6
@@ -466,4 +466,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 6a759bd1b10fa49b7d7ab5dfa9a81d1d8edc3516
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.0
