@@ -195,7 +195,7 @@ Threads are re-used (iOS: `DispatchQueue`, Android: kotlinx Coroutines).
 
 #### Image
 
-Previously rendered Blurhashes will get cached, so they don't re-decode on every state change, as long as the `blurhash`, `decodeWidth`, `decodeHeight` and `decodePunch` properties stay the same. 
+A `<Blurhash>` component caches the rendered Blurhash (Image) as long as the `blurhash`, `decodeWidth`, `decodeHeight` and `decodePunch` properties stay the same. Because unmounting the `<Blurhash>` component clears the cache, re-mounting it will cause it to decode again.
 
 #### Cosine Operations
 
