@@ -205,6 +205,8 @@ Cosine operations get cached in memory to avoid expensive re-calculation (~24.57
 Blurhash.clearCosineCache()
 ```
 
+> Note: At the moment, cosine operations are only cached on Android. Calling `clearCosineCache()` is a no-op on other platforms.
+
 ## Resources
 * [this medium article.](https://teabreak.e-spres-oh.com/swift-in-react-native-the-ultimate-guide-part-2-ui-components-907767123d9e) jesus christ amen thanks for that
 * [Native Modules documentation](https://reactnative.dev/docs/native-modules-ios.html), especially the [Swift part](https://reactnative.dev/docs/native-modules-ios.html#exporting-swift)
