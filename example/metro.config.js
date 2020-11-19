@@ -21,6 +21,13 @@ module.exports = {
           .replace(/[/\\]/g, '/')}.*`,
       ),
     ]),
+    // workaround for an issue with symlinks encountered starting with
+    // metro@0.55 / React Native 0.61
+    // (not needed with React Native 0.60 / metro@0.54)
+    extraNodeModules: new Proxy(
+      {},
+      { get: (_, name) => path.resolve('.', 'node_modules', name) }
+    )
   },
   transformer: {
     getTransformOptions: async () => ({
@@ -30,4 +37,6 @@ module.exports = {
       },
     }),
   },
+  // quick workaround for another issue with symlinks
+  watchFolders: ['.', '..']
 };

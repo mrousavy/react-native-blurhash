@@ -46,7 +46,7 @@
   "peerDependencies": {
     "react": "^16.8.1",
     "react-native": ">=0.60.0-rc.0 <1.0.x",
-    "react-native-windows": ">=0.60.0-rc.0 <1.0.x"
+    "react-native-windows": ">=0.62.6 <1.0.x"
   },
   "devDependencies": {
     "@types/react": "^16.9.47",
