@@ -1,3 +1,5 @@
+// Some functions from the Blurhash JS implementation that are used for light tasks (such as getting the average color or validating if a blurhash string is valid)
+
 export function decodeDC(value) {
 	const intR = value >> 16;
 	const intG = (value >> 8) & 255;
@@ -19,6 +21,27 @@ function sRGBToLinear(value) {
 	const v = value / 255;
 	if (v <= 0.04045) return v / 12.92;
 	else return Math.pow((v + 0.055) / 1.055, 2.4);
+}
+
+function validateBlurhash(blurhash) {
+	if (!blurhash || blurhash.length < 6) throw new Error('The blurhash string must be at least 6 characters');
+
+	const sizeFlag = decode83(blurhash[0]);
+	const numY = Math.floor(sizeFlag / 9) + 1;
+	const numX = (sizeFlag % 9) + 1;
+
+	if (blurhash.length !== 4 + 2 * numX * numY)
+		throw new Error(`blurhash length mismatch: length is ${blurhash.length} but it should be ${4 + 2 * numX * numY}`);
+}
+
+export function isBlurhashValid(blurhash) {
+	try {
+		validateBlurhash(blurhash);
+	} catch (error) {
+		return { isValid: false, errorReason: error.message };
+	}
+
+	return { isValid: true };
 }
 
 const digitCharacters = [
