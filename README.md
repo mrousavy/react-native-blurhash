@@ -181,6 +181,19 @@ const blurhash = await Blurhash.encode('https://blurha.sh/assets/images/img2.jpg
 
 Because encoding an Image is a pretty heavy task, this function is **non-blocking** and runs on a separate background Thread.
 
+### Validation
+
+If you need to validate a blurhash string, you can use `isValidBlurhash`.
+
+```ts
+const result = Blurhash.isValidBlurhash('LGFFaXYk^6#M@-5c,1J5@[or[Q6.')
+if (result.isValid) {
+  console.log(`Blurhash is valid!`)
+} else {
+  console.log(`Blurhash is invalid! ${result.reason}`)
+}
+```
+
 ## Performance
 
 The performance of the decoders is really fast, which means you should be able to use them in collections quite easily. By increasing the `decodeWidth` and `decodeHeight` props, the _time to decode_ also increases. I'd recommend values of `16` for large lists, and `32` otherwise. Play around with the values but keep in mind that you probably won't see a difference when increasing it to anything above `32`.
