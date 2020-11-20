@@ -96,4 +96,10 @@ export declare class Blurhash extends React.Component<BlurhashProps> {
 	 * @see https://github.com/mrousavy/react-native-blurhash#cosine-operations
 	 */
 	public static clearCosineCache(): void;
+
+	/**
+	 * Validates a given Blurhash using it's length, size flag, and encoding format.
+	 * @param blurhash The blurhash string to validate
+	 */
+	public static isBlurhashValid(blurhash: string): { isValid: true } | { isValid: false; reason: string };
 }

@@ -1,6 +1,6 @@
 const React = require('react');
 const { requireNativeComponent, NativeModules, Platform } = require('react-native');
-const { decode83, decodeDC } = require('./utils');
+const { decode83, decodeDC, isBlurhashValid } = require('./utils');
 
 const { useCallback } = React;
 
@@ -30,12 +30,18 @@ function Blurhash(props) {
 	return <BlurhashMemo {...props} />;
 }
 
+// requireNativeComponent automatically resolves 'BlurhashView' to 'BlurhashViewManager'
+const NativeBlurhashView = requireNativeComponent('BlurhashView', Blurhash);
+
 Blurhash.encode = (imageUri, componentsX, componentsY) => {
 	if (typeof imageUri !== 'string') throw new Error('imageUri must be a non-empty string!');
 	if (typeof componentsX !== 'number') throw new Error('componentsX must be a valid positive number!');
 	if (typeof componentsY !== 'number') throw new Error('componentsY must be a valid positive number!');
 
 	return BlurhashModule.createBlurhashFromImage(imageUri, componentsX, componentsY);
+};
+Blurhash.clearCosineCache = () => {
+	if (Platform.OS === 'android') BlurhashModule.clearCosineCache();
 };
 
 Blurhash.getAverageColor = (blurhash) => {
@@ -44,14 +50,8 @@ Blurhash.getAverageColor = (blurhash) => {
 	const value = decode83(blurhash.substring(2, 6));
 	return decodeDC(value);
 };
-
-Blurhash.clearCosineCache = () => {
-	if (Platform.OS === 'android') BlurhashModule.clearCosineCache();
-};
+Blurhash.isBlurhashValid = isBlurhashValid;
 
 Blurhash.displayName = 'Blurhash';
-
-// requireNativeComponent automatically resolves 'BlurhashView' to 'BlurhashViewManager'
-const NativeBlurhashView = requireNativeComponent('BlurhashView', Blurhash);
 
 module.exports = { Blurhash };
