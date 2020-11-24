@@ -36,10 +36,19 @@ cd ios; pod install; cd ..
 
   This is how I use it in my project:
 
-  <li>A user uploads images from the react native app to firebase</li>
-  <li>In firebase, I have a storage trigger function that generates a blurhash string from the uploaded image using the encoder from the <a href="https://github.com/woltapp/blurhash/blob/master/C/encode.c">C implementation</a>. (You can also use the <a href="#encoding">integrated encoder</a> to encode an Image straight out of your React Native App!)</li>
-  <li>After I generated the blurhash string, I set this as a property on my <code>post</code> document in Firestore</li>
-  <li>Now everytime a user loads a feed of <code>posts</code> from my Firestore database, I show a <code>&lt;Blurhash&gt;</code> component (with the post's <code>.blurhash</code> property) over my <code>&lt;Image&gt;</code> component, and fade it out once the <code>&lt;Image&gt;</code> component's <a href="https://reactnative.dev/docs/image#onloadend"><code>onLoadEnd</code></a> function has been called.</li>
+  <li>A user creates a post by calling a function on my server which expects a payload of an image and some post data (title, description, ...)</li>
+  <li>The function on my server then</li>
+  <ol>
+    <li>generates a blurhash from the image in the payload using the <a href="https://github.com/woltapp/blurhash/tree/master/C">C encoder</a></li>
+    <li>stores the post data (including the generated blurhash string) in my database</li>
+    <li>uploads the image to a content delivery network (e.g. AWS)</li>
+  </ol>
+  <li>Now everytime a user loads a feed of posts from my database, I can immediately show a <code>&lt;Blurhash&gt;</code> component (with the post's <code>.blurhash</code> property) over my <code>&lt;Image&gt;</code> component, and fade it out once the <code>&lt;Image&gt;</code> component's <a href="https://reactnative.dev/docs/image#onloadend"><code>onLoadEnd</code></a> function has been called.</li>
+  
+  <br/>
+  <blockquote>
+  Note: You can also use the <a href="#encoding">react-native-blurhash encoder</a> to encode straight from your React Native App!
+  </blockquote>
 </td>
 <td width="25%">
 <img src="https://github.com/mrousavy/react-native-blurhash/raw/master/img/demo.gif">
