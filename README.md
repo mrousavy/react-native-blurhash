@@ -20,7 +20,11 @@ cd ios; pod install; cd ..
 
 > The algorithm was created by [woltapp/blurhash](https://github.com/woltapp/blurhash), which also includes an [algorithm explanation](https://github.com/woltapp/blurhash/blob/master/Algorithm.md).
 
-<img src="https://github.com/mrousavy/react-native-blurhash/raw/master/img/explanation.png" alt="Turn grey image boxes into colorful blurred images" width="70%">
+<div align="center">
+  <p align="center">
+    <img align="center" src="https://github.com/mrousavy/react-native-blurhash/raw/master/img/explanation.png" alt="Turn grey image boxes into colorful blurred images" width="70%">
+  </p>
+</div>
 
 ## Example Workflow
 
