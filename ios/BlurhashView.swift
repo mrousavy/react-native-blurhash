@@ -56,7 +56,6 @@ final class BlurhashView: UIView {
                 throw BlurhashError.invalidBlurhashDecodePunch(actualValue: self.decodePunch.floatValue)
             }
 
-            log(level: .trace, message: "Decoding \(self.decodeWidth)x\(self.decodeHeight) blurhash (\(blurhash)) on \(Thread.isMainThread ? "main" : "separate") thread!")
             let size = CGSize(width: decodeWidth.intValue, height: self.decodeHeight.intValue)
             let nullableImage = UIImage(blurHash: blurhash as String, size: size, punch: self.decodePunch.floatValue)
             guard let image = nullableImage else {
@@ -114,12 +113,7 @@ final class BlurhashView: UIView {
     private final func updateImageContainer() {
         self.imageContainer.contentMode = self.parseResizeMode(resizeMode: self.resizeMode)
         if let cornerRadius = CGFloat(exactly: self.borderRadius) {
-            // TODO: shouldRasterize ?
-            let shouldRasterize = cornerRadius > 0 ? true : false
-            self.imageContainer.layer.shouldRasterize = shouldRasterize
-            if shouldRasterize {
-                log(level: .trace, message: "Enabled rasterization for the UIImageView's layer.")
-            }
+            self.imageContainer.layer.shouldRasterize = cornerRadius > 0 ? true : false
             self.imageContainer.layer.cornerRadius = cornerRadius
         }
     }
@@ -135,11 +129,11 @@ final class BlurhashView: UIView {
     }
 
     private final func emitLoadErrorEvent(message: String?) {
-        if let onLoadError = self.onLoadError {
-            onLoadError(["message": message as Any])
-        }
         if let message = message {
             log(level: .error, message: message)
+        }
+        if let onLoadError = self.onLoadError {
+            onLoadError(["message": message as Any])
         }
     }
 
@@ -147,14 +141,12 @@ final class BlurhashView: UIView {
         if let onLoadStart = self.onLoadStart {
             onLoadStart(nil)
         }
-        log(level: .trace, message: "Emitted onLoadStart event.")
     }
 
     private final func emitLoadEndEvent() {
         if let onLoadEnd = self.onLoadEnd {
             onLoadEnd(nil)
         }
-        log(level: .trace, message: "Emitted onLoadEnd event.")
     }
 
     private final func parseResizeMode(resizeMode: NSString) -> ContentMode {

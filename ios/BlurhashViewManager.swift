@@ -49,7 +49,6 @@ final class BlurhashViewManager: RCTViewManager {
                     return
                 }
 
-                log(level: .trace, message: "Encoding \(componentsX)x\(componentsY) Blurhash from URI \(imageUri)...")
                 let blurhash = image.encodeBlurhash(numberOfComponents: (componentsX.intValue, componentsY.intValue))
                 resolve(blurhash)
             })
