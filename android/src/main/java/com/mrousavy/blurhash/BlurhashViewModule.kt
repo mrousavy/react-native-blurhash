@@ -26,7 +26,6 @@ class BlurhashViewModule(reactContext: ReactApplicationContext) : ReactContextBa
     @ReactMethod
     fun createBlurhashFromImage(imageUri: String, componentsX: Int, componentsY: Int, promise: Promise) {
         thread(true) {
-            RNLog.l("Thread started")
             if (componentsX < 1 || componentsY < 1) {
                 promise.reject("INVALID_COMPONENTS", Exception("The componentX and componentY arguments must be greater than 0!"))
                 return@thread
@@ -48,7 +47,6 @@ class BlurhashViewModule(reactContext: ReactApplicationContext) : ReactContextBa
                                 } else {
                                     formattedUri
                                 }
-                                RNLog.l("Encoding ${componentsX}x${componentsY} Blurhash from URI $debugDescription...")
                                 val blurhash = BlurHashEncoder.encode(bitmap, componentsX, componentsY)
                                 promise.resolve(blurhash)
                             } else {
@@ -76,7 +74,6 @@ class BlurhashViewModule(reactContext: ReactApplicationContext) : ReactContextBa
                     }
                 }, CallerThreadExecutor.getInstance())
             } catch (e: Exception) {
-                RNLog.e(reactApplicationContext, "Failed to encode Image to Blurhash! ${e.message}")
                 promise.reject("INTERNAL", e)
             }
         }

@@ -2,7 +2,6 @@ package com.mrousavy.blurhash
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.util.Log
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.bridge.WritableMap
@@ -67,7 +66,6 @@ class BlurhashImageView(context: Context?): androidx.appcompat.widget.AppCompatI
             if (decodePunch <= 0) {
                 throw Exception("decodePunch must be greater than 0! Actual: $decodeWidth")
             }
-            log("Decoding ${decodeWidth}x${decodeHeight} blurhash ($blurhash) on ${getThreadDescriptor()} Thread!")
             _bitmap = BlurHashDecoder.decode(blurhash, decodeWidth, decodeHeight, decodePunch, USE_COSINES_CACHE)
             if (_bitmap == null) {
                 throw Exception("The provided Blurhash string was invalid.")
@@ -82,7 +80,6 @@ class BlurhashImageView(context: Context?): androidx.appcompat.widget.AppCompatI
 
     fun updateBlurhash() {
         val shouldReRender = this.shouldReRender()
-        RNLog.l("Should re-render: $shouldReRender")
         if (shouldReRender) {
             if (decodeAsync) {
                 GlobalScope.launch {
@@ -124,20 +121,6 @@ class BlurhashImageView(context: Context?): androidx.appcompat.widget.AppCompatI
         event.putString("message", message)
         val reactContext = context as ReactContext
         reactContext.getJSModule(RCTEventEmitter::class.java).receiveEvent(id, "blurhashLoadError", event)
-    }
-
-    private fun log(message: String) {
-        if (BuildConfig.DEBUG) {
-            Log.d(REACT_CLASS, message)
-        }
-        RNLog.t("$REACT_CLASS: $message")
-    }
-
-    private fun warn(message: String) {
-        if (BuildConfig.DEBUG) {
-            Log.w(REACT_CLASS, message)
-        }
-        RNLog.w(context as ReactContext?, "$REACT_CLASS: $message")
     }
 
     companion object {
