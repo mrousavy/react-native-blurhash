@@ -2,36 +2,32 @@ const React = require('react');
 const { requireNativeComponent, NativeModules, Platform } = require('react-native');
 const { decode83, decodeDC, isBlurhashValid } = require('./utils');
 
-const { useCallback } = React;
-
 // NativeModules automatically resolves 'BlurhashView' to 'BlurhashViewModule'
 const BlurhashModule = NativeModules.BlurhashView;
 
-function BlurhashBase(props) {
-	const _onLoadStart = useCallback(() => {
-		if (props.onLoadStart != null) props.onLoadStart();
-	}, [props]);
-	const _onLoadEnd = useCallback(() => {
-		if (props.onLoadEnd != null) props.onLoadEnd();
-	}, [props]);
-	const _onLoadError = useCallback(
-		(event) => {
-			if (props.onLoadError != null) props.onLoadError(event?.nativeEvent?.message);
-		},
-		[props],
-	);
+class Blurhash extends React.PureComponent {
+	constructor() {
+		super();
+		this._onLoadStart = this._onLoadStart.bind(this);
+		this._onLoadEnd = this._onLoadEnd.bind(this);
+		this._onLoadError = this._onLoadError.bind(this);
+	}
 
-	return <NativeBlurhashView {...props} onLoadStart={_onLoadStart} onLoadEnd={_onLoadEnd} onLoadError={_onLoadError} />;
+	_onLoadStart() {
+		if (this.props.onLoadStart != null) this.props.onLoadStart();
+	}
+	_onLoadEnd() {
+		if (this.props.onLoadEnd != null) this.props.onLoadEnd();
+	}
+	_onLoadError(event) {
+		if (this.props.onLoadError != null) this.props.onLoadError(event?.nativeEvent?.message);
+	}
+
+	render() {
+		const { onLoadStart: _, onLoadEnd: __, onLoadError: ___, ...props } = this.props;
+		return <NativeBlurhashView {...props} onLoadStart={this._onLoadStart} onLoadEnd={this._onLoadEnd} onLoadError={this._onLoadError} />;
+	}
 }
-
-const BlurhashMemo = React.memo(BlurhashBase);
-
-function Blurhash(props) {
-	return <BlurhashMemo {...props} />;
-}
-
-// requireNativeComponent automatically resolves 'BlurhashView' to 'BlurhashViewManager'
-const NativeBlurhashView = requireNativeComponent('BlurhashView', Blurhash);
 
 Blurhash.encode = (imageUri, componentsX, componentsY) => {
 	if (typeof imageUri !== 'string') throw new Error('imageUri must be a non-empty string!');
@@ -40,9 +36,6 @@ Blurhash.encode = (imageUri, componentsX, componentsY) => {
 
 	return BlurhashModule.createBlurhashFromImage(imageUri, componentsX, componentsY);
 };
-Blurhash.clearCosineCache = () => {
-	if (Platform.OS === 'android') BlurhashModule.clearCosineCache();
-};
 
 Blurhash.getAverageColor = (blurhash) => {
 	if (blurhash == null || blurhash.length < 7) return undefined;
@@ -50,8 +43,17 @@ Blurhash.getAverageColor = (blurhash) => {
 	const value = decode83(blurhash.substring(2, 6));
 	return decodeDC(value);
 };
+
+Blurhash.clearCosineCache = () => {
+	if (Platform.OS === 'android') BlurhashModule.clearCosineCache();
+	else console.warn('Blurhash.clearCosineCache is only available on Android.')
+};
+
 Blurhash.isBlurhashValid = isBlurhashValid;
 
 Blurhash.displayName = 'Blurhash';
 
+
+// requireNativeComponent automatically resolves 'BlurhashView' to 'BlurhashViewManager'
+const NativeBlurhashView = requireNativeComponent('BlurhashView', Blurhash);
 module.exports = { Blurhash };
