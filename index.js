@@ -46,13 +46,12 @@ Blurhash.getAverageColor = (blurhash) => {
 
 Blurhash.clearCosineCache = () => {
 	if (Platform.OS === 'android') BlurhashModule.clearCosineCache();
-	else console.warn('Blurhash.clearCosineCache is only available on Android.')
+	else console.warn('Blurhash.clearCosineCache is only available on Android.');
 };
 
 Blurhash.isBlurhashValid = isBlurhashValid;
 
 Blurhash.displayName = 'Blurhash';
-
 
 // requireNativeComponent automatically resolves 'BlurhashView' to 'BlurhashViewManager'
 const NativeBlurhashView = requireNativeComponent('BlurhashView', Blurhash);
