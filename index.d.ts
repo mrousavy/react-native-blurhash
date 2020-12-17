@@ -38,8 +38,8 @@ export declare interface BlurhashProps extends Omit<ViewProps, 'children'> {
 	decodePunch?: number;
 	/**
 	 * Asynchronously decode the Blurhash on a background Thread instead of the UI-Thread.
-	 *
-	 * Please see: https://github.com/mrousavy/react-native-blurhash#performance
+	 * Read the [performance documentation](https://github.com/mrousavy/react-native-blurhash#performance)
+	 * before enabling this.
 	 * @default false
 	 */
 	decodeAsync?: boolean;
@@ -60,7 +60,7 @@ export declare interface BlurhashProps extends Omit<ViewProps, 'children'> {
 	onLoadEnd?: () => void;
 
 	/**
-	 * Emitted when the Blurhash failed to load.
+	 * Emitted when the Blurhash failed to decode/load.
 	 */
 	onLoadError?: (message?: string) => void;
 }
