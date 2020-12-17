@@ -65,7 +65,7 @@ export declare interface BlurhashProps extends Omit<ViewProps, 'children'> {
 	onLoadError?: (message?: string) => void;
 }
 
-export declare class Blurhash extends React.Component<BlurhashProps> {
+export declare class Blurhash extends React.PureComponent<BlurhashProps> {
 	public render(): React.ReactNode;
 	/**
 	 * Asynchronously encode an Image URI to a Blurhash.
