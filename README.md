@@ -13,8 +13,9 @@ npx pod-install
 
 [![npm](https://img.shields.io/npm/v/react-native-blurhash?color=%238B83E6)](https://www.npmjs.com/package/react-native-blurhash)
 [![npm](https://img.shields.io/npm/dt/react-native-blurhash?color=%238B83E6)](https://www.npmjs.com/package/react-native-blurhash)
-[![GitHub stars](https://img.shields.io/github/stars/mrousavy/react-native-blurhash.svg?style=social&label=Star&maxAge=259000)](https://GitHub.com/mrousavy/react-native-blurhash/stargazers/)
-[![GitHub followers](https://img.shields.io/github/followers/mrousavy.svg?style=social&label=Follow&maxAge=259000)](https://github.com/mrousavy?tab=followers)
+
+[![GitHub followers](https://img.shields.io/github/followers/mrousavy?label=Follow%20%40mrousavy&style=social)](https://github.com/mrousavy?tab=followers)
+[![Twitter Follow](https://img.shields.io/twitter/follow/mrousavy?label=Follow%20%40mrousavy&style=social)](https://twitter.com/mrousavy)
 
 **BlurHash** is a compact representation of a placeholder for an image. Instead of displaying boring grey little boxes while your image loads, show a _blurred preview_ until the full image has been loaded.
 
