@@ -13,13 +13,12 @@
     "ios/**/*.h",
     "ios/**/*.m",
     "ios/**/*.swift",
-    "index.js",
-    "index.d.ts",
-    "utils.js",
+    "dist/",
     "react-native-blurhash.podspec"
   ],
   "scripts": {
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx ."
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
+    "prepack": "tsc --noEmit false"
   },
   "repository": {
     "type": "git",

@@ -1,13 +1,35 @@
 // Some functions from the Blurhash JS implementation that are used for light tasks (such as getting the average color or validating if a blurhash string is valid)
 
-export function decodeDC(value) {
+
+export interface RGB {
+	/**
+	 * The Red value component of this RGB instance. Ranges from 0 to 255.
+	 */
+	r: number;
+	/**
+	 * The Green value component of this RGB instance. Ranges from 0 to 255.
+	 */
+	g: number;
+	/**
+	 * The Blue value component of this RGB instance. Ranges from 0 to 255.
+	 */
+	b: number;
+}
+
+function sRGBToLinear(value: number): number {
+	const v = value / 255;
+	if (v <= 0.04045) return v / 12.92;
+	else return Math.pow((v + 0.055) / 1.055, 2.4);
+}
+
+export function decodeDC(value: number): RGB {
 	const intR = value >> 16;
 	const intG = (value >> 8) & 255;
 	const intB = value & 255;
 	return { r: sRGBToLinear(intR) * 255, g: sRGBToLinear(intG) * 255, b: sRGBToLinear(intB) * 255 };
 }
 
-export function decode83(str) {
+export function decode83(str: string): number {
 	let value = 0;
 	for (let i = 0; i < str.length; i++) {
 		const c = str[i];
@@ -17,13 +39,7 @@ export function decode83(str) {
 	return value;
 }
 
-function sRGBToLinear(value) {
-	const v = value / 255;
-	if (v <= 0.04045) return v / 12.92;
-	else return Math.pow((v + 0.055) / 1.055, 2.4);
-}
-
-function validateBlurhash(blurhash) {
+function validateBlurhash(blurhash: string): void {
 	if (!blurhash || blurhash.length < 6) throw new Error('The blurhash string must be at least 6 characters');
 
 	const sizeFlag = decode83(blurhash[0]);
@@ -34,7 +50,7 @@ function validateBlurhash(blurhash) {
 		throw new Error(`blurhash length mismatch: length is ${blurhash.length} but it should be ${4 + 2 * numX * numY}`);
 }
 
-export function isBlurhashValid(blurhash) {
+export function isBlurhashValid(blurhash: string): { isValid: true } | { isValid: false, errorReason: string } {
 	try {
 		validateBlurhash(blurhash);
 	} catch (error) {
