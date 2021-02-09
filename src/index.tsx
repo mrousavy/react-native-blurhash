@@ -54,7 +54,7 @@ export interface BlurhashProps extends Omit<ViewProps, 'children'> {
 	onLoadError?: (message?: string) => void;
 }
 
-class BlurhashImpl extends React.PureComponent<BlurhashProps> {
+export class Blurhash extends React.PureComponent<BlurhashProps> {
 	static displayName = 'Blurhash';
 
 	constructor(props: BlurhashProps) {
@@ -142,5 +142,3 @@ class BlurhashImpl extends React.PureComponent<BlurhashProps> {
 
 // requireNativeComponent automatically resolves 'BlurhashView' to 'BlurhashViewManager'
 const NativeBlurhashView = requireNativeComponent<BlurhashProps>('BlurhashView');
-
-export const Blurhash = React.memo(BlurhashImpl);
