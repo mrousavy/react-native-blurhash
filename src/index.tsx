@@ -127,10 +127,9 @@ export class Blurhash extends React.PureComponent<BlurhashProps> {
 	}
 
 	render() {
-		const { onLoadStart: _, onLoadEnd: __, onLoadError: ___, ...props } = this.props;
 		return (
 			<NativeBlurhashView
-				{...props}
+				{...this.props}
 				onLoadStart={this._onLoadStart}
 				onLoadEnd={this._onLoadEnd}
 				// @ts-expect-error
@@ -141,4 +140,8 @@ export class Blurhash extends React.PureComponent<BlurhashProps> {
 }
 
 // requireNativeComponent automatically resolves 'BlurhashView' to 'BlurhashViewManager'
-const NativeBlurhashView = requireNativeComponent<BlurhashProps>('BlurhashView');
+const NativeBlurhashView = requireNativeComponent<BlurhashProps>(
+	'BlurhashView',
+	// @ts-expect-error this second argument is still not public, but probably required for TurboModules.
+	Blurhash,
+);
