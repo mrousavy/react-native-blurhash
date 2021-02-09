@@ -141,4 +141,4 @@ export class Blurhash extends React.PureComponent<BlurhashProps> {
 }
 
 // requireNativeComponent automatically resolves 'BlurhashView' to 'BlurhashViewManager'
-const NativeBlurhashView = requireNativeComponent<BlurhashProps>('BlurhashView');
+const NativeBlurhashView = requireNativeComponent<BlurhashProps>('BlurhashView', Blurhash);
