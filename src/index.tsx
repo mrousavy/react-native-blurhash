@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { requireNativeComponent, NativeModules, Platform, ViewProps, NativeSyntheticEvent } from 'react-native';
 import { decode83, decodeDC, isBlurhashValid, RGB } from './utils';
 
@@ -141,4 +141,4 @@ export class Blurhash extends React.PureComponent<BlurhashProps> {
 }
 
 // requireNativeComponent automatically resolves 'BlurhashView' to 'BlurhashViewManager'
-const NativeBlurhashView = requireNativeComponent<BlurhashProps>('BlurhashView', Blurhash);
+const NativeBlurhashView = requireNativeComponent<BlurhashProps>('BlurhashView');
