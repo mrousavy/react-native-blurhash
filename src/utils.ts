@@ -1,6 +1,5 @@
 // Some functions from the Blurhash JS implementation that are used for light tasks (such as getting the average color or validating if a blurhash string is valid)
 
-
 export interface RGB {
 	/**
 	 * The Red value component of this RGB instance. Ranges from 0 to 255.
@@ -50,7 +49,7 @@ function validateBlurhash(blurhash: string): void {
 		throw new Error(`blurhash length mismatch: length is ${blurhash.length} but it should be ${4 + 2 * numX * numY}`);
 }
 
-export function isBlurhashValid(blurhash: string): { isValid: true } | { isValid: false, errorReason: string } {
+export function isBlurhashValid(blurhash: string): { isValid: true } | { isValid: false; errorReason: string } {
 	try {
 		validateBlurhash(blurhash);
 	} catch (error) {
