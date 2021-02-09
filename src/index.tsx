@@ -1,6 +1,6 @@
 import React from 'react';
-import { requireNativeComponent, NativeModules, Platform, ViewProps } from 'react-native';
-import { decode83, decodeDC, isBlurhashValid } from './utils';
+import { requireNativeComponent, NativeModules, Platform, ViewProps, NativeSyntheticEvent } from 'react-native';
+import { decode83, decodeDC, isBlurhashValid, RGB } from './utils';
 
 // NativeModules automatically resolves 'BlurhashView' to 'BlurhashViewModule'
 const BlurhashModule = NativeModules.BlurhashView;
@@ -88,7 +88,7 @@ class BlurhashImpl extends React.PureComponent<BlurhashProps> {
 	 * @example
 	 * const averageColor = Blurhash.getAverageColor(`LGFFaXYk^6#M@-5c,1J5@[or[Q6.`)
 	 */
-	static getAverageColor(blurhash: string): RGB {
+	static getAverageColor(blurhash: string): RGB | undefined {
 		if (blurhash == null || blurhash.length < 7) return undefined;
 
 		const value = decode83(blurhash.substring(2, 6));
