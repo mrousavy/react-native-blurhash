@@ -1,6 +1,6 @@
 import React from 'react';
 import { requireNativeComponent, NativeModules, Platform, ViewProps } from 'react-native';
-import { decode83, decodeDC, isBlurhashValid, RGB } from './utils';
+import { decode83, decodeDC, isBlurhashValid } from './utils';
 
 // NativeModules automatically resolves 'BlurhashView' to 'BlurhashViewModule'
 const BlurhashModule = NativeModules.BlurhashView;
@@ -104,7 +104,7 @@ class BlurhashImpl extends React.PureComponent<BlurhashProps> {
 	static clearCosineCache(): void {
 		if (Platform.OS === 'android') BlurhashModule.clearCosineCache();
 		else console.warn('Blurhash.clearCosineCache is only available on Android.');
-	};
+	}
 
 	/**
 	 * Verifies if the given blurhash is valid by checking it's type, length and size flag.
@@ -122,13 +122,21 @@ class BlurhashImpl extends React.PureComponent<BlurhashProps> {
 	_onLoadEnd() {
 		if (this.props.onLoadEnd != null) this.props.onLoadEnd();
 	}
-	_onLoadError(event) {
+	_onLoadError(event?: NativeSyntheticEvent<{ message?: string }>) {
 		if (this.props.onLoadError != null) this.props.onLoadError(event?.nativeEvent?.message);
 	}
 
 	render() {
 		const { onLoadStart: _, onLoadEnd: __, onLoadError: ___, ...props } = this.props;
-		return <NativeBlurhashView {...props} onLoadStart={this._onLoadStart} onLoadEnd={this._onLoadEnd} onLoadError={this._onLoadError} />;
+		return (
+			<NativeBlurhashView
+				{...props}
+				onLoadStart={this._onLoadStart}
+				onLoadEnd={this._onLoadEnd}
+				// @ts-expect-error
+				onLoadError={this._onLoadError}
+			/>
+		);
 	}
 }
 

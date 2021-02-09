@@ -53,11 +53,8 @@
     // "emitDecoratorMetadata": true,         /* Enables experimental support for emitting type metadata for decorators. */
     "outDir": "dist"
   },
-  "files": [
-    "src"
-  ],
   "include": [
-    "src"
+    "src/*"
   ],
   "exclude": [
     "node_modules"
