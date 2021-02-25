@@ -3,8 +3,8 @@
   "title": "React Native Blurhash",
   "version": "1.0.30",
   "description": "🖼 BlurHash is a compact representation of a placeholder for an image. This is a Native UI Module for React Native to asynchronously wrap the Blurhash implementations and make them usable in React Native. Also supports encoding!",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "lib/commonjs/index.js",
+  "types": "lib/typescript/src/index.d.ts",
   "files": [
     "README.md",
     "android/src",
@@ -13,12 +13,15 @@
     "ios/**/*.h",
     "ios/**/*.m",
     "ios/**/*.swift",
-    "dist/",
+    "lib/commonjs",
+    "lib/module",
+    "lib/typescript",
     "react-native-blurhash.podspec"
   ],
   "scripts": {
     "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
-    "prepack": "tsc --noEmit false --skipLibCheck"
+    "prepack": "tsc --noEmit false --skipLibCheck",
+    "prepare": "bob build"
   },
   "repository": {
     "type": "git",
@@ -56,6 +59,22 @@
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react-native": "^3.10.0",
     "prettier": "^2.2.0",
+    "react-native-builder-bob": "^0.17.1",
     "typescript": "^4.1.4"
-  }
+  },
+  "react-native": "src/index.tsx",
+  "module": "lib/module/index.js",
+  "react-native-builder-bob": {
+    "source": "src",
+    "output": "lib",
+    "targets": [
+      "commonjs",
+      "module",
+      "typescript"
+    ]
+  },
+  "eslintIgnore": [
+    "node_modules/",
+    "lib/"
+  ]
 }
