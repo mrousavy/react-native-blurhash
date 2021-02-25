@@ -23,6 +23,6 @@ Pod::Spec.new do |s|
 
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
 
-  s.dependency "React"
+  s.dependency "React-Core"
 end
 
