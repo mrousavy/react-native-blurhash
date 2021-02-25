@@ -24,10 +24,9 @@
     "prepare": "bob build",
     "release": "release-it"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mrousavy/react-native-blurhash.git",
-    "baseUrl": "https://github.com/mrousavy/react-native-blurhash"
+  "repository": "https://github.com/mrousavy/react-native-vision-camera",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   },
   "keywords": [
     "react-native",
@@ -73,7 +72,12 @@
     "targets": [
       "commonjs",
       "module",
-      "typescript"
+      [
+        "typescript",
+        {
+          "project": "tsconfig.build.json"
+        }
+      ]
     ]
   },
   "release-it": {
