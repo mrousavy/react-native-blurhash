@@ -21,7 +21,8 @@
   "scripts": {
     "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
     "prepack": "tsc --noEmit false --skipLibCheck",
-    "prepare": "bob build"
+    "prepare": "bob build",
+    "release": "release-it"
   },
   "repository": {
     "type": "git",
@@ -52,6 +53,7 @@
   "devDependencies": {
     "@react-native-community/eslint-config": "^2.0.0",
     "@react-native-community/eslint-plugin": "^1.1.0",
+    "@release-it/conventional-changelog": "^2.0.1",
     "@types/react": "^17.0.1",
     "@types/react-native": "^0.63.48",
     "eslint": "^7.19.0",
@@ -60,6 +62,7 @@
     "eslint-plugin-react-native": "^3.10.0",
     "prettier": "^2.2.0",
     "react-native-builder-bob": "^0.17.1",
+    "release-it": "^14.4.1",
     "typescript": "^4.1.4"
   },
   "react-native": "src/index.tsx",
@@ -72,6 +75,23 @@
       "module",
       "typescript"
     ]
+  },
+  "release-it": {
+    "git": {
+      "commitMessage": "chore: release ${version}",
+      "tagName": "v${version}"
+    },
+    "npm": {
+      "publish": true
+    },
+    "github": {
+      "release": true
+    },
+    "plugins": {
+      "@release-it/conventional-changelog": {
+        "preset": "angular"
+      }
+    }
   },
   "eslintIgnore": [
     "node_modules/",
