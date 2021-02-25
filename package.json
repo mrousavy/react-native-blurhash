@@ -23,7 +23,6 @@
   ],
   "scripts": {
     "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
-    "prepack": "tsc --noEmit false --skipLibCheck",
     "prepare": "bob build",
     "release": "release-it"
   },
