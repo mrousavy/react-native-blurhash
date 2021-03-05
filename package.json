@@ -26,7 +26,11 @@
     "prepare": "bob build",
     "release": "release-it"
   },
-  "repository": "https://github.com/mrousavy/react-native-vision-camera",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrousavy/react-native-blurhash.git",
+    "baseUrl": "https://github.com/mrousavy/react-native-blurhash"
+  },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
