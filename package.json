@@ -24,7 +24,7 @@
   "scripts": {
     "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
     "prepare": "bob build",
-    "prepare:dev": "yarn prepare && nodemon --watch src --exec yarn prepare",
+    "prepare:dev": "nodemon --watch src/ --watch web/ --ext js,ts,tsx --exec \"yarn prepare\"",
     "release": "release-it"
   },
   "repository": {
