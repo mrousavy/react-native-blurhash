@@ -131,16 +131,19 @@ export class Blurhash extends React.PureComponent<BlurhashProps> {
 				{...this.props}
 				onLoadStart={this._onLoadStart}
 				onLoadEnd={this._onLoadEnd}
-				// @ts-expect-error
 				onLoadError={this._onLoadError}
 			/>
 		);
 	}
 }
 
-// requireNativeComponent automatically resolves 'BlurhashView' to 'BlurhashViewManager'
-const NativeBlurhashView = requireNativeComponent<BlurhashProps>(
-	'BlurhashView',
-	// @ts-expect-error this second argument is still not public, but probably required for TurboModules.
-	Blurhash,
-);
+const NativeBlurhashView = Platform.select({
+  web: require('./web/blurhashView').default,
+  native() {
+    return requireNativeComponent<BlurhashProps>(
+        'BlurhashView',
+      // @ts-expect-error this second argument is still not public, but probably required for TurboModules.
+        Blurhash,
+      );
+  }
+});
