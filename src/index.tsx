@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { requireNativeComponent, NativeModules, Platform, ViewProps, NativeSyntheticEvent } from 'react-native';
+import { requireNativeComponent, Platform, ViewProps, NativeSyntheticEvent } from 'react-native';
 import { decode83, decodeDC, isBlurhashValid, RGB } from './utils';
-
 // NativeModules automatically resolves 'BlurhashView' to 'BlurhashViewModule'
-const BlurhashModule = NativeModules.BlurhashView;
+import BlurhashModule from './blurhashModule';
 
 export interface BlurhashProps extends Omit<ViewProps, 'children'> {
 	/**

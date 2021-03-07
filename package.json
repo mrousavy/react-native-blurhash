@@ -104,5 +104,8 @@
   "eslintIgnore": [
     "node_modules/",
     "lib/"
-  ]
+  ],
+  "dependencies": {
+    "blurhash": "^1.1.3"
+  }
 }
