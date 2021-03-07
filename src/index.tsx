@@ -123,7 +123,7 @@ export class Blurhash extends React.PureComponent<BlurhashProps> {
 	}
 	_onLoadError(event?: NativeSyntheticEvent<{ message?: string }>) {
 		if (this.props.onLoadError != null) {
-      const message = event?.nativeEvent?.message || event?.message || event;
+      const message = event?.nativeEvent?.message; // TODO: Not sure how to get proper value here on web
 		  this.props.onLoadError(message);
     }
 	}
