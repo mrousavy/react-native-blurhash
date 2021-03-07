@@ -6,14 +6,23 @@
     "postinstall": "rm -rf node_modules/react-native-blurhash/node_modules",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
+    "web": "./node_modules/.bin/webpack serve -d source-map --mode development --config ./web/webpack.config.js --inline --hot",
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx ."
   },
   "dependencies": {
+    "babel-loader": "^8.2.2",
+    "babel-plugin-react-native-web": "^0.15.0",
     "react": "16.13.1",
+    "react-dom": "^17.0.1",
     "react-native": "0.63.1",
-    "react-native-blurhash": "link:.."
+    "react-native-blurhash": "link:..",
+    "react-native-web": "^0.15.0",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.24.3",
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-server": "^3.11.2"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",
