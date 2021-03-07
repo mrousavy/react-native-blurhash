@@ -24,7 +24,7 @@ export default function BlurhashCanvas ({
     imageData.data.set(decodedBlurhash);
     ctx.putImageData(imageData, 0, 0);
     onLoadEnd();
-  }, [decodedBlurhash]);
+  }, [decodedBlurhash, height, width, onLoadEnd]);
 
   return <canvas {...rest} height={height} width={width} ref={canvasRef} />
 };
