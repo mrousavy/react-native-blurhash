@@ -15,6 +15,8 @@ export default function BlurhashView ({
   onLoadStart = () => null,
   onLoadEnd = () => null,
   onLoadError = () => null,
+  style,
+  ...rest
 }: BlurhashViewProps) {
   const [decodedBlurhash, setDecodedBlurhash] = useState<null | Uint8ClampedArray>(null);
   useEffect(() => {
@@ -27,7 +29,7 @@ export default function BlurhashView ({
   }, [blurhash]);
   
   return (
-    <View>
+    <View style={style}>
       {decodedBlurhash ? <BlurhashCanvas
         decodedBlurhash={decodedBlurhash}
         height={decodeHeight}
