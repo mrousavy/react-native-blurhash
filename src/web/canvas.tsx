@@ -18,6 +18,7 @@ export default function BlurhashCanvas ({
   ...rest
 }: Props) {
   const canvasRef = useCallback((canvas: Props) => {
+    if (!canvas) return;
     const ctx = canvas.getContext && canvas.getContext('2d');
     const imageData = ctx.createImageData(width, height);
     imageData.data.set(decodedBlurhash);

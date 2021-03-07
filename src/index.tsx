@@ -122,7 +122,10 @@ export class Blurhash extends React.PureComponent<BlurhashProps> {
 		if (this.props.onLoadEnd != null) this.props.onLoadEnd();
 	}
 	_onLoadError(event?: NativeSyntheticEvent<{ message?: string }>) {
-		if (this.props.onLoadError != null) this.props.onLoadError(event?.nativeEvent?.message);
+		if (this.props.onLoadError != null) {
+      const message = event?.nativeEvent?.message || event?.message || event;
+		  this.props.onLoadError(message);
+    }
 	}
 
 	render() {
