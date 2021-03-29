@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 export type Props = React.CanvasHTMLAttributes<HTMLCanvasElement> & {
   getContext?: Function;
@@ -17,14 +17,16 @@ export default function BlurhashCanvas ({
   width = 128,
   ...rest
 }: Props) {
-  const canvasRef = useCallback((canvas: Props) => {
-    if (!canvas) return;
-    const ctx = canvas.getContext && canvas.getContext('2d');
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  useEffect(() => {
+    if (!canvasRef.current) return;
+    const ctx = canvasRef?.current?.getContext('2d');
+    if (!ctx) return;
     const imageData = ctx.createImageData(width, height);
     imageData.data.set(decodedBlurhash);
     ctx.putImageData(imageData, 0, 0);
     onLoadEnd();
-  }, [decodedBlurhash, height, width, onLoadEnd]);
+  }, [canvasRef, decodedBlurhash, height, width, onLoadEnd]);
 
   return <canvas {...rest} height={height} width={width} ref={canvasRef} />
 };
