@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import BlurhashCanvas from './canvas';
-import type { BlurhashProps } from '../index';
+import type BlurhashProps from './blurhashProps';
 import { decode } from 'blurhash';
 
-interface BlurhashViewProps extends BlurhashProps {
-}
+// interface BlurhashViewProps extends BlurhashProps {
+// }
 
-export default function BlurhashView ({
+export function Blurhash ({
   blurhash,
   decodeHeight = 128,
   decodePunch,
@@ -16,7 +16,7 @@ export default function BlurhashView ({
   onLoadEnd = () => null,
   onLoadError = () => null,
   style,
-}: BlurhashViewProps) {
+}: BlurhashProps) {
   const [decodedBlurhash, setDecodedBlurhash] = useState<null | Uint8ClampedArray>(null);
   useEffect(() => {
     try {
