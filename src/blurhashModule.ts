@@ -1,7 +1,7 @@
 import { NativeModules, Platform } from 'react-native';
 const BlurhashModule: BlurhashModule = Platform.select({
   web: null,
-  native: NativeModules.BlurhashModule,
+  native: NativeModules.BlurhashView,
 });
 
 type BlurhashModule = {

@@ -4,9 +4,6 @@ import BlurhashCanvas from './canvas';
 import type BlurhashProps from './blurhashProps';
 import { decode } from 'blurhash';
 
-// interface BlurhashViewProps extends BlurhashProps {
-// }
-
 export function Blurhash ({
   blurhash,
   decodeHeight = 128,
