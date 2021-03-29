@@ -75,9 +75,9 @@ export class Blurhash extends React.PureComponent<BlurhashProps> {
 	}
 	_onLoadError(event?: NativeSyntheticEvent<{ message?: string }>) {
 		if (this.props.onLoadError != null) {
-      const message = event?.nativeEvent?.message; // TODO: Not sure how to get proper value here on web
-		  this.props.onLoadError(message);
-    }
+			const message = event?.nativeEvent?.message; // TODO: Not sure how to get proper value here on web
+			this.props.onLoadError(message);
+		}
 	}
 
 	render() {
@@ -86,7 +86,7 @@ export class Blurhash extends React.PureComponent<BlurhashProps> {
 				{...this.props}
 				onLoadStart={this._onLoadStart}
 				onLoadEnd={this._onLoadEnd}
-        // @ts-expect-error
+				// @ts-expect-error
 				onLoadError={this._onLoadError}
 			/>
 		);
@@ -94,7 +94,7 @@ export class Blurhash extends React.PureComponent<BlurhashProps> {
 }
 
 const NativeBlurhashView = requireNativeComponent<BlurhashProps>(
-  'BlurhashView',
-  // @ts-expect-error this second argument is still not public, but probably required for TurboModules.
-  Blurhash,
+	'BlurhashView',
+	// @ts-expect-error this second argument is still not public, but probably required for TurboModules.
+	Blurhash,
 );
