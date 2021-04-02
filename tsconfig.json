@@ -23,5 +23,17 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "esnext"
-  }
+  },
+  "include": [
+    "src",
+    "example",
+    ".eslintrc.js",
+    ".prettierrc.js",
+    "babel.config.js",
+  ],
+  "exclude": [
+    "node_modules",
+    "lib",
+    "docs"
+  ]
 }
