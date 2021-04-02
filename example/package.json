@@ -12,8 +12,10 @@
   },
   "dependencies": {
     "react": "16.13.1",
+    "react-dom": "^17.0.2",
     "react-native": "0.63.1",
-    "react-native-blurhash": "link:.."
+    "react-native-blurhash": "link:..",
+    "react-native-web": "^0.15.5"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",
@@ -21,6 +23,7 @@
     "@react-native-community/eslint-config": "^2.0.0",
     "@react-native-community/eslint-plugin": "^1.1.0",
     "babel-jest": "^26.0.1",
+    "babel-plugin-react-native-web": "^0.15.5",
     "eslint": "^7.7.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
