@@ -6,13 +6,18 @@ module.exports = {
 		},
 		ecmaVersion: 2018,
 	},
-	plugins: ['react', 'react-native', '@react-native-community', 'prettier'],
-	extends: ['eslint:recommended', 'plugin:react/recommended', 'plugin:prettier/recommended', '@react-native-community'],
+	plugins: ['react', 'react-native', '@react-native-community', 'prettier', 'react-hooks'],
+	extends: [
+		'eslint:recommended',
+		'plugin:react/recommended',
+		'plugin:prettier/recommended',
+		'@react-native-community',
+		'plugin:react-hooks/recommended',
+	],
 	rules: {
 		// eslint
 		semi: 'off',
 		curly: ['warn', 'multi-or-nest', 'consistent'],
-		'no-bitwise': 'off', // required for blurhash
 		'no-mixed-spaces-and-tabs': ['warn', 'smart-tabs'],
 		'no-async-promise-executor': 'warn',
 		'require-await': 'warn',
