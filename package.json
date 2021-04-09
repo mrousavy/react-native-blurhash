@@ -53,6 +53,7 @@
   "licenseFilename": "LICENSE",
   "readmeFilename": "README.md",
   "peerDependencies": {
+    "blurhash": "^1.x",
     "react": "^16.8.1",
     "react-native": ">=0.60.0-rc.0 <1.0.x"
   },
@@ -106,8 +107,5 @@
   "eslintIgnore": [
     "node_modules/",
     "lib/"
-  ],
-  "dependencies": {
-    "blurhash": "^1.1.3"
-  }
+  ]
 }
