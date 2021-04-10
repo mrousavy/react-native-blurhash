@@ -24,6 +24,7 @@
   "scripts": {
     "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
     "prepare": "bob build",
+    "prepare:dev": "nodemon --watch src/ --watch web/ --ext js,ts,tsx --exec \"yarn prepare\"",
     "release": "release-it"
   },
   "repository": {
@@ -52,6 +53,7 @@
   "licenseFilename": "LICENSE",
   "readmeFilename": "README.md",
   "peerDependencies": {
+    "blurhash": "^1.x",
     "react": "^16.8.1",
     "react-native": ">=0.60.0-rc.0 <1.0.x"
   },
@@ -61,10 +63,12 @@
     "@release-it/conventional-changelog": "^2.0.1",
     "@types/react": "^17.0.1",
     "@types/react-native": "^0.63.48",
+    "blurhash": "^1.x",
     "eslint": "^7.19.0",
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react-native": "^3.10.0",
+    "nodemon": "^2.0.7",
     "prettier": "^2.2.0",
     "react-native-builder-bob": "^0.17.1",
     "release-it": "^14.4.1",
