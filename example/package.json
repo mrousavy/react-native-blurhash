@@ -5,20 +5,15 @@
   "scripts": {
     "postinstall": "rm -rf node_modules/react-native-blurhash/node_modules",
     "android": "react-native run-android",
-    "web": "expo web",
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx ."
   },
   "dependencies": {
-    "babel-preset-expo": "^8.2.1",
-    "expo": "^37.0.12",
     "react": "16.13.1",
-    "react-dom": "^17.0.1",
     "react-native": "0.63.1",
-    "react-native-blurhash": "link:..",
-    "react-native-web": "^0.15.0"
+    "react-native-blurhash": "link:.."
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",
