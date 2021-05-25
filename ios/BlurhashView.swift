@@ -17,7 +17,6 @@ final class BlurhashView: UIView {
     @objc var decodeAsync: Bool = false
 
     @objc var resizeMode: NSString = "cover"
-    @objc var borderRadius: NSNumber = 0
 
     @objc var onLoadStart: RCTDirectEventBlock?
     @objc var onLoadEnd: RCTDirectEventBlock?
@@ -92,7 +91,7 @@ final class BlurhashView: UIView {
                 self.renderBlurhash()
             }
         }
-        if changedProps.contains("resizeMode") || changedProps.contains("borderRadius") {
+        if changedProps.contains("resizeMode") {
             self.updateImageContainer()
         }
     }
@@ -112,10 +111,6 @@ final class BlurhashView: UIView {
 
     private final func updateImageContainer() {
         self.imageContainer.contentMode = self.parseResizeMode(resizeMode: self.resizeMode)
-        if let cornerRadius = CGFloat(exactly: self.borderRadius) {
-            self.imageContainer.layer.shouldRasterize = cornerRadius > 0 ? true : false
-            self.imageContainer.layer.cornerRadius = cornerRadius
-        }
     }
 
     private final func setImageContainerImage(image: UIImage?) {
