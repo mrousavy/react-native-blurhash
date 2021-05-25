@@ -121,16 +121,15 @@ const styles = StyleSheet.create({
 		shadowOpacity: 0.4,
 		overflow: 'visible',
 	},
-	// on iOS you can also apply borderRadius directly to the Blurhash's style. I'm working on it for Android.
 	blurhashRadiusMask: {
 		elevation: 5,
+		// borderRadius has to be applied to the parent
 		borderRadius: 5,
 		overflow: 'hidden',
 	},
 	blurhashImage: {
 		width: 300,
 		height: 200,
-		borderRadius: 5, // only supported on iOS
 		// Custom styling for width, height, scaling etc here
 	},
 	textInput: {
