@@ -61,15 +61,15 @@ class BlurhashViewModule(reactContext: ReactApplicationContext) : ReactContextBa
                         }
                     }
 
-                    override fun onFailureImpl(dataSource: DataSource<CloseableReference<CloseableImage>>?) {
+                    override fun onFailureImpl(dataSource: DataSource<CloseableReference<CloseableImage>>) {
                         try {
-                            if (dataSource?.failureCause != null) {
+                            if (dataSource.failureCause != null) {
                                 promise.reject("LOAD_ERROR", dataSource.failureCause)
                             } else {
                                 promise.reject("LOAD_ERROR", Exception("Failed to load URI!"))
                             }
                         } finally {
-                            dataSource?.close()
+                            dataSource.close()
                         }
                     }
                 }, CallerThreadExecutor.getInstance())
