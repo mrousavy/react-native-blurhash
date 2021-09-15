@@ -2,17 +2,16 @@
 
 > 🖼️ Give your users the loading experience they want.
 
-
-<a href="https://github.com/sponsors/mrousavy">
-  <img align="right" width="160" alt="This library helped you? Consider sponsoring!" src=".github/funding-octocat.svg">
-</a>
-
 Install via [npm](https://www.npmjs.com/package/react-native-blurhash):
 
 ```sh
 npm i react-native-blurhash
 npx pod-install
 ```
+
+<a href="https://github.com/sponsors/mrousavy">
+  <img align="right" width="160" alt="This library helped you? Consider sponsoring!" src=".github/funding-octocat.svg">
+</a>
 
 [![npm](https://img.shields.io/npm/v/react-native-blurhash?color=%238B83E6)](https://www.npmjs.com/package/react-native-blurhash)
 [![npm](https://img.shields.io/npm/dt/react-native-blurhash?color=%238B83E6)](https://www.npmjs.com/package/react-native-blurhash)
