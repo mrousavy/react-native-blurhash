@@ -125,4 +125,5 @@ dependencies {
     // noinspection GradleDynamicVersion
     api 'com.facebook.react:react-native:+'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0"
 }
