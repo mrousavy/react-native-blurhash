@@ -11,6 +11,7 @@
     "README.md",
     "android/src",
     "android/build.gradle",
+    "android/gradle.properties",
     "ios/Blurhash.xcodeproj/project.pbxproj",
     "ios/**/*.h",
     "ios/**/*.m",
