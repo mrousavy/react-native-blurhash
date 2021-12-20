@@ -24,7 +24,7 @@
   ],
   "scripts": {
     "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
-    "prepare": "bob build",
+    "build": "bob build",
     "release": "release-it"
   },
   "repository": {
