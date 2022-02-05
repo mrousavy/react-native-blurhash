@@ -7,31 +7,24 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
-    "test": "jest",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx ."
   },
   "dependencies": {
-    "react": "16.13.1",
-    "react-native": "0.63.1",
+    "react": "^17.0.2",
+    "react-native": "^0.68.0-rc.1",
     "react-native-blurhash": "link:.."
   },
   "devDependencies": {
-    "@babel/core": "^7.10.2",
-    "@babel/runtime": "^7.10.2",
-    "@react-native-community/eslint-config": "^2.0.0",
+    "@babel/core": "^7.17.0",
+    "@babel/runtime": "^7.17.0",
+    "@react-native-community/eslint-config": "^3.0.1",
     "@react-native-community/eslint-plugin": "^1.1.0",
-    "babel-jest": "^26.0.1",
     "eslint": "^7.7.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-prettier": "^3.1.4",
-    "eslint-plugin-react-hooks": "^4.1.0",
-    "eslint-plugin-react-native": "^3.9.1",
-    "jest": "^26.0.1",
-    "metro-react-native-babel-preset": "^0.60.0",
-    "prettier": "^2.1.1",
-    "react-test-renderer": "16.13.1"
-  },
-  "jest": {
-    "preset": "react-native"
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-react-native": "^4.0.0",
+    "metro-react-native-babel-preset": "^0.67.0",
+    "prettier": "^2.5.1"
   }
 }
