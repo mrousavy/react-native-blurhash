@@ -25,6 +25,10 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-plugin-react-native": "^4.0.0",
     "metro-react-native-babel-preset": "^0.67.0",
+    "react-native-gradle-plugin": "^0.0.4",
     "prettier": "^2.5.1"
+  },
+  "codegenConfig": {
+    "libraries": []
   }
 }
