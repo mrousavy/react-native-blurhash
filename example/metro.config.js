@@ -22,4 +22,13 @@ module.exports = {
 
 	// quick workaround for another issue with symlinks
 	watchFolders: ['.', '..'],
+
+	transformer: {
+		getTransformOptions: async () => ({
+			transform: {
+				experimentalImportSupport: true,
+				inlineRequires: true,
+			},
+		}),
+	},
 };
