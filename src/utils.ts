@@ -53,7 +53,8 @@ export function isBlurhashValid(blurhash: string): { isValid: true } | { isValid
 	try {
 		validateBlurhash(blurhash);
 	} catch (error) {
-		return { isValid: false, errorReason: error.message };
+		const message = error instanceof Error ? error.message : JSON.stringify(error);
+		return { isValid: false, errorReason: message };
 	}
 
 	return { isValid: true };
