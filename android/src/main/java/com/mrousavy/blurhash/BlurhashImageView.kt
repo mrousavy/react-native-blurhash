@@ -36,7 +36,7 @@ internal class BlurhashCache(private val _blurhash: String?, private val _decode
 
 const val USE_COSINES_CACHE = true
 
-class BlurhashImageView(context: Context?): androidx.appcompat.widget.AppCompatImageView(context) {
+class BlurhashImageView(context: Context): androidx.appcompat.widget.AppCompatImageView(context) {
     var blurhash: String? = null
     var decodeWidth = 32
     var decodeHeight = 32
