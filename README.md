@@ -1,3 +1,7 @@
+<a href="https://margelo.io">
+  <img src="./img/banner.svg" width="100%" />
+</a>
+
 <a href="https://github.com/sponsors/mrousavy">
   <img align="right" width="160" alt="This library helped you? Consider sponsoring!" src=".github/funding-octocat.svg">
 </a>
@@ -47,7 +51,7 @@ npx pod-install
     <li>uploads the image to a content delivery network (e.g. AWS)</li>
   </ol>
   <li>Now everytime a user loads a feed of posts from my database, I can immediately show a <code>&lt;Blurhash&gt;</code> component (with the post's <code>.blurhash</code> property) over my <code>&lt;Image&gt;</code> component, and fade it out once the <code>&lt;Image&gt;</code> component's <a href="https://reactnative.dev/docs/image#onloadend"><code>onLoadEnd</code></a> function has been called.</li>
-  
+
   <br/>
   <blockquote>
   Note: You can also use the <a href="#encoding">react-native-blurhash encoder</a> to encode straight from your React Native App!
