@@ -35,8 +35,8 @@ npx pod-install
 
 ## Expo
 
-✅ You can use this library with [Development Builds](https://docs.expo.dev/development/introduction/). No config plugin is required.
-❌ This library can't be used in the "Expo Go" app because it [requires custom native code](https://docs.expo.dev/workflow/customizing/).
+- ✅ You can use this library with [Development Builds](https://docs.expo.dev/development/introduction/). No config plugin is required.
+- ❌ This library can't be used in the "Expo Go" app because it [requires custom native code](https://docs.expo.dev/workflow/customizing/).
 
 ## Example Workflow
 
