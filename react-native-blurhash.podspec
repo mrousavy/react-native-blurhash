@@ -24,5 +24,6 @@ Pod::Spec.new do |s|
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
 
   s.dependency "React-Core"
+  s.swift_version = "5.0"
 end
 
