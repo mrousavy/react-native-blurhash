@@ -21,22 +21,21 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 14
-    - name: Cache node modules
-      uses: actions/cache@v1
-      env:
-        cache-name: cache-node-modules
+    - name: Get yarn cache directory path
+      id: yarn-cache-dir-path
+      run: echo "::set-output name=dir::$(yarn cache dir)"
+    - name: Restore node_modules from cache
+      uses: actions/cache@v2
+      id: yarn-cache
       with:
-        path: ~/.npm
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+        path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
         restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name }}-
-          ${{ runner.os }}-build-
-          ${{ runner.os }}-
+          ${{ runner.os }}-yarn-
 
     - name: Install dependencies via yarn
-    # Can't use npm because of the softlink to the library (../)
       run: yarn install --frozen-lockfile
       working-directory: ${{env.working-directory}}
     - name: Run ESLint on all *.js*/*.ts* files
-      run: npx eslint --ext .js,.jsx,.ts,.tsx .
+      run: yarn eslint --ext .js,.jsx,.ts,.tsx .
       working-directory: ${{env.working-directory}}
