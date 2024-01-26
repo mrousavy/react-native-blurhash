@@ -945,6 +945,8 @@ PODS:
     - glog
     - React-debug
   - react-native-blurhash (1.1.11):
+    - glog
+    - RCT-Folly (= 2022.05.16.00)
     - React-Core
   - React-nativeconfig (0.73.2)
   - React-NativeModulesApple (0.73.2):
@@ -1349,7 +1351,7 @@ SPEC CHECKSUMS:
   React-jsinspector: 03644c063fc3621c9a4e8bf263a8150909129618
   React-logger: 66b168e2b2bee57bd8ce9e69f739d805732a5570
   React-Mapbuffer: 9ee041e1d7be96da6d76a251f92e72b711c651d6
-  react-native-blurhash: a59e6bf8117a0304488ed576abd440f4b0777a8c
+  react-native-blurhash: bb99ded7a87d193bfe05faa28ccbc62b582d8c3d
   React-nativeconfig: d753fbbc8cecc8ae413d615599ac378bbf6999bb
   React-NativeModulesApple: 964f4eeab1b4325e8b6a799cf4444c3fd4eb0a9c
   React-perflogger: 29efe63b7ef5fbaaa50ef6eaa92482f98a24b97e

@@ -11,5 +11,5 @@ import Foundation
 let context = "RNBlurhash"
 
 func log(level: RCTLogLevel, message: String, file: String = #file, lineNumber: Int = #line) {
-	RCTDefaultLogFunction(level, RCTLogSource.native, file, lineNumber as NSNumber, "\(context): \(message)")
+    RCTDefaultLogFunction(level, RCTLogSource.native, file, lineNumber as NSNumber, "\(context): \(message)")
 }

@@ -33,7 +33,7 @@ export default function App() {
   const [blurhash, setBlurhash] = useState('LGFFaXYk^6#M@-5c,1J5@[or[Q6.');
   const [decodeAsync, setDecodeAsync] = useState(true);
   const [encodingImageUri, setEncodingImageUri] = useState(
-    'https://blurha.sh/assets/images/img4.jpg',
+    'https://github.com/woltapp/blurhash/blob/master/Website/assets/images/img1.jpg?raw=true',
   );
   const [isEncoding, setIsEncoding] = useState(false);
   //#endregion
