@@ -106,5 +106,13 @@
 	"eslintIgnore": [
 		"node_modules/",
 		"lib/"
-	]
+	],
+	"codegenConfig": {
+		"name": "blurhash_codegen",
+		"type": "all",
+		"jsSrcsDir": "./src/specs",
+		"android": {
+			"javaPackageName": "com.mrousavy.blurhash"
+		}
+	}
 }
