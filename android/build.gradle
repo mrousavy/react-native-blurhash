@@ -23,11 +23,11 @@ def isNewArchitectureEnabled() {
 }
 
 def getExtOrDefault(name) {
-    return rootProject.ext.has(name) ? rootProject.ext.get(name) : project.properties['RNBlurhash' + name]
+    return rootProject.ext.has(name) ? rootProject.ext.get(name) : project.properties['RNBlurhash_' + name]
 }
 
 def getExtOrIntegerDefault(name) {
-    return rootProject.ext.has(name) ? rootProject.ext.get(name) : (project.properties['RNBlurhash' + name]).toInteger()
+    return rootProject.ext.has(name) ? rootProject.ext.get(name) : (project.properties['RNBlurhash_' + name]).toInteger()
 }
 
 apply plugin: 'com.android.library'
@@ -65,71 +65,6 @@ android {
 repositories {
     mavenCentral()
     google()
-
-    def found = false
-    def defaultDir = null
-    def androidSourcesName = 'React Native sources'
-
-    if (rootProject.ext.has('reactNativeAndroidRoot')) {
-        defaultDir = rootProject.ext.get('reactNativeAndroidRoot')
-    } else {
-        defaultDir = new File(
-                projectDir,
-                '/../../../node_modules/react-native/android'
-        )
-    }
-
-    if (defaultDir.exists()) {
-        maven {
-            url defaultDir.toString()
-            name androidSourcesName
-        }
-
-        logger.info(":${project.name}:reactNativeAndroidRoot ${defaultDir.canonicalPath}")
-        found = true
-    } else {
-        def parentDir = rootProject.projectDir
-
-        1.upto(5, {
-            if (found) return true
-            parentDir = parentDir.parentFile
-
-            def androidSourcesDir = new File(
-                    parentDir,
-                    'node_modules/react-native'
-            )
-
-            def androidPrebuiltBinaryDir = new File(
-                    parentDir,
-                    'node_modules/react-native/android'
-            )
-
-            if (androidPrebuiltBinaryDir.exists()) {
-                maven {
-                    url androidPrebuiltBinaryDir.toString()
-                    name androidSourcesName
-                }
-
-                logger.info(":${project.name}:reactNativeAndroidRoot ${androidPrebuiltBinaryDir.canonicalPath}")
-                found = true
-            } else if (androidSourcesDir.exists()) {
-                maven {
-                    url androidSourcesDir.toString()
-                    name androidSourcesName
-                }
-
-                logger.info(":${project.name}:reactNativeAndroidRoot ${androidSourcesDir.canonicalPath}")
-                found = true
-            }
-        })
-    }
-
-    if (!found) {
-        throw new GradleException(
-                "${project.name}: unable to locate React Native android sources. " +
-                        "Ensure you have you installed React Native as a dependency in your project and try again."
-        )
-    }
 }
 
 def kotlin_version = getExtOrDefault('kotlinVersion')
@@ -138,5 +73,4 @@ dependencies {
     // noinspection GradleDynamicVersion
     api 'com.facebook.react:react-native:+'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
 }
