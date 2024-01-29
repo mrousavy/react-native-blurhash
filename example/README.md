@@ -1,6 +1,17 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Blurhash Example
 
-# Getting Started
+This is an example app, demonstrating the usage of the [react-native-blurhash](https://github.com/mrousavy/react-native-blurhash) library.
+
+ <table>
+   <tr>
+     <th>iOS Screenshot</th>
+     <th>Android Screenshot</th>
+   </tr>
+   <tr>
+     <td width="50%"><img src="https://github.com/mrousavy/react-native-blurhash/raw/master/img/demo_ios.png" alt="iOS Demo Screenshot"></td>
+     <td width="50%"><img src="https://github.com/mrousavy/react-native-blurhash/raw/master/img/demo_android.png" alt="Android Demo Screenshot"></td>
+   </tr>
+ </table>
 
 >**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
 
