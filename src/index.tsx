@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { requireNativeComponent, NativeModules, Platform, ViewProps, NativeSyntheticEvent } from 'react-native';
-import { decode83, decodeDC, isBlurhashValid, RGB } from './utils';
-
-// NativeModules automatically resolves 'BlurhashView' to 'BlurhashViewModule'
-const BlurhashModule = NativeModules.BlurhashView;
+import { Platform, type NativeSyntheticEvent, type ViewProps } from 'react-native';
+import NativeBlurhashModule from './specs/NativeBlurhashModule';
+import NativeBlurhashView from './specs/NativeBlurhashView';
+import { decode83, decodeDC, isBlurhashValid, type RGB } from './utils';
 
 export interface BlurhashProps extends Omit<ViewProps, 'children'> {
 	/**
@@ -77,7 +76,7 @@ export class Blurhash extends React.PureComponent<BlurhashProps> {
 		if (typeof componentsX !== 'number') throw new Error('componentsX must be a valid positive number!');
 		if (typeof componentsY !== 'number') throw new Error('componentsY must be a valid positive number!');
 
-		return BlurhashModule.createBlurhashFromImage(imageUri, componentsX, componentsY);
+		return NativeBlurhashModule.createBlurhashFromImage(imageUri, componentsX, componentsY);
 	}
 
 	/**
@@ -102,7 +101,7 @@ export class Blurhash extends React.PureComponent<BlurhashProps> {
 	 * @see https://github.com/mrousavy/react-native-blurhash#cosine-operations
 	 */
 	static clearCosineCache(): void {
-		if (Platform.OS === 'android') BlurhashModule.clearCosineCache();
+		if (Platform.OS === 'android') NativeBlurhashModule.clearCosineCache();
 		else console.warn('Blurhash.clearCosineCache is only available on Android.');
 	}
 
@@ -127,21 +126,6 @@ export class Blurhash extends React.PureComponent<BlurhashProps> {
 	}
 
 	render() {
-		return (
-			<NativeBlurhashView
-				{...this.props}
-				onLoadStart={this._onLoadStart}
-				onLoadEnd={this._onLoadEnd}
-				// @ts-expect-error
-				onLoadError={this._onLoadError}
-			/>
-		);
+		return <NativeBlurhashView {...this.props} onLoadStart={this._onLoadStart} onLoadEnd={this._onLoadEnd} onLoadError={this._onLoadError} />;
 	}
 }
-
-// requireNativeComponent automatically resolves 'BlurhashView' to 'BlurhashViewManager'
-const NativeBlurhashView = requireNativeComponent<BlurhashProps>(
-	'BlurhashView',
-	// @ts-expect-error this second argument is still not public, but probably required for TurboModules.
-	Blurhash,
-);

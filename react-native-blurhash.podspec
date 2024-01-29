@@ -19,11 +19,16 @@ Pod::Spec.new do |s|
   s.tvos.deployment_target = '9.0'
   s.source       = { :git => "https://github.com/mrousavy/react-native-blurhash.git", :tag => "#{s.version}" }
 
-  s.source_files = "ios/**/*.{h,c,m,swift}"
+  s.source_files = "ios/**/*.{h,c,m,mm,swift}"
 
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
 
-  s.dependency "React-Core"
   s.swift_version = "5.0"
+
+  if defined?(install_modules_dependencies()) != nil
+    install_modules_dependencies(s);
+  else
+    s.dependency "React-Core"
+  end
 end
 

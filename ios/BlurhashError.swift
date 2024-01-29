@@ -9,9 +9,9 @@
 import Foundation
 
 enum BlurhashError: Error {
-	case invalidBlurhashString(isNil: Bool)
-	case invalidBlurhashDecodeWidth(actualValue: Int)
-	case invalidBlurhashDecodeHeight(actualValue: Int)
-	case invalidBlurhashDecodePunch(actualValue: Float)
-	case decodeError(message: String?)
+    case invalidBlurhashString(isNil: Bool)
+    case invalidBlurhashDecodeWidth(actualValue: Int)
+    case invalidBlurhashDecodeHeight(actualValue: Int)
+    case invalidBlurhashDecodePunch(actualValue: Float)
+    case decodeError(message: String?)
 }
