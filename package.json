@@ -15,6 +15,7 @@
 		"ios/Blurhash.xcodeproj/project.pbxproj",
 		"ios/**/*.h",
 		"ios/**/*.m",
+		"ios/**/*.mm",
 		"ios/**/*.swift",
 		"lib/commonjs",
 		"lib/module",
