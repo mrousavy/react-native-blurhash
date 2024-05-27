@@ -6,7 +6,11 @@
 #import <blurhash_codegen/blurhash_codegen.h>
 #endif
 
+#if __has_include("react_native_blurhash/react_native_blurhash-Swift.h")
+#import "react_native_blurhash/react_native_blurhash-Swift.h"
+#else
 #import "react_native_blurhash-Swift.h"
+#endif
 
 #ifdef RCT_NEW_ARCH_ENABLED
 using namespace facebook::react;
