@@ -22,8 +22,8 @@ class BlurhashModule(reactContext: ReactApplicationContext) :
   @ReactMethod
   override fun createBlurhashFromImage(
       imageUri: String,
-      componentsX: Double,
-      componentsY: Double,
+      componentsX: Int,
+      componentsY: Int,
       promise: Promise
   ) {
     thread(true) {
@@ -44,7 +44,7 @@ class BlurhashModule(reactContext: ReactApplicationContext) :
               override fun onNewResultImpl(bitmap: Bitmap?) {
                 try {
                   if (dataSource.isFinished && bitmap != null) {
-                    val blurhash = BlurHashEncoder.encode(bitmap, componentsX.toInt(), componentsY.toInt())
+                    val blurhash = BlurHashEncoder.encode(bitmap, componentsX, componentsY)
                     promise.resolve(blurhash)
                   } else {
                     if (dataSource.failureCause != null) {

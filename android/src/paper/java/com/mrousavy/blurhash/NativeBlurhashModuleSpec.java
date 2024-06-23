@@ -34,7 +34,7 @@ public abstract class NativeBlurhashModuleSpec extends ReactContextBaseJavaModul
 
   @ReactMethod
   @DoNotStrip
-  public abstract void createBlurhashFromImage(String imageUri, double componentsX, double componentsY, Promise promise);
+  public abstract void createBlurhashFromImage(String imageUri, int componentsX, int componentsY, Promise promise);
 
   @ReactMethod
   @DoNotStrip
