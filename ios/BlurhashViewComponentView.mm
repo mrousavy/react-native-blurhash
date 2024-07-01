@@ -10,7 +10,11 @@
 #import <react/renderer/components/blurhash_codegen/Props.h>
 #import <react/renderer/components/blurhash_codegen/RCTComponentViewHelpers.h>
 
+#if __has_include("react_native_blurhash/react_native_blurhash-Swift.h")
+#import "react_native_blurhash/react_native_blurhash-Swift.h"
+#else
 #import "react_native_blurhash-Swift.h"
+#endif
 
 using namespace facebook::react;
 
