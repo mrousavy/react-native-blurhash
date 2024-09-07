@@ -41,8 +41,8 @@ RCT_EXPORT_METHOD(createBlurhashFromImage
   [self.impl createBlurhashFromImage:imageUri
                          componentsX:componentsX
                          componentsY:componentsY
-                            resolver:resolve
-                            rejecter:reject];
+                             resolve:resolve
+                              reject:reject];
 }
 
 RCT_EXPORT_METHOD(clearCosineCache)
