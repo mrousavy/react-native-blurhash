@@ -19,7 +19,7 @@ public final class BlurhashModuleImpl: NSObject {
     }
 
     @objc
-    public func createBlurhashFromImage(_ imageUri: String, componentsX: Int, componentsY: Int, resolver resolve: @escaping (String) -> Void, rejecter reject: @escaping (String, String, Error?) -> Void) {
+    public func createBlurhashFromImage(_ imageUri: String, componentsX: Int, componentsY: Int, resolve: @escaping (String) -> Void, reject: @escaping (String, String, Error?) -> Void) {
         let formattedUri = imageUri.trimmingCharacters(in: .whitespacesAndNewlines)
 
         DispatchQueue.global(qos: .utility).async {
