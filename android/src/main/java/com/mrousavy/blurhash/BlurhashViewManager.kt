@@ -23,7 +23,7 @@ internal class LoadStartEvent(
   override fun getEventData(): WritableMap = Arguments.createMap()
 
   companion object {
-    const val EVENT_NAME = "topBlurhashLoadStart"
+    const val EVENT_NAME = "topLoadStart"
   }
 }
 
@@ -36,7 +36,7 @@ internal class LoadEndEvent(
   override fun getEventData(): WritableMap = Arguments.createMap()
 
   companion object {
-    const val EVENT_NAME = "topBlurhashLoadEnd"
+    const val EVENT_NAME = "topLoadEnd"
   }
 }
 
@@ -51,7 +51,7 @@ internal class LoadErrorEvent(
       Arguments.createMap().apply { putString("message", message) }
 
   companion object {
-    const val EVENT_NAME = "topBlurhashLoadError"
+    const val EVENT_NAME = "topLoadError"
   }
 }
 
