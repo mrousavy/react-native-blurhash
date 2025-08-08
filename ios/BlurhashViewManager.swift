@@ -84,8 +84,14 @@ final class BlurhashViewWrapper: UIView, BlurhashViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // Called only on the old arch:
     override func reactSetFrame(_ frame: CGRect) {
         blurhashView.frame = frame
+    }
+
+    override func layoutSubviews() {
+      super.layoutSubviews();
+      blurhashView.frame = self.bounds;
     }
 
     override func didSetProps(_: [String]!) {
