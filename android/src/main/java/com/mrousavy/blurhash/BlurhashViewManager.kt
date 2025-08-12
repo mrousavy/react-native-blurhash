@@ -108,7 +108,7 @@ class BlurhashViewManager :
     return image
   }
 
-  override fun getExportedCustomDirectEventTypeConstants(): MutableMap<String, Any>? {
+  override fun getExportedCustomDirectEventTypeConstants(): Map<String, Any>? {
     return MapBuilder.builder<String, Any>()
         .put(LoadErrorEvent.EVENT_NAME, MapBuilder.of("registrationName", "onLoadError"))
         .put(LoadStartEvent.EVENT_NAME, MapBuilder.of("registrationName", "onLoadStart"))
