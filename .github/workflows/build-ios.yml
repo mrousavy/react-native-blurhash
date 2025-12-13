@@ -55,7 +55,7 @@ jobs:
           working-directory: example
 
       - name: Restore Pods cache
-        uses: actions/cache@v2
+        uses: actions/cache@v5
         with:
           path: |
             example/ios/Pods
