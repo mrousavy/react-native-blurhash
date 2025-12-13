@@ -34,12 +34,24 @@ jobs:
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+        run: |
+          if command -v yarn &> /dev/null; then
+            CACHE_DIR=$(yarn config get cacheFolder 2>/dev/null || yarn cache dir 2>/dev/null || echo "")
+            if [ -z "$CACHE_DIR" ]; then
+              CACHE_DIR="$HOME/.yarn/cache"
+            fi
+          else
+            CACHE_DIR="$HOME/.yarn/cache"
+          fi
+          echo "dir=$CACHE_DIR" >> $GITHUB_OUTPUT
       - name: Restore node_modules from cache
-        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684
+        uses: actions/cache@v5
         id: yarn-cache
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          path: |
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+            node_modules
+            example/node_modules
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
@@ -49,7 +61,7 @@ jobs:
         run: yarn install --frozen-lockfile --cwd example
 
       - name: Restore Gradle cache
-        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684
+        uses: actions/cache@v5
         with:
           path: |
             ~/.gradle/caches
