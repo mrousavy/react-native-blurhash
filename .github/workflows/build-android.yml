@@ -32,6 +32,14 @@ jobs:
           java-version: 17
           distribution: 'temurin'
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Enable Corepack
+        run: corepack enable
+
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: |
