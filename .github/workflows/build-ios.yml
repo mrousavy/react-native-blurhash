@@ -82,7 +82,6 @@ jobs:
             ${{ runner.os }}-pods-
       - name: Build App
         run: | 
-          cd ios
           bundle install 
           RCT_USE_RN_DEP=1 RCT_USE_PREBUILT_RNCORE=1 bundle exec pod install
           xcodebuild build \
