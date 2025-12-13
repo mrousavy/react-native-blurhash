@@ -88,7 +88,7 @@ jobs:
           -scheme BlurhashExample \
           -sdk iphonesimulator \
           -configuration Debug \
-          -destination 'platform=iOS Simulator,name=iPhone 11 Pro' \
+          -destination 'platform=iOS Simulator,name=iPhone 16 Pro' \
           build \
           CODE_SIGNING_ALLOWED=NO | xcpretty"
  
