@@ -83,9 +83,9 @@ jobs:
         run: "set -o pipefail && xcodebuild \
           CC=clang CPLUSPLUS=clang++ LD=clang LDPLUSPLUS=clang++ \
           -derivedDataPath build -UseModernBuildSystem=YES \
-          -workspace example.xcworkspace \
+          -workspace BlurhashExample.xcworkspace \
           ONLY_ACTIVE_ARCH=NO \
-          -scheme example \
+          -scheme BlurhashExample \
           -sdk iphonesimulator \
           -configuration Debug \
           -destination 'platform=iOS Simulator,name=iPhone 11 Pro' \
