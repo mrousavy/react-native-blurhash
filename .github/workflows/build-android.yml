@@ -66,7 +66,7 @@ jobs:
       - name: Install node_modules
         run: yarn install --frozen-lockfile
       - name: Install node_modules for example/
-        run: yarn install --frozen-lockfile --cwd example
+        run: yarn install --frozen-lockfile
 
       - name: Restore Gradle cache
         uses: actions/cache@v5
