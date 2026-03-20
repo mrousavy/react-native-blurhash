@@ -1,12 +1,21 @@
 {
-  "extends": "@react-native/typescript-config/tsconfig.json",
   "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "lib": ["esnext"],
+    "jsx": "react-native",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "baseUrl": ".",
     "paths": {
-      "react-native-blurhash": ["../src/index"]
-    },
+      "react-native-blurhash": ["../src/index.tsx"]
+    }
   },
-  "include": [
-    "src",
-    "index.js"
-  ]
+  "include": ["src/**/*", "index.js"],
+  "exclude": ["node_modules"]
 }
+

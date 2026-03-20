@@ -19,43 +19,58 @@ on:
 jobs:
   build:
     name: Build iOS Example App
-    runs-on: macOS-13
+    runs-on: macOS-latest
     defaults:
       run:
         working-directory: example/ios
     steps:
       - uses: actions/checkout@v4
       - name: Install node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18
+
+      - name: Enable Corepack
+        run: corepack enable
+      
+      - name: Setup xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: 16.4.0
+
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+        run: |
+          if command -v yarn &> /dev/null; then
+            CACHE_DIR=$(yarn config get cacheFolder 2>/dev/null || yarn cache dir 2>/dev/null || echo "")
+            if [ -z "$CACHE_DIR" ]; then
+              CACHE_DIR="$HOME/.yarn/cache"
+            fi
+          else
+            CACHE_DIR="$HOME/.yarn/cache"
+          fi
+          echo "dir=$CACHE_DIR" >> $GITHUB_OUTPUT
       - name: Restore node_modules from cache
-        uses: actions/cache@v2
+        uses: actions/cache@v5
         id: yarn-cache
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          path: |
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+            node_modules
+            example/node_modules
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Install node_modules for example/
-        run: yarn install --frozen-lockfile --cwd ..
-
-      - name: Restore buildcache
-        uses: mikehardy/buildcache-action@v1
-        continue-on-error: true
-
+        run: yarn install --frozen-lockfile
       - name: Setup Ruby (bundle)
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.7
-          bundler-cache: true
+          ruby-version: 3.2
           working-directory: example
 
       - name: Restore Pods cache
-        uses: actions/cache@v2
+        uses: actions/cache@v5
         with:
           path: |
             example/ios/Pods
@@ -64,79 +79,13 @@ jobs:
           key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-pods-
-      - name: Install Pods
-        run: pod install
-      - name: Install xcpretty
-        run: gem install xcpretty
       - name: Build App
-        run: "set -o pipefail && xcodebuild \
-          CC=clang CPLUSPLUS=clang++ LD=clang LDPLUSPLUS=clang++ \
-          -derivedDataPath build -UseModernBuildSystem=YES \
-          -workspace example.xcworkspace \
-          ONLY_ACTIVE_ARCH=NO \
-          -scheme example \
-          -sdk iphonesimulator \
-          -configuration Debug \
-          -destination 'platform=iOS Simulator,name=iPhone 11 Pro' \
-          build \
-          CODE_SIGNING_ALLOWED=NO | xcpretty"
-  build_new_arch:
-    name: Build iOS Example App with new arch enabled
-    runs-on: macOS-13
-    defaults:
-      run:
-        working-directory: example/ios
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-      - name: Restore node_modules from cache
-        uses: actions/cache@v2
-        id: yarn-cache
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-      - name: Install node_modules for example/
-        run: yarn install --frozen-lockfile --cwd ..
-
-      - name: Restore buildcache
-        uses: mikehardy/buildcache-action@v1
-        continue-on-error: true
-
-      - name: Setup Ruby (bundle)
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 2.7
-          bundler-cache: true
-          working-directory: example
-
-      - name: Restore Pods cache
-        uses: actions/cache@v2
-        with:
-          path: |
-            example/ios/Pods
-            ~/Library/Caches/CocoaPods
-            ~/.cocoapods
-          key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-pods-
-      - name: Install Pods
-        run: RCT_NEW_ARCH_ENABLED=1 pod install
-      - name: Install xcpretty
-        run: gem install xcpretty
-      - name: Build App
-        run: "set -o pipefail && xcodebuild \
-          CC=clang CPLUSPLUS=clang++ LD=clang LDPLUSPLUS=clang++ \
-          -derivedDataPath build -UseModernBuildSystem=YES \
-          -workspace example.xcworkspace \
-          ONLY_ACTIVE_ARCH=NO \
-          -scheme example \
-          -sdk iphonesimulator \
-          -configuration Debug \
-          -destination 'platform=iOS Simulator,name=iPhone 11 Pro' \
-          build \
-          CODE_SIGNING_ALLOWED=NO | xcpretty"
+        run: | 
+          bundle install 
+          RCT_USE_RN_DEP=1 RCT_USE_PREBUILT_RNCORE=1 bundle exec pod install
+          xcodebuild build \
+            -workspace BlurhashExample.xcworkspace \
+            -scheme BlurhashExample \
+            -sdk iphonesimulator
+     
+   
