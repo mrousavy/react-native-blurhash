@@ -4295,8 +4295,7 @@ react-is@^17.0.1:
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
 "react-native-blurhash@link:..":
-  version "0.0.0"
-  uid ""
+  version "1.1.9"
 
 react-native@0.73.2:
   version "0.73.2"
